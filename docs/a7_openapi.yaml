@@ -1,0 +1,25 @@
+openapi: 3.0.0
+
+info:
+ version: '1.0'
+ title: 'AutoBids Web API'
+ description: 'Web Resources Specification (A7) for AutoBids'
+
+ servers:
+  - url: http://lbaw.fe.up.pt
+  - description: Production server
+
+ externalDocs:
+  - description: Find more info here.
+  - url: https://git.fe.up.pt/lbaw/lbaw2223/lbaw2285/-/wikis/eap
+
+ tags:
+ - name: 'M01: Authentication and Individual Profile'
+ - name: 'M02: Auctions'
+ - name: 'M03: Authenticated user lists'
+ - name: 'M04: Notifications'
+ - name: 'M05: Admin'
+ - name: 'M06: Static pages'
+
+ 
+
