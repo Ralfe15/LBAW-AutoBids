@@ -1,0 +1,55 @@
+#highlights article{
+    border: thin solid black;
+}
+
+#title{
+    font-size:300%;
+    font-weight: 900;
+    margin:0;
+}
+
+.logo-home {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+}
+
+.search-div{
+    display: flex;
+}
+
+.search-by{
+    left: 23.5%;
+}
+
+.search > input{
+    box-sizing:border-box;
+    margin-left: 0.5em;
+    margin-right:1em;
+    width: 50vw;
+    height: 3em;
+    border-radius: 1em;
+    padding: 1em;
+    border:none;
+    background-color: lightgray;
+}
+
+.wrapper{
+    display: flex;
+    height: 10%;
+    width: 20%;
+    min-width: 200px;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    border-radius: 5px;
+    padding: 20px 15px;
+}
+
+.central-button {
+    margin-right: 0.5em;
+    margin-left: 0.5em;
+}

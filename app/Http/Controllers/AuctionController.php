@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-class AuctionController
+class AuctionController extends Controller
 {
 
 }

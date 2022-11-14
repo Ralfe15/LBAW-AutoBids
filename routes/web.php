@@ -10,8 +10,17 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Home
-Route::get('/', 'Auth\LoginController@home');
+// Root
+Route::get('/', function() {
+    return redirect('/home');
+});
+
+//Home
+Route::get('/home', 'HomeController@show')->name('home');
+
+
+//Auctions
+
 
 // Cards
 Route::get('cards', 'CardController@list');

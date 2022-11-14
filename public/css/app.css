@@ -1,157 +1,326 @@
+@import url('https://fonts.googleapis.com/css?family=Inter');
+
+*{
+    font-family: "Inter";
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+h4{
+    margin: 0.3em 0.2em 0.3em 0.1em;
+}
+
+h3, h4{
+    font-size: 120%;
+    font-weight: lighter;
+}
+
 body {
-  background-color: #ffffff;
-  color: #9b4dca;
+    margin: 0;
 }
-main > header {
-  display: grid;
-  grid-template-columns: 1fr auto auto;
-  align-items: center;
-  background-color: #d2afe7;
-  padding: 1em;
-  margin: 1em;
+
+body>header {
+    display: block;
+    padding: 1em;
+    margin: 0 1em 3em 1em;
 }
-main > header h1 {
-  margin: 0;
+
+#signup, #login, #cart{
+    padding: 0.5em 1em;
 }
-main > header a.button {
-  margin: 1em;
-  justify-self: center;
+
+#register {
+    align-items: center;
+    display: flex;
+    justify-content: end;
 }
-main > header span {
-  margin: 1em;
-  justify-self: center;
+
+#login {
+    height: fit-content;
+    border-radius: 0.5em;
+    background-color: lightgray;
+    margin-right: 1em;
 }
-#cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+
+#avatar{
+    border-radius: 50%;
 }
-#cards article.card {
-  display: flex;
-  flex-direction: column;
-  background-color: #d3edc3;
-  padding: 1em;
-  margin: 1em;
+
+.footer-wrapper { clear: both; height: 50px; }
+
+
+footer {
+    position: fixed;
+    background-color: black;
+    padding: 1em 1em 0em 1em;
+    bottom: 0;
+    width: 100vw;
+    margin-top: 2em;
+    height: 35px;
+    color: white;
 }
-#cards article.card header {
-  display: flex;
-  align-items: center;
-}
-#cards article.card header h2 {
-  flex-grow: 1;
-}
-#cards article.card header a.delete {
-  display: none;
-  font-size: 2.6rem;
-  margin-top: .5rem;
-  margin-bottom: 2.5rem;
-  line-height: 1.25;
-}
-#cards article.card header:hover a.delete {
-  display: inline;
-}
-#cards article.card li {
-  list-style-type: none;
-}
-#cards article.card li label {
-  display: flex;
-  align-items: baseline;
-}
-#cards article.card li label span {
-  margin-left: .5em;
-  flex-grow: 1;
-}
-#cards article.card li label a {
-  display: none;
-}
-#cards article.card li label:hover a {
-  display: inline;
-}
-#cards article.card input:checked + span {
-  text-decoration: var(--primary-color) solid line-through;
-}
-#cards article.card ul {
-  margin: 0;
-}
-#cards article.card form {
-  margin: 0;
-}
-#cards article.card input[type=text] {
-  background-color: white;
-  margin: 0;
-}
-#content label {
-  font-weight: normal;
-}
-#content > form {
-  margin: 0 auto;
-  padding: 1em;
-  max-width: 20em;
-  border: 1px solid #d2afe7;
-}
-#content > form .error {
-  font-weight: bold;
-  color: #ff3333;
-}
-#content > form input {
-  background-color: white;
-}
-@media (max-width: 70em) {
-  #cards {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  main > header {
+
+.header-wrapper {
+    font-size: 110%;
+    margin: 0.4em 1em 1em 1em;
     display: grid;
-    grid-template-columns: 1fr auto;
-  }
-  main > header h1 {
-    grid-row-end: span 2;
-  }
+    grid-template-columns: 1fr 5fr;
+    grid-template-rows: 1fr;
+    align-content: center;
 }
-@media (max-width: 40em) {
-  #cards {
-    grid-template-columns: 1fr;
-  }
+
+.search-div{
+    margin-top: 2em;
+    justify-content: center;
 }
-@media (max-width: 25em) {
-  body {
-    margin: 0;
-  }
-  main > header {
-    margin: 0;
-    padding: 0.5em;
-  }
-  main > header span {
-    margin: 0;
-  }
-  #content form {
-    margin: 0;
-    max-width: 25em;
-  }
-  article.card {
-    margin: 0;
-    border-bottom: 1px solid rgba(96, 108, 118, 0.4);
-  }
+
+.search{
+    display:flex;
+    height: 2.5em;
 }
-/**
- * Overide milligram colors
- * Some styles might be missing
- **/
-button {
-  background-color: #9b4dca;
-  border-color: #9b4dca;
+
+.search > input::placeholder{
+    color:black;
 }
-a.button {
-  background-color: #9b4dca;
-  border-color: #9b4dca;
+
+.search > input{
+    box-sizing:border-box;
+    margin-right:0.7em;
+    width: -webkit-fill-available;
+    border-radius: 1em;
+    padding: 1em;
+    border:none;
+    background-color: lightgray;
 }
-a.button.button-outline {
-  color: #9b4dca;
+
+.search-button {
+    font-size: 200%;
+    background-color: white;
+    border: none;
+    color: darkgrey;
+    position: relative;
+    top: -0.12em;
+    right: 0.2em;
+    flex-grow: 1;
 }
-a {
-  color: #9b4dca;
+
+.form{
+    text-align: center;
+    display: block;
 }
-input[type=text]:focus,
-input[type=email]:focus,
-input[type=password]:focus {
-  border-color: #9b4dca;
+
+.central-button{
+    background-color: lightgray;
+    color: black;
+    border-radius: 0.5em;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    display: flex;
+    text-decoration: none;
+    margin-bottom: 10px;
+}
+
+.button-wrapper{
+    text-align: center;
+    margin-top: 2em;
+    margin-bottom: 7em;
+    display: flex;
+    justify-content: center;
+}
+
+/* Sidenav stuff */
+
+.sidenav {
+    height: 95%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 30px;
+
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 8px;
+    margin-top: 0px;
+    text-decoration: none;
+    font-size: 35px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav p{
+    padding: 8px 8px 8px 8px;
+    margin-bottom: 5px;
+    font-size: 25px;
+    color: white;
+    transition: 0.3s;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+.shopping-cart-header {
+    border-bottom: 1px solid #E8E8E8;
+    padding-bottom: 15px;
+    margin-top: 2em;
+}
+.shopping-cart-total {
+    float: right;
+    margin-right: 10px;
+    color:white
+}
+
+.cart-icon {
+    color: white;
+    font-size: 24px;
+    margin-right: 7px;
+    float: left;
+    margin-left: 10px;
+    margin-top: 3px;
+}
+.trash-icon {
+    color: white;
+    font-size: 24px;
+    margin-right: 7px;
+    margin-left: 10px;
+    margin-top: 3px;
+    cursor: pointer;
+}
+.badge {
+    background-color: rgba(169, 169, 169, 0.713);
+    border-radius: 10px;
+    color: white;
+    display: inline-block;
+    font-size: 12px;
+    line-height: 1;
+    padding: 3px 7px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.cartItems{
+    padding-top: 20px;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+}
+
+.cartItems li {
+    margin-bottom: 18px;
+}
+
+.cartItems img {
+    float: left;
+    margin-right: 12px;
+    width: 80px;
+    border-radius: 1em;
+}
+
+.item-name {
+    display: block;
+    padding-top: 10px;
+    font-size: 16px;
+    color:white;
+}
+
+.item-price {
+    color: green;
+    margin-right: 8px;
+}
+
+.item-quantity {
+    color: white;
+}
+
+.checkout-button {
+    background: darkgray;
+    color:white;
+    text-align: center;
+    padding: 12px;
+    text-decoration: none;
+    display: block;
+    border-radius: 3px;
+    font-size: 16px;
+    margin: 10px 30px 10px 30px;
+    cursor: pointer;
+}
+
+/* End of sidenav stuff */
+
+label {
+    display: inline-block;
+    width: 150px;
+    text-align: right;
+}
+
+.search-by{
+    position: relative;
+    font-size:0.8em;
+    display: flex;
+    width: 20%;
+    min-width: 200px;
+    align-items: center;
+    border-radius: 5px;
+    padding: 1em;
+}
+
+.search-by > *{
+    margin-right: 0.5em;
+}
+.search-by .option{
+    height: 100%;
+    width: auto;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 0 10px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+.search-by .option-1{
+    justify-content: right;
+}
+.search-by .option-2{
+    justify-content: center;
+}
+.search-by .option-3{
+    justify-content: left;
+}
+input[type="radio"]{
+    display: none;
+}
+#option-1:checked:checked ~ .option-1,
+#option-2:checked:checked ~ .option-2,
+#option-3:checked:checked ~ .option-3
+{
+    border-color: darkgray;
+    background: darkgray;
+}
+.wrapper .option span{
+    color: #808080;
+}
+#option-1:checked:checked ~ .option-1 span,
+#option-2:checked:checked ~ .option-2 span,
+#option-3:checked:checked ~ .option-3 span
+{
+    color: #fff;
 }

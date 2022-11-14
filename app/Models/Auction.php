@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
-class Auction
-{
+use Illuminate\Database\Eloquent\Model;
 
+class Auction extends Model
+{
+    public $timestamps  = false;
 }

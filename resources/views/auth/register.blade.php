@@ -1,39 +1,36 @@
-@extends('layouts.app')
+@include('partials/header')
+<head>
+    <link href="{{ asset('css/login.css') }}" rel="stylesheet">
 
-@section('content')
-<form method="POST" action="{{ route('register') }}">
-    {{ csrf_field() }}
+</head>
+<body>
+<h1 style="text-align: center;">Sign up</h1>
+<div class="form">
+    <form method="POST" action="{{ route('register') }}" id="form_login">
+        {{ csrf_field() }}
+        <p>
+            <input id="name" type="text" name="name" value="{{ old('name') }}" placeholder="name" required autofocus>
+        </p>
+        <p>
+            <input id="email" type="email" name="email" value="{{ old('email') }}" placeholder="email" required>
+        </p>
+        <p>
+            <input type="password" required name="password" placeholder="password"/>
+        </p>
+        <p>
+            <input type="password" required name="password-confirmation" placeholder="repeat password"/>
+        </p>
+        <p>
+            <input type="tel" required name="phone" placeholder="phone"/>
+        </p>
+        <p>
+            <input type="text" required name="address" placeholder="address"/>
+        </p>
+        <button type="submit">
+            Register
+        </button>
+    </form>
 
-    <label for="name">Name</label>
-    <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus>
-    @if ($errors->has('name'))
-      <span class="error">
-          {{ $errors->first('name') }}
-      </span>
-    @endif
+    {{--    TODO: Handle error messages--}}
+</div>
 
-    <label for="email">E-Mail Address</label>
-    <input id="email" type="email" name="email" value="{{ old('email') }}" required>
-    @if ($errors->has('email'))
-      <span class="error">
-          {{ $errors->first('email') }}
-      </span>
-    @endif
-
-    <label for="password">Password</label>
-    <input id="password" type="password" name="password" required>
-    @if ($errors->has('password'))
-      <span class="error">
-          {{ $errors->first('password') }}
-      </span>
-    @endif
-
-    <label for="password-confirm">Confirm Password</label>
-    <input id="password-confirm" type="password" name="password_confirmation" required>
-
-    <button type="submit">
-      Register
-    </button>
-    <a class="button button-outline" href="{{ route('login') }}">Login</a>
-</form>
-@endsection
