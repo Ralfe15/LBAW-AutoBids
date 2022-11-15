@@ -18,7 +18,7 @@
             <input type="password" required name="password" placeholder="password"/>
         </p>
         <p>
-            <input type="password" required name="password-confirmation" placeholder="repeat password"/>
+            <input type="password" required name="password_confirmation" placeholder="repeat password"/>
         </p>
         <p>
             <input type="tel" required name="phone" placeholder="phone"/>

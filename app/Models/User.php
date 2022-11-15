@@ -13,7 +13,7 @@ class User extends Authenticatable
     public $timestamps  = false;
 
     // Table name in pgsql
-    public $table = 'member';
+    protected $table = 'member';
 
     /**
      * The attributes that are mass assignable.

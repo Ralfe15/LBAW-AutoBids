@@ -6,6 +6,7 @@
 <h1 style="text-align: center;">Login </h1>
 <div class="form">
     <form action="{{ route('login') }}" method="post">
+        {{ csrf_field() }}
         <p>
             <input type="text" required name="email" placeholder="email"/>
         </p>

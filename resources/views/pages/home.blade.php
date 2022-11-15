@@ -30,10 +30,11 @@
     </label>
 </div>
 @if(Auth::check())
+{{--    TODO: Handle these endpoints--}}
 <div class="button-wrapper">
-    <a class="central-button" href='../pages/user_orders.php'>Your orders</a>
-    <a class="central-button" href='../pages/favorite_restaurants.php'>Your favorite restaurants</a>
-    <a class="central-button" href='../pages/favorite_dishes.php'>Your favorite dishes</a>
+    <a class="central-button" href=''>Your owned auctions</a>
+    <a class="central-button" href=''>Your favorite auctions</a>
+    <a class="central-button" href=''>Your bidded auctions</a>
 </div>
 @endif
 </body>
