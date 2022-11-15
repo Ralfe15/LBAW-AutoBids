@@ -1,6 +1,8 @@
 DROP SCHEMA IF EXISTS lbaw2285 CASCADE ;
 CREATE SCHEMA lbaw2285;
 
+set search_path = lbaw2285;
+
 DROP TABLE IF EXISTS Member CASCADE;
 DROP TYPE IF EXISTS TransactionType CASCADE;
 DROP TABLE IF EXISTS Transaction CASCADE;
@@ -317,7 +319,7 @@ CREATE INDEX auctionViewsIdx ON Auction USING btree (views);
 -- Add column to Auction to store content of model, description and brand.
 ALTER TABLE Auction ADD COLUMN search TEXT;
 
-UPDATE Auction SET search = 
+UPDATE Auction SET search =
 CONCAT(A.description, ' ', A.color, ' ', M.name, '', B.name)
 FROM Auction A
 INNER JOIN Model M ON M.id = A.id_Model
@@ -328,7 +330,7 @@ where Auction.id = A.id;
 ALTER TABLE Auction
 ADD COLUMN tsvectors TSVECTOR;
 UPDATE Auction SET tsvectors = to_tsvector('english', search);
- 
+
 -- Create a function to automatically update ts_vectors.
 CREATE FUNCTION auction_search_update() RETURNS TRIGGER AS $$
 BEGIN
@@ -363,6 +365,6 @@ CREATE TRIGGER auction_search_update
 -- Finally, create a GIN index for ts_vectors.
 CREATE INDEX auctionIdxSearch ON Auction USING GIN (tsvectors);
 
--- CREATE EXTENSION pg_trgm; 
+-- CREATE EXTENSION pg_trgm;
 -- CREATE INDEX memberIdxNameEmail ON Member using GIN ((name || ' ' || email) gin_trgm_ops);
 
