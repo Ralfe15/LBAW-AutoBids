@@ -1,0 +1,123 @@
+.search > input{
+    margin-left: 2.5em;
+    margin-right:1em;
+    height: 3em;
+}
+
+.search-div{
+    margin-right: 2em;
+}
+
+.search-button{
+    display: flex;
+    justify-content: initial;
+}
+
+.results-grid
+{
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3em;
+    width: 100%;
+    justify-content:space-evenly;
+    margin-bottom: 5em;
+}
+
+.card > a:nth-child(1){
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 15%;
+    min-width: 200px;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+    padding: 10px 16px;
+}
+.container > *{
+    margin: 0 0 0.5em 0;
+}
+
+.card img{
+    margin: 0.7em auto auto auto;
+    border-radius: 50%;
+
+    width: 90%;
+}
+
+.container a{
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.fa-heart{
+    color:red;
+}
+
+#toggle{
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1em;
+}
+
+.wrapper{
+    display: flex;
+    height: 10%;
+    width: 20%;
+    min-width: 200px;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    border-radius: 5px;
+    padding: 20px 15px;
+}
+
+.search-by{
+    left: 2.5%;
+}
+
+.favorite-btn{
+    align-self: flex-end;
+    font-size: 0.8em;
+    margin: 0.5em;
+    cursor: pointer;
+}
+
+.manage-grid{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3em;
+    max-width: 100%;
+    justify-content: flex-start;
+    margin: 20px 5% 5% 5%;
+}
+
+.results-grid
+{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.results-grid > a
+{
+    margin: 2em;
+    flex-shrink: 0;
+    background-color: lightgray;
+    width: 20%;
+}

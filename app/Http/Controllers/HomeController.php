@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
+use App\Models\Auction;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
 
     public function show() {
-        $table = User::all();
+        $table = Auction::where('id_member', Auth::id())->get();
         return view("pages.home", ["users"=>$table]);
     }
 }

@@ -20,11 +20,10 @@ Route::get('/home', 'HomeController@show')->name('home');
 
 
 //Auctions
+Route::get('my-auctions', 'AuctionController@list')->name('my_auctions');
+Route::get('auctions', 'AuctionController@all')->name('auctions');
+Route::get('auction/{id}', 'AuctionController@show')->name('detail');
 
-
-// Cards
-Route::get('cards', 'CardController@list');
-Route::get('cards/{id}', 'CardController@show');
 
 // API
 Route::put('api/cards', 'CardController@create');
