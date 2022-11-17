@@ -3,29 +3,33 @@
 namespace App\Http\Controllers;
 
 use App\Models\Auction;
+use App\Models\Bid;
 use App\Models\Card;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class AuctionController extends Controller
 {
 
-    /**
-     * Shows the card for a given id.
-     *
-     * @param  int  $id
-     * @return Response
-     */
     public function show($id)
     {
         $auction = Auction::find($id);
-        return view('pages.auction', ['auction' => $auction]);
+        if(!$auction->active){
+            return redirect('/home');
+        }
+        $time_remaining = Carbon::parse($auction->end_date)->diffForHumans(Carbon::now(), ['parts' => 6]);
+        $current_bid_val = $auction->bids->max('value');//handle cents
+        $current_bid = Bid::where('value', '=', $current_bid_val)->get();
+        $can_bid = true;
+        if(($current_bid[0]->id_member == Auth::id()) || ($auction->id_member == Auth::id())){
+            $can_bid = false;
+        }
+        $current_bid = $current_bid_val/100;
+        return view('pages.auction', ['auction' => $auction, 'time_remaining' => $time_remaining,
+            'current_bid' => $current_bid, 'can_bid' =>$can_bid]);
     }
 
-    /**
-     * Shows all auctions.
-     *
-     * @return Response
-     */
     public function list()
     {
         if (!Auth::check()) return redirect('/login');
@@ -33,9 +37,16 @@ class AuctionController extends Controller
         $auctions = Auth::user()->auctions()->orderBy('id')->get();
         return view('pages.my_auctions', ['auctions' => $auctions]);
     }
-    public function all()
+    public function all(Request $request)
     {
-        $auctions = Auction::where('active', true)->get();
+        if(!$request->has('search')){
+            $auctions = Auction::where('active', true)->get();
+        }
+        else{
+            $auctions = Auction::whereRelation('model', 'name', 'ilike', '%'.$request->input('search').'%')
+                ->distinct()->get();
+        }
         return view('pages.auctions', ['auctions' => $auctions]);
+
     }
 }
