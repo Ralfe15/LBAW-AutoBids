@@ -1,0 +1,11 @@
+.auction-title {
+	width: 301px;
+	height: 44px;
+	color: #606060;
+	font-family: "Roboto";
+	font-weight: bold;
+	font-size: 40px;
+	line-height: 1;
+	letter-spacing: 2px;
+	text-align: left;
+}

@@ -29,7 +29,7 @@ class Auction extends Model
     }
 
     public function category(){
-        return $this->hasOne('App\Models\CarModel', 'id', 'id_category');
+        return $this->hasOne('App\Models\Category', 'id', 'id_category');
     }
 
 
