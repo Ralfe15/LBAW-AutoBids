@@ -20,10 +20,10 @@ class Bid extends Model
     ];
 
     public function user(){
-        return $this->belongsTo('App\Models\User', 'id', 'id_member');
+        return $this->belongsTo('App\Models\User', 'id_member', 'id');
     }
 
     public function auction(){
-        return $this->belongsTo('App\Models\Auction', 'id', 'id_auction');
+        return $this->belongsTo('App\Models\Auction', 'id_auction', 'id');
     }
 }

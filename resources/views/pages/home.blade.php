@@ -3,7 +3,6 @@
 <head>
     <link href="{{ asset('css/landing.css') }}" rel="stylesheet">
 </head>
-
 <body>
 <img class="logo-home" src="https://manualdeimagem.up.pt/files/uportonegativofundoopaco.jpg" />
 <div class="search-div">
