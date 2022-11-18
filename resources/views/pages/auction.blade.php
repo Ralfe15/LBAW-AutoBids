@@ -1,6 +1,5 @@
 @include('partials/header')
 
-<<<<<<< HEAD
 <h1> Model: {{$auction->model->name}}</h1>
 <h1> Number of bids: {{$auction->number_bids}}</h1>
 <h1>started at: {{$auction->start_date}}</h1>
