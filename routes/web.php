@@ -12,7 +12,7 @@
 */
 // Root
 Route::get('/', function() {
-    return redirect('/home');
+    return redirect('/default');
 });
 
 //Home
@@ -40,3 +40,10 @@ Route::post('login', 'Auth\LoginController@login');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 Route::post('register', 'Auth\RegisterController@register');
+
+// User
+Route::get('user/{id}', 'UserController@show')->name('user_profile');
+Route::get('users', 'UserController@list')->name('user_list');
+
+//Default
+Route::get('/default', 'DefaultController@show')->name('default');
