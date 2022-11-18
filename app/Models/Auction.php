@@ -28,9 +28,23 @@ class Auction extends Model
         return $this->hasOne('App\Models\CarModel', 'id', 'id_model');
     }
 
+    public function brand(){
+        return $this->hasOneThrough(
+            Brand::class,
+            Model::class,
+            'id_brand',
+            'id_model',
+            'id',
+            'id',
+        );
+
+    }
+
     public function category(){
         return $this->hasOne('App\Models\Category', 'id', 'id_category');
     }
-
+    public function bids(){
+        return $this->hasMany('App\Models\Bid', 'id_auction',);
+    }
 
 }

@@ -27,6 +27,7 @@
         <a href="/home" id="return">AutoBids</a>
         @if(Auth::check())
             <div id="register">
+                <p>Balance: U${{credits_format(Auth::user()->credits/100)}}</p>
                 <a href="/logout" id="signup">Log out</a>
             </div>
         @else

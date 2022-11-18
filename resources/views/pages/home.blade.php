@@ -7,9 +7,9 @@
 <body>
 <img class="logo-home" src="https://manualdeimagem.up.pt/files/uportonegativofundoopaco.jpg" />
 <div class="search-div">
-    <form action="../pages/search.php" class="search" method="POST">
+    <form action="{{route('auctions')}}" class="search" method="GET">
         <input type="text" placeholder="Search.." name="search">
-        <input type="text" class="search-type" name="search-type" style="display:none" value="restaurant">
+        <input type="text" class="search-type" name="" style="display:none" value="restaurant">
         <button type="submit" class="search-button"><i></i>&#x276F</button>
     </form>
 </div>
@@ -18,7 +18,6 @@
 {{--    TODO  handle ONCLICK function here  --}}
     <input type="radio" name="select" id="option-1" value = "restaurant">
     <input type="radio" name="select" id="option-2" value= "dish">
-    <input type="radio" name="select" id="option-3" value= "rating">
 
     <label for="option-1" class="option option-1" name="restaurant">
         <div class="dot"></div>
