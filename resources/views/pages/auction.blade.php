@@ -17,6 +17,8 @@
     <label>Enter the value to bid! Minimum bid: U${{bid_step($current_bid)}}</label>
     <input type="number" min='{{bid_step($current_bid)}}' name="bid" id="bid" step="0.01">
     <input type="hidden" value="{{bid_step($current_bid)}}" name="minimum">
+    <input type="hidden" value="{{$current_bid}}" name="prev_bid">
+    <input type="hidden" value="{{$prev_id}}" name="prev_id">
     <button type="submit">Bid now!</button>
 </form>
 @include('partials/error_list_validator')

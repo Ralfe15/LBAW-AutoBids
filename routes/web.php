@@ -25,7 +25,7 @@ Route::get('auctions', 'AuctionController@all')->name('auctions');
 Route::get('auction/{id}', 'AuctionController@show')->name('detail');
 
 //Bids
-Route::put('auction/{id}/bid', 'BidController@makeBid')->name('bid');
+Route::put('auction/{id}/bid', 'BidController@create')->name('bid');
 
 // API
 Route::put('api/cards', 'CardController@create');

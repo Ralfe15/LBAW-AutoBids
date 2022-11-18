@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 
 
+use App\Models\Bid;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -20,16 +22,22 @@ class BidController extends Controller
     {
         return Validator::make($data, [
             'bid' => 'required|numeric|min:'.$data['minimum'],
-
+            'prev_id' => 'required|integer',
         ]);
     }
 
-    public function makeBid(Request $request){
+    public function create(Request $request, $id){
         if(!Auth::check()){
             redirect('/home');
         }
+        $bid = new Bid();
+        $bid->id_auction = $id;
+        $bid->value = $request->input('bid')*100;
+        $bid->id_member = Auth::id();
+        $bid->save();
+        User::find($request->input('prev_id'))->increment('credits', $request->input('prev_bid')*100);
+        Auth::user()->decrement('credits', $bid->value);
 
-        $this->validator($request->all())->validate();
+    }
 
-           }
 }

@@ -25,9 +25,11 @@ class AuctionController extends Controller
         if(($current_bid[0]->id_member == Auth::id()) || ($auction->id_member == Auth::id())){
             $can_bid = false;
         }
+        $current_bid_user_id = $current_bid[0]->id_member;
         $current_bid = $current_bid_val/100;
+
         return view('pages.auction', ['auction' => $auction, 'time_remaining' => $time_remaining,
-            'current_bid' => $current_bid, 'can_bid' =>$can_bid]);
+            'current_bid' => $current_bid, 'can_bid' =>$can_bid, 'prev_id'=>$current_bid_user_id]);
     }
 
     public function list()
