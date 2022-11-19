@@ -34,18 +34,21 @@ class BidController extends Controller
             redirect('/home');
         }
         $prevbids = Bid::where('id_auction', $id)->get();
+
         $bid = new Bid();
         $bid->id_auction = $id;
         $bid->value = $request->input('bid')*100;
         $bid->id_member = Auth::id();
-        $bid->save();
-        User::find($request->input('prev_id'))->increment('credits', $request->input('prev_bid')*100);
+        //decrement before saving the bid in case of negative creds
         Auth::user()->decrement('credits', $bid->value);
-
-        //notify other bidders that there has been a new bid
+        $bid->save();
         $notification = new NewBidAuctionNotification(Auction::find($id), $bid->value);
-        foreach ($prevbids as $prevbid){
-            $prevbid->user->notify($notification);
+        if(!$prevbids->isEmpty()) {
+            User::find($request->input('prev_id'))->increment('credits', $request->input('prev_bid') * 100);
+            foreach ($prevbids as $prevbid){
+                //notify other bidders that there has been a new bid
+                $prevbid->user->notify($notification);
+            }
         }
         //notify owner about the new bid
         Auction::find($id)->user->notify($notification);

@@ -21,14 +21,24 @@ class AuctionController extends Controller
             return redirect('/home');
         }
         $time_remaining = Carbon::parse($auction->end_date)->longAbsoluteDiffForHumans(Carbon::now(), 6 );
-        $current_bid_val = $auction->bids->max('value');//handle cents
-        $current_bid = Bid::where('value', '=', $current_bid_val)->get();
+        $current_bid_val = $auction->bids->max('value');
         $can_bid = true;
-        if(($current_bid[0]->id_member == Auth::id()) || ($auction->id_member == Auth::id())){
-            $can_bid = false;
+        if(is_null($current_bid_val)){
+            $current_bid = ($auction->starting_bid)/100; //starting price
+            $current_bid_user_id = -1;
+            if ($auction->id_member == Auth::id()){
+                $can_bid = false;
+            }
         }
-        $current_bid_user_id = $current_bid[0]->id_member;
-        $current_bid = $current_bid_val/100;
+        else{
+            $current_bid = Bid::where('value', '=', $current_bid_val)->get();
+            if(($current_bid[0]->id_member == Auth::id()) || ($auction->id_member == Auth::id())){
+                $can_bid = false;
+            }
+            $current_bid_user_id = $current_bid[0]->id_member;
+            $current_bid = $current_bid_val/100;
+        }
+
 
         return view('pages.auction', ['auction' => $auction, 'time_remaining' => $time_remaining,
             'current_bid' => $current_bid, 'can_bid' =>$can_bid, 'prev_id'=>$current_bid_user_id]);
@@ -60,13 +70,13 @@ class AuctionController extends Controller
             ->get();
         foreach ($active_auctions as $auction){
             // if we are in a time ahead of end_date
-            if(!Carbon::parse($auction[0]->end_date)->diff(Carbon::now())->invert){
-                $auction[0]->active = false;
-                $auction[0]->save();
+            if(!Carbon::parse($auction->end_date)->diff(Carbon::now())->invert){
+                $auction->active = false;
+                $auction->save();
 
                 //notify the auction winner and the owner about the result
                 $winner = $auction->winner();
-                $notification = new EndAuctionNotification($auction[0], $winner);
+                $notification = new EndAuctionNotification($auction, $winner);
                 $winner->notify($notification);
                 $auction[0]->user()->notify($notification);
             }
