@@ -28,4 +28,13 @@ class UserController extends Controller
       $users = User::all();
       return view('pages.users', ['users' => $users]);
     }
+
+    public function notifications($id){
+        if(Auth::check() && Auth::id() == $id){
+            $user = User::find($id);
+            return view('pages.notifications', ['user' => $user]);
+        }
+        return view('pages.home');
+
+    }
 }

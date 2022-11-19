@@ -27,6 +27,8 @@ Route::get('auction/{id}', 'AuctionController@show')->name('detail');
 //Bids
 Route::put('auction/{id}/bid', 'BidController@create')->name('bid');
 
+
+
 // API
 Route::put('api/cards', 'CardController@create');
 Route::delete('api/cards/{card_id}', 'CardController@delete');
@@ -44,6 +46,9 @@ Route::post('register', 'Auth\RegisterController@register');
 // User
 Route::get('user/{id}', 'UserController@show')->name('user_profile');
 Route::get('users', 'UserController@list')->name('user_list');
+
+//Notifications
+Route::get('user/{id}/notifications', 'UserController@notifications')->name('notifications');
 
 //Default
 Route::get('/default', 'DefaultController@show')->name('default');

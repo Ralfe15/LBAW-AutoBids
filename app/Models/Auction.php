@@ -37,7 +37,10 @@ class Auction extends Model
             'id',
             'id',
         );
+    }
 
+    public function winner(){
+        return $this->bids->where('id', $this->bids->max('id'))->first();
     }
 
     public function category(){
