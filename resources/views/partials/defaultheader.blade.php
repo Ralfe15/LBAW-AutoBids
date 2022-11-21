@@ -38,7 +38,7 @@
             <ul class="dropdown-menu" aria-labelledby="dropdownAccountButton">
                 @if(Auth::check())
                     <li><a class="dropdown-item" href="#">Balance: U${{credits_format(Auth::user()->credits/100)}}</a></li>
-                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li><a class="dropdown-item" href="/user/{{ Auth::user()->id }}">Profile</a></li>
                     <li><a class="dropdown-item" href="/logout">Logout</a></li>
                 @else
                     <li><a class="dropdown-item" href="{{route('register')}}">Sign Up</a></li>

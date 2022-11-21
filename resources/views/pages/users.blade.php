@@ -1,15 +1,29 @@
-@include('partials/header')
-<link rel="stylesheet" href="{{asset('css/search.css')}}">
-<link href="{{ asset('css/auctions.css') }}" rel="stylesheet">
+@extends('layouts.default')
+@section('content')
+<head>
+    <link rel="stylesheet" href="{{asset('css/users.css')}}">
+    
+</head>
 
-<body>
 <div class="content-wrapper">
-    <div class="title-wrapper">
-        <h1 style="margin-left: 2em">Users</h1>
-    </div>
-    <section class="results-grid">
-        @each('partials/user', $users, 'user')
-
+    <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Rating</th>
+            <th scope="col">Credits</th>
+            <th scope="col">Profile Link</th>
+          </tr>
+        </thead>
+        <tbody>
+            @each('partials/user', $users, 'user')
+        </tbody>
+      </table>
+    
+    
     </section>
 </div>
-</body>
+@stop
+
