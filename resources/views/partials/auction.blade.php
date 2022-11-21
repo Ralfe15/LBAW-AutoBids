@@ -1,11 +1,17 @@
 <div class="card">
 {{--    button redirecting to /auctions/{id}--}}
     <a href="{{route('detail', ['id'=> $auction->id]) }}">
-        <img src='https://picsum.photos/200/200?business?id='>
+        @if($auction->images->isEmpty())
+            <img src='{{ asset('img/auctions/car_placeholder_square200.png') }}'>
+        @else
+            {{-- <img src='{{ $auction->images->first->path }}'> --}}
+            <img src='https://picsum.photos/200/200?business?id='>
+        @endif
+        
         <div class="container">
             <h4><b>{{$auction->model->brand->name}} {{$auction->model->name }} - {{ $auction->year }}</b></h4>
-            <p>Category: {{$auction->category->name}}</p>
-            <p>Rating: {{$auction->rating}}</p>
+            <p>Mileage: {{$auction->mileage}}</p>
+            <p>Current Bid: {{$auction->bids->max('value')/100}}</p>
         </div>
     </a>
 {{--   TODO favourite btn logic--}}

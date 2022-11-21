@@ -12,7 +12,7 @@
 */
 // Root
 Route::get('/', function() {
-    return redirect('/default');
+    return redirect('/home');
 });
 
 //Home

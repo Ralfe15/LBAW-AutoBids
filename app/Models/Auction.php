@@ -49,5 +49,8 @@ class Auction extends Model
     public function bids(){
         return $this->hasMany('App\Models\Bid', 'id_auction',);
     }
+    public function images(){
+        return $this->hasMany('App\Models\Image', 'id_auction', 'id');
+    }
 
 }

@@ -1,25 +1,132 @@
-@include('partials/header')
+@extends('layouts.default')
+@section('content')
+    <head>
+        <link rel="stylesheet" href="/css/auctionDetails.css">
+    </head>
 
-<h1> Model: {{$auction->model->name}}</h1>
-<h1> Number of bids: {{$auction->number_bids}}</h1>
-<h1>started at: {{$auction->start_date}}</h1>
-<h1>time remainig: {{$time_remaining}}</h1>
-<h1> Description: {{$auction->description}}</h1>
-<h1> Mileage {{$auction->mileage}}</h1>
-<h1> Year: {{$auction->year}}</h1>
+    <div class='auction-title'>
+        <p>{{$auction->model->brand->name}} {{$auction->model->name}} </p>
+    </div>
 
-<h1>current bid is: {{$current_bid}}</h1>
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            @if($auction->images->isEmpty())
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            @else
+                @foreach($auction->images as $img)
+                    @if($loop->first)
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{$loop->index}}" class="active" aria-current="true" aria-label="Slide {{ $loop->iteration }}"></button>
+                    @else
+                        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ $loop->index }}" aria-label="Slide {{ $loop->iteration }}"></button>
+                    @endif
+                @endforeach
+            @endif
+        </div>
 
-@if(Auth::check() && $can_bid && (Auth::user()->credits/100) >= $current_bid)
-<form action="{{route('bid', ['id'=>$auction->id])}}" class="search" method="POST">
-    @method('PUT')
-    {{csrf_field()}}
-    <label>Enter the value to bid! Minimum bid: U${{bid_step($current_bid)}}</label>
-    <input type="number" min='{{bid_step($current_bid)}}' name="bid" id="bid" step="0.01">
-    <input type="hidden" value="{{bid_step($current_bid)}}" name="minimum">
-    <input type="hidden" value="{{$current_bid}}" name="prev_bid">
-    <input type="hidden" value="{{$prev_id}}" name="prev_id">
-    <button type="submit">Bid now!</button>
-</form>
-@include('partials/error_list_validator')
-@endif
+        <div class="carousel-inner">
+            @if($auction->images->isEmpty())
+            <div class="carousel-item active">
+                <img src="{{ asset('img/auctions/car_placeholder.png') }}" class="d-block w-100" alt="...">
+            </div>
+            @else
+                @foreach($auction->images as $img)
+                    @if($loop->first)
+                        <div class="carousel-item active">
+                            <img src="{{$img->path}}" class="d-block w-100" alt="...">
+                        </div>
+                    @else
+                        <div class="carousel-item">
+                            <img src="{{$img->path}}" class="d-block w-100" alt="...">
+                        </div>
+                    @endif
+                @endforeach
+            @endif
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <div class="auction-status-box">
+        <div class="auction-status">
+            <div class="status-currentbid">
+                <p><b>CurrendBid: </b> {{$auction->starting_bid/100}}</p>
+            </div>
+            <div class="status-startingbid">
+                <p><b>StartingBid: </b> {{$auction->starting_bid/100}}</p>
+            </div>
+            <div class="status-numberbids">
+                <p> {{$auction->number_bids}} Bids</p>
+            </div>
+            <div class="status-started">
+                <p><b>Started at: </b> {{$auction->start_date}}</p>
+            </div>
+            <div class="status-timeleft">
+                <p><b>Time Left: </b> {{$time_remaining}}</p>
+            </div>
+            <div class="status-bid">
+                @if(Auth::check() && $can_bid && (Auth::user()->credits/100) >= $current_bid)
+                    <form action="{{route('bid', ['id'=>$auction->id])}}" class="search" method="POST">
+                        @method('PUT')
+                        {{csrf_field()}}
+                        <label>Enter the value to bid! Minimum bid: U${{bid_step($current_bid)}}</label>
+                        <input type="number" min='{{bid_step($current_bid)}}' name="bid" id="bid" step="0.01">
+                        <input type="hidden" value="{{bid_step($current_bid)}}" name="minimum">
+                        <input type="hidden" value="{{$current_bid}}" name="prev_bid">
+                        <input type="hidden" value="{{$prev_id}}" name="prev_id">
+                        <button type="submit">Bid now!</button>
+                    </form>
+                    @include('partials/error_list_validator')
+                @endif
+            </div>
+            
+            
+        </div>
+    </div>
+
+    <div class="auction-description-box">
+        <div class="auction-description">
+            <div class="description-brand">
+                <p><b>Brand: </b> {{$auction->model->brand->name}}</p>
+            </div>
+            <div class="description-model">
+                <p><b>Model: </b> {{$auction->model->name}}</p>
+            </div>
+            <div class="description-category">
+                <p><b>Category: </b> {{$auction->category->name}}</p>
+            </div>
+            <div class="description-year">
+                <p><b>Year: </b> {{$auction->year}}</p>
+            </div>
+            <div class="description-mileage">
+                <p><b>Mileage: </b> {{$auction->mileage}} km</p>
+            </div>
+            <div class="description-displacement">
+                <p><b>Displacement: </b> {{$auction->displacement}} cm3</p>
+            </div>
+            <div class="description-power">
+                <p><b>Power: </b> {{$auction->power}} cv</p>
+            </div>
+            <div class="description-color">
+                <p><b>Color: </b> {{$auction->color}}</p>
+            </div>
+            <div class="description-text">
+                <p><b>Description: </b> {{$auction->description}}</p>
+            </div>
+
+            </div>
+    </div>
+@stop
+
+
+
+
+
+
+
+

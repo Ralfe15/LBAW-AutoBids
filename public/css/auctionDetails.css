@@ -1,0 +1,40 @@
+.auction-title {
+	text-align: center;
+    font-family: Roboto;
+    font-size: 2.5em;
+    color: #606060;
+    padding-top: 3.125em;
+    padding-bottom: 1.5em;
+}
+
+#carouselExampleIndicators {
+    width: 50%;
+    border: solid;
+    border-width: thin;
+    border-color: lightgrey;
+    margin: auto;
+}
+
+.auction-status-box{
+    padding-top: 3.125em;
+}
+
+.auction-status {
+    border: solid;
+    border-color: lightgrey;
+    width: 50%;
+    margin: auto;
+    padding: 1em;
+}
+
+.auction-description-box{
+    padding-top: 3.125em;
+}
+
+.auction-description {
+    border: solid;
+    border-color: lightgrey;
+    width: 50%;
+    margin: auto;
+    padding: 1em;
+}
