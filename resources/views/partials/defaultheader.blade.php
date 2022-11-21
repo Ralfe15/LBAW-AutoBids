@@ -40,6 +40,9 @@
                     <li><a class="dropdown-item" href="#">Balance: U${{credits_format(Auth::user()->credits/100)}}</a></li>
                     <li><a class="dropdown-item" href="/user/{{ Auth::user()->id }}">Profile</a></li>
                     <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                    @if(Auth::user()->is_admin)
+                        <li><a class="dropdown-item" href="{{route('admin_dashboard')}}">Admin dashboard</a></li>
+                    @endif
                 @else
                     <li><a class="dropdown-item" href="{{route('register')}}">Sign Up</a></li>
                     <li><a class="dropdown-item" href="{{route('login')}}">Login</a></li>

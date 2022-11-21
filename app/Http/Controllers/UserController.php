@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Auction;
+use App\Models\AuctionReport;
 use Illuminate\Http\Request;
+use Illuminate\Notifications\Action;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -35,6 +38,16 @@ class UserController extends Controller
             return view('pages.notifications', ['user' => $user]);
         }
         return view('pages.home');
+    }
 
+    public function adminDashboard()
+    {
+        if (Auth::check() && Auth::user()->is_admin) {
+            $requests = Auction::where('approved', false)->orderBy('creation_date', 'asc')->get();
+            $reports = AuctionReport::all();
+
+            return view('pages.admin', ['requests'=>$requests, 'reports'=>$reports]);
+        }
+        return view('pages.home');
     }
 }
