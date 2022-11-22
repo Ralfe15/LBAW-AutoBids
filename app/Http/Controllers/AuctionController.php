@@ -126,7 +126,7 @@ class AuctionController extends Controller
         $auction = new Auction();
         $auction->id_category = $request->input('id_Category');
         $auction->id_model = $request->input('id_Model');
-        $auction->starting_bid = $request->input('starting_bid');
+        $auction->starting_bid = $request->input('starting_bid')*100;
         $auction->description = $request->input('description');
         $auction->duration = $request->input('duration');
         $auction->year = $request->input('year');
