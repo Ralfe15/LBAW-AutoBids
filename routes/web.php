@@ -25,6 +25,11 @@ Route::get('auctions', 'AuctionController@all')->name('auctions');
 Route::get('auction/{id}', 'AuctionController@show')->name('detail');
 Route::get('auctions/create', 'AuctionController@showAuctionForm')->name('create_auction');
 Route::post('auctions/create', 'AuctionController@create')->name('create-auction');
+Route::post('auction/approve/{id}', 'AuctionController@approve')->name('approve');
+
+//Reports
+Route::post('auction/solve', 'AuctionReportController@markAsSolved')->name('solved');
+
 //Bids
 Route::put('auction/{id}/bid', 'BidController@create')->name('bid');
 
