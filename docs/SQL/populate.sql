@@ -1426,7 +1426,7 @@ BEGIN
     IF EXISTS (SELECT * FROM Auction WHERE NEW.id = Auction.id) THEN
 	    IF NEW.approved = TRUE THEN
             NEW.start_date = CURRENT_TIMESTAMP;
-            NEW.end_date = (NEW.start_date) + (NEW.duration * interval '1 second');
+            NEW.end_date = (NEW.start_date) + (NEW.duration * interval '1 day');
         END IF;
     END IF;
 	RETURN NEW;

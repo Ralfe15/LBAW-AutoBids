@@ -11,6 +11,7 @@ use App\Models\Category;
 use App\Models\User;
 use App\Notifications\EndAuctionNotification;
 use Carbon\Carbon;
+use Carbon\CarbonInterval;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -161,6 +162,7 @@ class AuctionController extends Controller
             $auction->approved = true;
             $auction->active = true;
             $auction->start_date = now();
+            //end date is handled as a pgsql trigger
             $auction->save();
             return redirect('/admin');
 
