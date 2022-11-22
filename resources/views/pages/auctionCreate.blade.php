@@ -11,14 +11,17 @@
 </div>
 <div class="form-wrapper">
 
-    <div class="details-wrapper">
-        <h3>Vehicle Details</h3>
-    </div>
+
 
     <div class="form">
         <form method="POST" action="{{ route('create-auction') }}" id="form_createauction">
             {{ csrf_field() }}
+            <div class="details-wrapper">
+                <h3>Vehicle Details</h3>
+            </div>
+            <div class="line"></div>
             <div class="form-category">
+                <label for="vinForm" class="form-label">Category</label>
                 <select class="form-select" name="id_Category">
                     <option selected>Select Category...</option>
                     @foreach($categories as $category)
@@ -26,19 +29,18 @@
                     @endforeach
                 </select>
             </div>
-            <div class="form-brand">
-                <select class="form-select" name="id_Brand">
-                    <option selected>Select Brand...</option>
-                    @foreach($car_brands as $car_brand)
-                        <option value='{{ $car_brand->id}}'> {{ $car_brand->name}}</option>
-                    @endforeach
-                </select>
-            </div>
+
             <div class="form-model">
+                <label for="vinForm" class="form-label">Brand & Model</label>
                 <select class="form-select" name="id_Model">
                     <option selected>Select Model...</option>
-                    @foreach($car_models as $car_model)
-                        <option value='{{ $car_model->id}}'> {{ $car_model->name}}</option>
+                    @foreach($car_brands as $car_brand)
+                        <option disabled style="background-color: lightgray; color: black" value='{{ $car_brand->id}}'> {{ $car_brand->name}}</option>
+                        @foreach($car_models as $car_model)
+                            @if($car_brand->id == $car_model->id_brand)
+                                <option value='{{ $car_model->id}}' >&nbsp&nbsp {{ $car_model->name}}</option>
+                            @endif
+                        @endforeach
                     @endforeach
                 </select>
             </div>
@@ -59,6 +61,7 @@
             <div class="technical-wrapper">
                 <h3>Technical Details</h3>
             </div>
+            <div class="line"></div>
             <div class="power-form">
                 <label for="powerForm" class="form-label">Power</label>
                 <input type="number" class="form-control" name="power" id="power-form" placeholder="Ex: 227">
@@ -71,9 +74,10 @@
                 <label for="colorForm" class="form-label">Color</label>
                 <input type="text" class="form-control" name="color" id="color-form" placeholder="Ex: Blue">
             </div>
-            <div class="details-wrapper">
+            <div class="description-wrapper">
                 <h3>Description</h3>
             </div>
+            <div class="line"></div>
             <div class="description-form">
                 <label for="descriptionForm" class="form-label">Description</label>
                 <textarea class="form-control" name="description" id="description-form" rows="5"></textarea>
@@ -82,9 +86,10 @@
 
 
 
-            <div class="details-wrapper">
+            <div class="auction-details-wrapper">
                 <h3>Auction Details</h3>
             </div>
+            <div class="line"></div>
 
             <div class="startingbid-form">
                 <label for="startingbidForm" class="form-label">Starting Bid</label>
@@ -95,10 +100,11 @@
                 <label for="durationForm" class="form-label">Duration in days</label>
                 <input type="number" class="form-control" name="duration" id="duration-form" placeholder="Ex: 27">
             </div>
-
-            <button type="submit">
-                Submit for Approval
-            </button>
+            <div class="submit-button">
+                <button type="submit" class="btn btn-secondary">
+                    Create Auction
+                </button>
+            </div>
         </form>
 
         {{--    TODO: Handle error messages--}}

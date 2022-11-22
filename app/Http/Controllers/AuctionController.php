@@ -148,9 +148,9 @@ class AuctionController extends Controller
         if(!Auth::check()){
             return redirect('/home');
         }
-        $car_models = CarModel::all();
-        $car_brands = Brand::all();
-        $categories = Category::all();
+        $car_models = CarModel::all()->sortBy('name' );
+        $car_brands = Brand::all()->sortBy('name' );
+        $categories = Category::all()->sortBy('name' );
         return view('pages.auctionCreate', ['auction' => null, 'categories' => $categories, 'car_models' => $car_models, 'car_brands' => $car_brands]);
     }
 
