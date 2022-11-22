@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Auction;
 use App\Models\Bid;
+use App\Models\Brand;
 use App\Models\Card;
+use App\Models\CarModel;
+use App\Models\Category;
 use App\Models\User;
 use App\Notifications\EndAuctionNotification;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class AuctionController extends Controller
 {
@@ -83,5 +87,72 @@ class AuctionController extends Controller
         }
         echo "Updated auctions and notified owner/winner";
     }
+
+    /**
+     * Get a validator for an incoming registration request.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'id_Category' => 'required|integer',
+            'id_Model' => 'required|integer',
+            'starting_bid' => 'required|integer',
+            'description' => 'required|string',
+            'duration' => 'required|integer',
+            'year' => 'required|integer|digits:4',
+            'mileage' => 'required|integer',
+            'displacement' => 'required|integer',
+            'vin' => 'alpha_num|required|size:17',
+            'power' => 'required|integer',
+            'color' => 'required|string|max:32'
+        ]);
+    }
+
+    /**
+     * Create a new auction instance after validation
+     *
+     */
+
+    public function create(Request $request)
+    {
+        $this->validator($request->all())->validate();
+        if(!Auth::check()){
+            redirect('/home');
+        }
+        $id = Auth::user()->id;
+        $auction = new Auction();
+        $auction->id_category = $request->input('id_Category');
+        $auction->id_model = $request->input('id_Model');
+        $auction->starting_bid = $request->input('starting_bid');
+        $auction->description = $request->input('description');
+        $auction->duration = $request->input('duration');
+        $auction->year = $request->input('year');
+        $auction->mileage = $request->input('mileage');
+        $auction->displacement = $request->input('displacement');
+        $auction->vin = $request->input('vin');
+        $auction->power = $request->input('power');
+        $auction->color = $request->input('color');
+        $auction->id_member = $id;
+
+        $auction->save();
+
+        //change redirect to auction details
+        return redirect('/home');
+    }
+
+    public function showAuctionForm()
+    {
+        if(!Auth::check()){
+            return redirect('/home');
+        }
+        $car_models = CarModel::all();
+        $car_brands = Brand::all();
+        $categories = Category::all();
+        return view('pages.auctionCreate', ['auction' => null, 'categories' => $categories, 'car_models' => $car_models, 'car_brands' => $car_brands]);
+    }
+
 
 }
