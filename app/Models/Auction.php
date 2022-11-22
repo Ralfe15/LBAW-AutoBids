@@ -43,6 +43,11 @@ class Auction extends Model
         return $this->bids->where('id', $this->bids->max('id'))->first();
     }
 
+    public function currentWinnerValue(){
+        return $this->bids->isEmpty()
+            ? $this->starting_bid : $this->bids->where('id', $this->bids->max('id'))->first()->value;
+    }
+
     public function category(){
         return $this->hasOne('App\Models\Category', 'id', 'id_category');
     }

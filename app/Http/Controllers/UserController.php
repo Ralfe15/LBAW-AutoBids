@@ -44,7 +44,7 @@ class UserController extends Controller
     {
         if (Auth::check() && Auth::user()->is_admin) {
             $requests = Auction::where('approved', false)->orderBy('creation_date', 'asc')->get();
-            $reports = AuctionReport::all();
+            $reports = AuctionReport::where('solved',false)->orderBy('date', 'asc')->get();
 
             return view('pages.admin', ['requests'=>$requests, 'reports'=>$reports]);
         }

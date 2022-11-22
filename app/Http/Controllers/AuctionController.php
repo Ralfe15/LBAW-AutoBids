@@ -84,4 +84,17 @@ class AuctionController extends Controller
         echo "Updated auctions and notified owner/winner";
     }
 
+    public function approve($id){
+        if(Auth::check() && Auth::user()->is_admin){
+            $auction = Auction::find($id);
+            $auction->approved = true;
+            $auction->active = true;
+            $auction->start_date = now();
+            $auction->save();
+            return redirect('/admin');
+        }
+        return redirect('/home');
+
+    }
+
 }

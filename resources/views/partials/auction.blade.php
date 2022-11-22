@@ -7,11 +7,11 @@
             {{-- <img src='{{ $auction->images->first->path }}'> --}}
             <img src='https://picsum.photos/200/200?business?id='>
         @endif
-        
+
         <div class="container">
             <h4><b>{{$auction->model->brand->name}} {{$auction->model->name }} - {{ $auction->year }}</b></h4>
             <p>Mileage: {{$auction->mileage}}</p>
-            <p>Current Bid: {{$auction->bids->max('value')/100}}</p>
+            <p>Current Bid: U${{credits_format($auction->currentWinnerValue()/100)}}</p>
         </div>
     </a>
 {{--   TODO favourite btn logic--}}

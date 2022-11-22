@@ -55,10 +55,10 @@
     <div class="auction-status-box">
         <div class="auction-status">
             <div class="status-currentbid">
-                <p><b>CurrendBid: </b> {{$auction->starting_bid/100}}</p>
+                <p><b>Current Bid: </b> {{$auction->currentWinnerValue()/100}}</p>
             </div>
             <div class="status-startingbid">
-                <p><b>StartingBid: </b> {{$auction->starting_bid/100}}</p>
+                <p><b>Starting Bid: </b> {{$auction->starting_bid/100}}</p>
             </div>
             <div class="status-numberbids">
                 <p> {{$auction->number_bids}} Bids</p>
@@ -84,8 +84,8 @@
                     @include('partials/error_list_validator')
                 @endif
             </div>
-            
-            
+
+
         </div>
     </div>
 

@@ -25,16 +25,13 @@
         <table class="table table-bordered table-striped">
             <thead>
             <tr>
-                <th scope="col">Auction id</th>
+                <th scope="col">Reported by</th>
                 <th scope="col">Auction name</th>
-                <th scope="col">Created at</th>
-                <th scope="col">Starting bid</th>
-                <th scope="col">Owner</th>
-                <th scope="col">Duration</th>
+                <th scope="col">Date</th>
             </tr>
             </thead>
             <tbody>
-            @each('partials/auction_admin', $requests, 'auction')
+            @each('partials/reports_admin', $reports, 'report')
             </tbody>
         </table>
     </div>
