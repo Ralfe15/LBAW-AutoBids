@@ -7,7 +7,7 @@
         <link href="{{ asset('css/createPaypal.css') }}" rel="stylesheet">
     </head>
     <div class="title-wrapper">
-        <h1>Paypal Transaction</h1>
+        <h1>Deposit/Withdraw Funds</h1>
     </div>
     @foreach ($errors->all() as $message)
         <h1>{{$message}}</h1>
@@ -17,13 +17,23 @@
 
 
         <div class="form">
-            <form method="POST" action="{{ route('create-paypal') }}" id="form_createpaypal">
+            <form method="POST" action="{{ route('create-transaction') }}" id="form_createtransaction">
                 {{ csrf_field() }}
+                <div class="form-transaction">
+                    <label for="transactionForm" class="form-label">Transaction Method</label>
+                    <select required class="form-select" name="transaction">
+                        <option value="SelectMethod" selected>Select Method..</option>
+                        <option value="Paypal" >Paypal</option>
+                        <option value="BankTransfer">Bank Transfer</option>
+
+                    </select>
+                </div>
                 <div class="form-type">
                     <label for="typeForm" class="form-label">Transaction Type</label>
                     <select required class="form-select" name="type">
-                        <option value="Deposit" selected>Deposit</option>
-                        <option value="Withdraw" selected>Withdraw</option>
+                        <option value="SelectType" selected>Select Type..</option>
+                        <option value="Deposit">Deposit</option>
+                        <option value="Withdraw">Withdraw</option>
 
                     </select>
                 </div>
@@ -42,7 +52,7 @@
 
                 <div class="submit-button">
                     <button type="submit" class="btn btn-secondary">
-                        Create Auction
+                        Submit Transaction
                     </button>
                 </div>
             </form>

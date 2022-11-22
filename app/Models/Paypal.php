@@ -8,6 +8,7 @@ class Paypal extends Model
 {
   // Don't add create and update timestamps in database.
   public $timestamps  = false;
+  protected $table = 'paypal';
 
   /**
    * The user this paypal transaction belongs to

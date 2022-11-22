@@ -61,5 +61,5 @@ Route::get('user/{id}/notifications', 'UserController@notifications')->name('not
 Route::get('/default', 'DefaultController@show')->name('default');
 
 //Credits
-Route::get('paypal/create', 'PaypalController@showPaypalForm')->name('create_paypal');
-Route::post('paypal/create', 'PaypalController@create')->name('create-paypal');
+Route::get('transaction', 'TransactionController@showTransactionForm')->name('create_transaction');
+Route::post('transaction', 'TransactionController@create')->name('create-transaction');
