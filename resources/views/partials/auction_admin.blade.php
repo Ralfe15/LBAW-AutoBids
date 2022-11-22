@@ -6,5 +6,10 @@
     <td>{{ $auction -> user->name }}</td>
     <td>{{ $auction -> duration }}</td>
 
-    <td><a class="btn btn-secondary" href="" role="button">Aprove request</a></td>
+    <td>
+        <form method="POST" action="{{route('approve', ['id'=>$auction->id])}}">
+            {{csrf_field()}}
+        <button class="btn btn-secondary" type="submit" role="button">Approve request</button>
+        </form>
+    </td>
 </tr>

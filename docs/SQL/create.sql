@@ -231,6 +231,7 @@ CREATE TABLE ReportAuction (
 	id_Auction integer NOT NULL,
 	date timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	description text NOT NULL,
+	solved boolean NOT NULL DEFAULT FALSE,
 	CONSTRAINT ReportAuction_pk PRIMARY KEY (id_Member,id_Auction)
 );
 

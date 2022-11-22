@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use http\Env\Request;
 use Illuminate\Database\Eloquent\Model;
 
 class AuctionReport extends Model
@@ -17,5 +18,4 @@ class AuctionReport extends Model
     public function auction(){
         return $this->belongsTo('App\Models\Auction', 'id_auction', 'id');
 }
-
 }
