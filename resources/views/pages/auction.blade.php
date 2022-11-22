@@ -118,9 +118,37 @@
             <div class="description-text">
                 <p><b>Description: </b> {{$auction->description}}</p>
             </div>
-
+            <div class="description-text">
+                <p><b>Owner: </b><a class="text-decoration-none" href="{{route('user_profile', ['id'=> $auction->user->id]) }}"> {{$auction->user->name}}</a></p>
             </div>
+        </div>
     </div>
+    <div class="auction-description-box">
+        <div class="auction-description">
+            <div class="description-brand">
+                <p><b>Bidding hisory: </b></p>
+            </div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">User</th>
+                    <th scope="col">Value</th>
+                    <th scope="col">Date</th>
+                </tr>
+                </thead>
+                @foreach($prev_bids as $prev_bid)
+                    <tr>
+                        <th scope="row">{{$loop->index+1}}</th>
+                        <td>{{$prev_bid->user->name}}</td>
+                        <td>{{$prev_bid->value}}</td>
+                        <td>{{date("F j, Y, g:i a", strtotime($prev_bid->date))}}</td>
+                    </tr>
+                @endforeach
+            </table>
+        </div>
+    </div>
+
 @stop
 
 

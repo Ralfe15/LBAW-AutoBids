@@ -25,7 +25,7 @@ class AuctionController extends Controller
         $can_bid = true;
         if(is_null($current_bid_val)){
             $current_bid = ($auction->starting_bid)/100; //starting price
-            $current_bid_user_id = -1;
+            $current_bid_user_id = -1; //check for this flag in the notification
             if ($auction->id_member == Auth::id()){
                 $can_bid = false;
             }
@@ -38,10 +38,10 @@ class AuctionController extends Controller
             $current_bid_user_id = $current_bid[0]->id_member;
             $current_bid = $current_bid_val/100;
         }
-
+        $prev_bids = $auction->bids()->orderBy('date', 'desc')->get();
 
         return view('pages.auction', ['auction' => $auction, 'time_remaining' => $time_remaining,
-            'current_bid' => $current_bid, 'can_bid' =>$can_bid, 'prev_id'=>$current_bid_user_id]);
+            'current_bid' => $current_bid, 'can_bid' =>$can_bid, 'prev_id'=>$current_bid_user_id, 'prev_bids'=>$prev_bids]);
     }
 
     public function list()
