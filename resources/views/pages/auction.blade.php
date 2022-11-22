@@ -55,13 +55,13 @@
     <div class="auction-status-box">
         <div class="auction-status">
             <div class="status-currentbid">
-                <p><b>Current Bid: </b> {{$auction->currentWinnerValue()/100}}</p>
+                <p><b>Current Bid: </b>U${{credits_format($auction->currentWinnerValue()/100)}}</p>
             </div>
             <div class="status-startingbid">
-                <p><b>Starting Bid: </b> {{$auction->starting_bid/100}}</p>
+                <p><b>Starting Bid: </b>U${{credits_format($auction->starting_bid/100)}}</p>
             </div>
             <div class="status-numberbids">
-                <p> {{$auction->number_bids}} Bids</p>
+                <p> <b>Number of bids: </b>{{$auction->bids()->count()}} bids</p>
             </div>
             <div class="status-started">
                 <p><b>Started at: </b> {{$auction->start_date}}</p>
@@ -132,16 +132,16 @@
                 <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">User</th>
+                    <th scope="col">Member</th>
                     <th scope="col">Value</th>
                     <th scope="col">Date</th>
                 </tr>
                 </thead>
                 @foreach($prev_bids as $prev_bid)
                     <tr>
-                        <th scope="row">{{$loop->index+1}}</th>
+                        <th scope="row">{{$loop->iteration}}</th>
                         <td>{{$prev_bid->user->name}}</td>
-                        <td>{{$prev_bid->value}}</td>
+                        <td>U${{credits_format($prev_bid->value/100)}}</td>
                         <td>{{date("F j, Y, g:i a", strtotime($prev_bid->date))}}</td>
                     </tr>
                 @endforeach
