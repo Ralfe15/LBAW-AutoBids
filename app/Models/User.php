@@ -36,7 +36,13 @@ class User extends Authenticatable
     /**
      * The cards this user owns.
      */
-     public function auctions() {
+    public function auctions() {
       return $this->hasMany('App\Models\Auction', 'id_member');
+    }
+    public function paypal() {
+        return $this->hasMany('App\Models\Paypal', 'id_member');
+    }
+    public function banktransfer() {
+        return $this->hasMany('App\Models\BankTransfer', 'id_member');
     }
 }
