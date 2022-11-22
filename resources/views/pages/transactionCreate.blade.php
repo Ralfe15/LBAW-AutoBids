@@ -4,18 +4,16 @@
 
 
     <head>
-        <link href="{{ asset('css/createPaypal.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/transaction.css') }}" rel="stylesheet">
     </head>
     <div class="title-wrapper">
         <h1>Deposit/Withdraw Funds</h1>
     </div>
+    <div class="line"></div>
     @foreach ($errors->all() as $message)
         <h1>{{$message}}</h1>
     @endforeach
     <div class="form-wrapper">
-
-
-
         <div class="form">
             <form method="POST" action="{{ route('create-transaction') }}" id="form_createtransaction">
                 {{ csrf_field() }}
@@ -38,16 +36,16 @@
                     </select>
                 </div>
 
-                <div class="email-form">
+                <div class="form-email">
                     <label for="emailForm" class="form-label">Email</label>
                     <input required type="email" class="form-control" name="email" id="email-form" placeholder="Ex:name@domain.tld">
                 </div>
-                <div class="value-form">
+                <div class="form-value">
                     <label for="valueForm" class="form-label">Value</label>
                     <input required type="number" class="form-control" name="value" min=0 id="value-form" placeholder="Ex: 12727">
                 </div>
 
-                <div class="line"></div>
+
 
 
                 <div class="submit-button">
