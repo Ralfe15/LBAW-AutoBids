@@ -7,9 +7,10 @@
 
         </div>
         <div class="search-div">
-            <form action="../pages/search.php" class="search" method="POST">
+            <form action="{{ route('search-auction') }}" class="search" method="POST">
+                {{ csrf_field() }}
                 <input type="text" placeholder="Search.." name="search">
-                <input type="text" class="search-type" name="search-type" style="display:none" value="restaurant">
+                <input type="text" class="search-type" name="search-type" style="display:none" name="query">
                 <button type="submit" class="search-button"><i></i>&#x276F</button>
             </form>
             <div class="search-by">

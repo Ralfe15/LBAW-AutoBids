@@ -61,3 +61,7 @@ Route::post('transaction/approve/{id}', 'TransactionController@approve')->name('
 //Images
 Route::get('image', 'ImageController@form')->name('upload_image');
 Route::post('image/upload', 'ImageController@upload')->name('upload-image');
+
+
+//Search
+Route::post('auctions/search', 'SearchController@searchAuction')->name('search-auction');
