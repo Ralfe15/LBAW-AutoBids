@@ -3,7 +3,6 @@
     <head>
         <link rel="stylesheet" href="{{asset('css/user.css')}}">
     </head>
-    {{ info($transactions)}}
     <div class="content-wrapper">
         <h1>Auction creation requests</h1>
         <table class="table table-bordered table-striped">

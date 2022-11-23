@@ -4,8 +4,7 @@
         @if($auction->images->isEmpty())
             <img src='{{ asset('img/auctions/car_placeholder_square200.png') }}'>
         @else
-            {{-- <img src='{{ $auction->images->first->path }}'> --}}
-            <img src='https://picsum.photos/200/200?business?id='>
+            <img src={{ asset($auction->images->first()->path) }}>
         @endif
 
         <div class="container">

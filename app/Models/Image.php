@@ -16,6 +16,6 @@ class Image extends Model
      * The auction this image belongs to
      */
     public function images() {
-        return $this->belongsTo('App\Models\Auction', 'id_auction');
+        return $this->belongsTo('App\Models\Auction', 'id_auction', 'id');
     }
 }

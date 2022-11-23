@@ -8,6 +8,7 @@ use App\Models\Brand;
 use App\Models\Card;
 use App\Models\CarModel;
 use App\Models\Category;
+use App\Models\Image;
 use App\Models\User;
 use App\Notifications\EndAuctionNotification;
 use Carbon\Carbon;
@@ -108,7 +109,8 @@ class AuctionController extends Controller
             'displacement' => 'required|integer',
             'vin' => 'alpha_num|required|size:17',
             'power' => 'required|integer',
-            'color' => 'required|string|max:32'
+            'color' => 'required|string|max:32',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
     }
 
@@ -124,6 +126,8 @@ class AuctionController extends Controller
             redirect('/home');
         }
         $id = Auth::user()->id;
+
+        //Auction
         $auction = new Auction();
         $auction->id_category = $request->input('id_Category');
         $auction->id_model = $request->input('id_Model');
@@ -137,8 +141,25 @@ class AuctionController extends Controller
         $auction->power = $request->input('power');
         $auction->color = $request->input('color');
         $auction->id_member = $id;
-
         $auction->save();
+
+        //Images
+        if ($request->images){
+            foreach($request->images as $key=> $image)
+            {
+                $newImage = new Image();
+                $imageName = $auction->id.'-'.$key.'.'.$image->extension();
+                $imagePath = "img/auctions/$auction->id/";
+                $image->move(public_path($imagePath), $imageName);
+                $imageFullPath = $imagePath.$imageName;
+
+                $newImage->path = $imageFullPath;
+                $newImage->id_auction = $auction->id;
+                $newImage->save();
+            }
+        }
+
+
 
         //change redirect to auction details
         return redirect('/home');

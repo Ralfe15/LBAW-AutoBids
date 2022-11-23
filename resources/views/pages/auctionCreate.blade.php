@@ -17,7 +17,7 @@
 
 
     <div class="form">
-        <form method="POST" action="{{ route('create-auction') }}" id="form_createauction">
+        <form method="POST" action="{{ route('create-auction') }}" id="form_createauction" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="details-wrapper">
                 <h3>Vehicle Details</h3>
@@ -94,6 +94,11 @@
                 <h3>Auction Details</h3>
             </div>
             <div class="line"></div>
+
+            <div class="mb-3">
+                <label for="formFileMultiple" class="form-label">Multiple files input example</label>
+                <input class="form-control" type="file" id="formFileMultiple" multiple name="images[]">
+            </div>
 
             <div class="startingbid-form">
                 <label for="startingbidForm" class="form-label">Starting Bid</label>

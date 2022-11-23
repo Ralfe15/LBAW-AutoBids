@@ -64,3 +64,7 @@ Route::get('/default', 'DefaultController@show')->name('default');
 Route::get('transaction', 'TransactionController@showTransactionForm')->name('create_transaction');
 Route::post('transaction/create', 'TransactionController@create')->name('create-transaction');
 Route::post('transaction/approve/{id}', 'TransactionController@approve')->name('approve-transaction');
+
+//Images
+Route::get('image', 'ImageController@form')->name('upload_image');
+Route::post('image/upload', 'ImageController@upload')->name('upload-image');

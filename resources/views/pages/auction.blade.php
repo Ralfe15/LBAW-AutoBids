@@ -32,11 +32,11 @@
                 @foreach($auction->images as $img)
                     @if($loop->first)
                         <div class="carousel-item active">
-                            <img src="{{$img->path}}" class="d-block w-100" alt="...">
+                            <img src="{{asset($img->path)}}" class="d-block w-100" alt="...">
                         </div>
                     @else
                         <div class="carousel-item">
-                            <img src="{{$img->path}}" class="d-block w-100" alt="...">
+                            <img src="{{asset($img->path)}}" class="d-block w-100" alt="...">
                         </div>
                     @endif
                 @endforeach
