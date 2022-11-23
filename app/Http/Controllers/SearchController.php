@@ -14,6 +14,8 @@ class SearchController extends Controller
         $search = $request->input('search');
 
         $auctions = Auction::select('auction.*')
+            ->where('approved', '=', 'true')
+            ->where('active', '=', 'true')
             ->join('category','category.id','=','id_category')
             ->join('model', 'model.id', '=', 'id_model')
             ->join('brand', 'brand.id', '=', 'id_brand')
@@ -21,7 +23,9 @@ class SearchController extends Controller
             ->orWhere('model.name', 'ilike', '%'.$search.'%')           //model
             ->orWhere('brand.name', 'ilike', '%'.$search.'%')           //brand
             ->orwhere('color','ilike','%'.$search.'%')                  //color
-            ->orWhere('description','ilike','%'.$search.'%')->get();    //description
+            ->orWhere('description','ilike','%'.$search.'%')    //description
+            ->get();
+
 
         return view('pages.auctions', ['auctions'=>$auctions]);
     }
