@@ -21,7 +21,7 @@ Route::get('/home', 'HomeController@show')->name('home');
 
 //Auctions
 Route::get('my-auctions', 'AuctionController@list')->name('my_auctions');
-Route::get('auctions', 'AuctionController@checkEnd')->name('auctions');
+Route::get('auctions', 'AuctionController@all')->name('auctions');
 Route::get('auction/{id}', 'AuctionController@show')->name('detail');
 Route::get('auctions/create', 'AuctionController@showAuctionForm')->name('create_auction');
 Route::post('auctions/create', 'AuctionController@create')->name('create-auction');
