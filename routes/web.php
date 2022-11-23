@@ -56,6 +56,7 @@ Route::get('admin', 'UserController@adminDashboard')->name('admin_dashboard');
 
 //Notifications
 Route::get('user/{id}/notifications', 'UserController@notifications')->name('notifications');
+Route::get('readnotification/{id}', 'UserController@readNotification')->name('readnotification');
 
 //Default
 Route::get('/default', 'DefaultController@show')->name('default');

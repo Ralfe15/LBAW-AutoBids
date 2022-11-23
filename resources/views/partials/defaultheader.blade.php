@@ -39,6 +39,7 @@
                 @if(Auth::check())
                     <li><a class="dropdown-item" href="#">Balance: U${{credits_format(Auth::user()->credits/100)}}</a></li>
                     <li><a class="dropdown-item" href="/user/{{ Auth::user()->id }}">Profile</a></li>
+                    <li><a class="dropdown-item" href="{{route('notifications', ['id'=>Auth::id()])}}">Notifications ({{ Auth::user()->unreadNotifications->count() }})</a></li>
                     <li><a class="dropdown-item" href="/my-auctions">My Auctions</a></li>
                     <li><a class="dropdown-item" href="#">Favourites</a></li>
                     <li><a class="dropdown-item" href="/auctions/create">Create Auction</a></li>

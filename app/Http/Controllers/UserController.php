@@ -42,6 +42,18 @@ class UserController extends Controller
         return view('pages.home');
     }
 
+    public function readNotification($id){
+        $userUnreadNotification = Auth::user()
+            ->unreadNotifications
+            ->where('id', $id)
+            ->first();
+
+        if($userUnreadNotification) {
+            $userUnreadNotification->markAsRead();
+        }
+        return back();
+    }
+
     public function adminDashboard()
     {
         if (Auth::check() && Auth::user()->is_admin) {

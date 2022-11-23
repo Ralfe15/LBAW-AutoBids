@@ -28,3 +28,15 @@ if (!function_exists('secsToStr')){
     }
 }
 
+if (!function_exists('processNotification')){
+    function processNotification($notification) {
+        switch($notification->type){
+            case 'App\\Notifications\\ApprovedAuctionNotification':
+                return $notification->data['auction_owner'] . ", your auction named " .
+                    $notification->data['auction_name'] . " was approved at " .
+                    date("Y-m-d H:i:s", $notification->created_at->timestamp) . ".";
+            default:
+                return "default";
+        }
+    }
+}
