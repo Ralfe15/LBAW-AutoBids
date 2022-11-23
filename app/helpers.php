@@ -35,8 +35,19 @@ if (!function_exists('processNotification')){
                 return $notification->data['auction_owner'] . ", your auction named " .
                     $notification->data['auction_name'] . " was approved at " .
                     date("Y-m-d H:i:s", $notification->created_at->timestamp) . ".";
+            case 'App\\Notifications\\EndAuctionNotificationNoBids':
+                return $notification->data['auction_owner'] . ", your auction named " .
+                    $notification->data['auction_name'] . " ended with no bids at " .
+                    date("Y-m-d H:i:s", $notification->created_at->timestamp) . ".";
+            case 'App\\Notifications\\EndAuctionNotificationBids':
+                return "The auction named " .
+                    $notification->data['auction_name'] . " ended with a highest bid of " .
+                    $notification->data['winner_bid']/100 . " made by " . $notification->data['winner_name'] .
+                    " at ". date("Y-m-d H:i:s", $notification->created_at->timestamp) . ".";
+            case 'App\\Notifications\\NewBidAuctionNotification':
+                return "An auction you have previously bid has a new bid with value os U$" . credits_format($notification->data['new_val']/100);
             default:
-                return "default";
+                return $notification;
         }
     }
 }

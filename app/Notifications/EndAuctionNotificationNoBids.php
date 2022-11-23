@@ -8,7 +8,7 @@ use Illuminate\Bus\Queueable;
 
 use Illuminate\Notifications\Notification;
 
-class ApprovedAuctionNotification extends Notification
+class EndAuctionNotificationNoBids extends Notification
 {
     use Queueable;
     public Auction $auction;

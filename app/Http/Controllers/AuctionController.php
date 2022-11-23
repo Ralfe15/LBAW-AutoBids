@@ -10,7 +10,9 @@ use App\Models\CarModel;
 use App\Models\Category;
 use App\Models\Image;
 use App\Models\User;
-use App\Notifications\EndAuctionNotification;
+use App\Notifications\ApprovedAuctionNotification;
+use App\Notifications\EndAuctionNotificationBids;
+use App\Notifications\EndAuctionNotificationNoBids;
 use Carbon\Carbon;
 use Carbon\CarbonInterval;
 use Illuminate\Support\Facades\Auth;
@@ -74,17 +76,24 @@ class AuctionController extends Controller
         $active_auctions = Auction::where('active', true)
             ->where('approved', true)
             ->get();
+
         foreach ($active_auctions as $auction) {
             // if we are in a time ahead of end_date
             if (!Carbon::parse($auction->end_date)->diff(Carbon::now())->invert) {
-                $auction->active = false;
-                $auction->save();
-
                 //notify the auction winner and the owner about the result
                 $winner = $auction->winner();
-                $notification = new EndAuctionNotification($auction, $winner);
-                $winner->notify($notification);
-                $auction[0]->user()->notify($notification);
+                if(!is_null($winner)){
+                    $notification = new EndAuctionNotificationBids($auction, $winner);
+                    $winner->user->notify($notification);
+                }
+                else{
+                    // Case an auction ends without any bid
+                    $notification = new EndAuctionNotificationNoBids($auction);
+                }
+
+                $auction->user->notify($notification);
+                $auction->active = false;
+                $auction->save();
             }
         }
         echo "Updated auctions and notified owner/winner";
@@ -185,6 +194,7 @@ class AuctionController extends Controller
             $auction->start_date = now();
             //end date is handled as a pgsql trigger
             $auction->save();
+            $auction->user->notify(new ApprovedAuctionNotification($auction));
             return redirect('/admin');
 
         }

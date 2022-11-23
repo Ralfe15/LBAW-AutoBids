@@ -10,17 +10,17 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class EndAuctionNotification extends Notification
+class EndAuctionNotificationBids extends Notification
 {
     use Queueable;
-    public User $winner;
+    public Bid $winner;
     public Auction $auction;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(Auction $auction, User $winner)
+    public function __construct(Auction $auction, Bid $winner)
     {
         $this->auction = $auction;
         $this->winner = $winner;
@@ -46,7 +46,7 @@ class EndAuctionNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            'winner_name' => $this->winner->name,
+            'winner_name' => $this->winner->user->name,
             'auction_name' => $this->auction->model->brand->name. " - " .
                 $this->auction->model->name . " - "  . $this->auction->year,
             'auction_owner' => $this->auction->user->name,
