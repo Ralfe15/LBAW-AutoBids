@@ -54,6 +54,9 @@ insert into Member (name, email, password, rating, credits, address) values ('Wy
 insert into Member (name, email, password, rating, credits, address) values ('Shantee Demonge', 'sdemonge1b@stumbleupon.com', 'wOd0rLwXvVP0', 2.85, 0, '1 Sachs Circle');
 insert into Member (name, email, password, rating, credits, address) values ('Bettina Innwood', 'binnwood1c@privacy.gov.au', 'sl574KXDG', 2.38, 0, '372 Starling Place');
 insert into Member (name, email, password, rating, credits, address) values ('Kaye Crosscombe', 'kcrosscombe1d@ihg.com', 'bUXdIB2g1aMO', 2.82, 0, '4 Havey Plaza');
+insert into Member (name, email, password, rating, credits, address, is_admin) values ('LBAW Admin', 'lbaw.admin@lbaw.com', '$2y$10$pHT.P0ytVi0tc9AtEkh/eOCVMtPcJleRtTselwsE2helpbAO2g4o2', 0, 9999999, 'FEUP', true);
+insert into Member (name, email, password, rating, credits, address) values ('LBAW User', 'lbaw.user@lbaw.com', '$2y$10$pHT.P0ytVi0tc9AtEkh/eOCVMtPcJleRtTselwsE2helpbAO2g4o2', 0, 9999999, 'FEUP');
+
 
 
 insert into Brand (name) values ('Seat');
@@ -1178,38 +1181,6 @@ insert into Notification (send_date, id_Bid, id_Auction, id_Comment, seen) value
 insert into Notification (send_date, id_Bid, id_Auction, id_Comment, seen) values ('8/13/2022', '13', '4', '17', false);
 insert into Notification (send_date, id_Bid, id_Auction, id_Comment, seen) values ('9/21/2022', '30', '10', '5', false);
 insert into Notification (send_date, id_Bid, id_Auction, id_Comment, seen) values ('11/13/2021', '11', '22', '3', true);
-
-
-
-
-
-insert into Image (path, id_Auction) values ('path/236x100.png/ff4444/ffffff', '1');
-insert into Image (path, id_Auction) values ('path/208x100.png/dddddd/000000', '2');
-insert into Image (path, id_Auction) values ('path/229x100.png/5fa2dd/ffffff', '3');
-insert into Image (path, id_Auction) values ('path/193x100.png/ff4444/ffffff', '4');
-insert into Image (path, id_Auction) values ('path/169x100.png/5fa2dd/ffffff', '5');
-insert into Image (path, id_Auction) values ('path/130x100.png/5fa2dd/ffffff', '6');
-insert into Image (path, id_Auction) values ('path/135x100.png/ff4444/ffffff', '7');
-insert into Image (path, id_Auction) values ('path/157x100.png/ff4444/ffffff', '8');
-insert into Image (path, id_Auction) values ('path/184x100.png/dddddd/000000', '9');
-insert into Image (path, id_Auction) values ('path/248x100.png/ff4444/ffffff', '10');
-insert into Image (path, id_Auction) values ('path/151x100.png/cc0000/ffffff', '11');
-insert into Image (path, id_Auction) values ('path/117x100.png/ff4444/ffffff', '12');
-insert into Image (path, id_Auction) values ('path/179x100.png/ff4444/ffffff', '13');
-insert into Image (path, id_Auction) values ('path/189x100.png/5fa2dd/ffffff', '14');
-insert into Image (path, id_Auction) values ('path/133x100.png/cc0000/ffffff', '15');
-insert into Image (path, id_Auction) values ('path/106x100.png/5fa2dd/ffffff', '16');
-insert into Image (path, id_Auction) values ('path/226x100.png/5fa2dd/ffffff', '17');
-insert into Image (path, id_Auction) values ('path/118x100.png/ff4444/ffffff', '18');
-insert into Image (path, id_Auction) values ('path/136x100.png/5fa2dd/ffffff', '19');
-insert into Image (path, id_Auction) values ('path/137x100.png/cc0000/ffffff', '20');
-insert into Image (path, id_Auction) values ('path/219x100.png/5fa2dd/ffffff', '21');
-insert into Image (path, id_Auction) values ('path/109x100.png/cc0000/ffffff', '22');
-insert into Image (path, id_Auction) values ('path/182x100.png/cc0000/ffffff', '23');
-insert into Image (path, id_Auction) values ('path/150x100.png/5fa2dd/ffffff', '24');
-insert into Image (path, id_Auction) values ('path/146x100.png/dddddd/000000', '25');
-
-
 
 insert into FollowAuction (id_Member, id_Auction, date) values ('18', '9', '12/19/2022');
 insert into FollowAuction (id_Member, id_Auction, date) values ('14', '8', '12/13/2022');

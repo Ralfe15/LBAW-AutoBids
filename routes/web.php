@@ -18,7 +18,6 @@ Route::get('/', function() {
 //Home
 Route::get('/home', 'HomeController@show')->name('home');
 
-
 //Auctions
 Route::get('my-auctions', 'AuctionController@list')->name('my_auctions');
 Route::get('auctions', 'AuctionController@all')->name('auctions');
@@ -32,13 +31,6 @@ Route::post('auction/solve', 'AuctionReportController@markAsSolved')->name('solv
 
 //Bids
 Route::put('auction/{id}/bid', 'BidController@create')->name('bid');
-
-// API
-Route::put('api/cards', 'CardController@create');
-Route::delete('api/cards/{card_id}', 'CardController@delete');
-Route::put('api/cards/{card_id}/', 'ItemController@create');
-Route::post('api/item/{id}', 'ItemController@update');
-Route::delete('api/item/{id}', 'ItemController@delete');
 
 // Authentication
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
