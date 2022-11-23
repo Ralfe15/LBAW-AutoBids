@@ -105,8 +105,7 @@ class TransactionController extends Controller
     {
         if (Auth::check() && Auth::user()->is_admin) {
             $transaction = BankTransfer::find($id);
-            $transaction->approved = true;
-            $transaction->save();
+
 
             if($transaction->type == 'Deposit') {
                 $transaction->user->increment('credits', $transaction->value);
@@ -114,7 +113,8 @@ class TransactionController extends Controller
             elseif($transaction->type == 'Withdraw') {
                 $transaction->user->decrement('credits', $transaction->value);
             }
-
+            $transaction->approved = true;
+            $transaction->save();
             return redirect('/admin');
         }
     }
