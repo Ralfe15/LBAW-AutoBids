@@ -1,6 +1,10 @@
 <div class="card">
 {{--    button redirecting to /auctions/{id}--}}
-    <a href="{{route('detail', ['id'=> $auction->id]) }}">
+    <a href="{{route('detail', ['id'=> $auction->id]) }}"
+       @if(!$auction->active || !$auction->approved)
+           style="pointer-events: none; cursor: default;"
+        @endif
+    >
         @if($auction->images->isEmpty())
             <img src='{{ asset('img/auctions/car_placeholder_square200.png') }}'>
         @else
@@ -11,6 +15,13 @@
             <h4><b>{{$auction->model->brand->name}} {{$auction->model->name }} - {{ $auction->year }}</b></h4>
             <p>Mileage: {{$auction->mileage}}</p>
             <p>Current Bid: U${{credits_format($auction->currentWinnerValue()/100)}}</p>
+            @if(!$auction->approved)
+                <p style="color: red" class="text-red">Not approved</p>
+            @elseif(!$auction->active)
+                <p style="color: red" class="text-red">Expired</p>
+            @endif
+
+
         </div>
     </a>
 {{--   TODO favourite btn logic--}}

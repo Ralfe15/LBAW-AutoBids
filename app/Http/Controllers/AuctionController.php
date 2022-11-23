@@ -54,7 +54,6 @@ class AuctionController extends Controller
     public function list()
     {
         if (!Auth::check()) return redirect('/login');
-        $this->authorize('list', Card::class);
         $auctions = Auth::user()->auctions()->orderBy('id')->get();
         return view('pages.my_auctions', ['auctions' => $auctions]);
     }
