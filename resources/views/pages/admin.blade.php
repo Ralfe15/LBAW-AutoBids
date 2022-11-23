@@ -3,7 +3,7 @@
     <head>
         <link rel="stylesheet" href="{{asset('css/user.css')}}">
     </head>
-
+    {{ info($transactions)}}
     <div class="content-wrapper">
         <h1>Auction creation requests</h1>
         <table class="table table-bordered table-striped">
@@ -32,6 +32,22 @@
             </thead>
             <tbody>
             @each('partials/reports_admin', $reports, 'report')
+            </tbody>
+        </table>
+
+        <h1>Transaction requests</h1>
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Requested by</th>
+                <th scope="col">Profile</th>
+                <th scope="col">Type</th>
+                <th scope="col">Value</th>
+            </tr>
+            </thead>
+            <tbody>
+            @each('partials/transactions', $banktransfers_approval, 'transaction')
             </tbody>
         </table>
     </div>

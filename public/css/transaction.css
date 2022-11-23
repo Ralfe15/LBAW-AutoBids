@@ -1,0 +1,52 @@
+.title-wrapper {
+    padding-top: 100px;
+    padding-bottom: 25px;
+    text-align: center;
+}
+
+
+.form {
+    padding-top: 50px;
+    width: 15%;
+    margin: auto;
+}
+
+
+label{
+    display: block; /* add this */
+    text-align: left;
+    font-weight: bold;
+    width: fit-content;
+}
+
+.form-transaction {
+    padding-bottom: 25px;
+}
+
+.form-type {
+    padding-bottom: 25px;
+}
+
+.form-email {
+    padding-bottom: 25px;
+}
+
+.form-value {
+    padding-bottom: 25px;
+}
+
+
+
+.submit-button {
+    padding-top: 50px;
+    padding-bottom: 150px;
+}
+
+.line {
+    width: 20%;
+    margin: 0 auto 25px auto;
+    border-bottom-style: solid;
+    border-color: lightgrey;
+    border-width: 2px;
+}
+
