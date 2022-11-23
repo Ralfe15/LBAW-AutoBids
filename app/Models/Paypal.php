@@ -14,7 +14,7 @@ class Paypal extends Model
    * The user this paypal transaction belongs to
    */
   public function user() {
-    return $this->belongsTo('App\Models\User');
+    return $this->belongsTo('App\Models\User', 'id_member', 'id');
   }
 
 }

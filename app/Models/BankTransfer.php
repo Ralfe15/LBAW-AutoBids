@@ -15,7 +15,7 @@ class BankTransfer extends Model
      * The user this bank transaction belongs to
      */
     public function user() {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('App\Models\User', 'id_member', 'id');
     }
 
 }

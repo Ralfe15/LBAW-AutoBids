@@ -109,10 +109,10 @@ class TransactionController extends Controller
             $transaction->save();
 
             if($transaction->type == 'Deposit') {
-                Auth::user()->increment('credits', $transaction->value);
+                $transaction->user->increment('credits', $transaction->value);
             }
             elseif($transaction->type == 'Withdraw') {
-                Auth::user()->decrement('credits', $transaction->value);
+                $transaction->user->decrement('credits', $transaction->value);
             }
 
             return redirect('/admin');

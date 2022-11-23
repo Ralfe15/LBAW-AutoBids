@@ -62,4 +62,5 @@ Route::get('/default', 'DefaultController@show')->name('default');
 
 //Credits
 Route::get('transaction', 'TransactionController@showTransactionForm')->name('create_transaction');
-Route::post('transaction', 'TransactionController@create')->name('create-transaction');
+Route::post('transaction/create', 'TransactionController@create')->name('create-transaction');
+Route::post('transaction/approve/{id}', 'TransactionController@approve')->name('approve-transaction');
