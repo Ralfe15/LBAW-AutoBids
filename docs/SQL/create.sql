@@ -349,7 +349,7 @@ BEGIN
             FROM Auction A
             INNER JOIN Model M ON M.id = A.id_Model
             INNER JOIN Brand B ON M.id_Brand = B.id
-            where Auction.id = NEW.id;
+            where A.id = NEW.id;
             NEW.tsvectors = to_tsvector('english', NEW.search);
          END IF;
  END IF;
