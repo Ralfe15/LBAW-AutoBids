@@ -95,9 +95,11 @@
             </div>
             <div class="line"></div>
 
+            <div class="image-form">
             <div class="mb-3">
-                <label for="formFileMultiple" class="form-label">Multiple files input example</label>
+                <label for="formFileMultiple" class="form-label">Upload Images</label>
                 <input class="form-control" type="file" id="formFileMultiple" multiple name="images[]">
+            </div>
             </div>
 
             <div class="startingbid-form">
