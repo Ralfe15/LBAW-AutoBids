@@ -87,6 +87,8 @@ class TransactionController extends Controller
 
         $transaction->save();
 
+        $transaction->transaction = $request->input('transaction');
+
         if($transaction->transaction == 'Paypal') {
             if($transaction->type == 'Deposit') {
                 Auth::user()->increment('credits', $transaction->value);
