@@ -17,6 +17,8 @@ Route::get('/', function() {
 
 //Home
 Route::get('/home', 'HomeController@show')->name('home');
+Route::get('/faq', 'HomeController@showFAQ')->name('faq');
+Route::get('/about', 'HomeController@showAbout')->name('about');
 
 //Auctions
 Route::get('my-auctions', 'AuctionController@list')->name('my_auctions');

@@ -17,4 +17,12 @@ class HomeController extends Controller
 
         return view("pages.default", ['auctions_latest' => $auctions_latest, 'auctions_finishing' => $auctions_finishing, 'auctions_popular' => $auctions_popular]);
     }
+
+    public function showFAQ() {
+        return view("pages.faq");
+    }
+
+    public function showAbout() {
+        return view("pages.about");
+    }
 }

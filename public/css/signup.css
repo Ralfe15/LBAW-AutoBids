@@ -1,4 +1,4 @@
-.login-title {
+.signup-title {
     text-align: center;
     padding-top: 100px;
     padding-bottom: 50px;
@@ -9,7 +9,16 @@
     margin: auto;
 }
 
+.form-name {
+    padding-bottom: 25px;
+}
 .form-email {
+    padding-bottom: 25px;
+}
+.form-password {
+    padding-bottom: 25px;
+}
+.form-tel {
     padding-bottom: 25px;
 }
 
@@ -21,5 +30,4 @@ label{
 
 .button-wrapper {
     padding-top: 25px;
-
 }

@@ -1,0 +1,14 @@
+.content-wrapper {
+    width: 50%;
+    margin: auto
+}
+.about-title {
+    text-align: center;
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+.about-wrapper {
+    border: solid;
+    border-color: lightgrey;
+    padding: 25px;
+}

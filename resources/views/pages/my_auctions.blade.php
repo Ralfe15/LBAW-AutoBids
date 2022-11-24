@@ -1,8 +1,9 @@
-@include('partials/header')
-<link rel="stylesheet" href="{{asset('css/search.css')}}">
-<link href="{{ asset('css/auctions.css') }}" rel="stylesheet">
+@extends('layouts.default')
+@section('content')
+<head>
+<link href="{{ asset('css/auction.css') }}" rel="stylesheet">
+</head>
 
-<body>
     <div class="content-wrapper">
         <div class="title-wrapper">
             <h1 style="margin-left: 2em">Your auctions</h1>
@@ -12,4 +13,4 @@
 
         </section>
     </div>
-</body>
+@stop

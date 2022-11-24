@@ -13,22 +13,6 @@
                 <input type="text" class="search-type" name="search-type" style="display:none" name="query">
                 <button type="submit" class="search-button"><i></i>&#x276F</button>
             </form>
-            <div class="search-by">
-                <span>By:</span>
-                {{--    TODO  handle ONCLICK function here  --}}
-                <input type="radio" name="select" id="option-1" value = "restaurant">
-                <input type="radio" name="select" id="option-2" value= "dish">
-                <input type="radio" name="select" id="option-3" value= "rating">
-
-                <label for="option-1" class="option option-1" name="restaurant">
-                    <div class="dot"></div>
-                    <span>Name</span>
-                </label>
-                <label for="option-2" class="option option-2" name="dish">
-                    <div class="dot"></div>
-                    <span>Price</span>
-                </label>
-            </div>
         </div>
 
 
@@ -59,8 +43,8 @@
     <div class="header-navbar">
         <a class="nav-home" href="{{ route('home') }}">Home</a>
         <a class="nav-auctions" href="{{ route('auctions') }}">Auctions</a>
-        <a class="nav-faq" href="#">FAQ</a>
-        <a class="nav-about" href="#">About</a>
+        <a class="nav-faq" href="{{ route('faq') }}">FAQ</a>
+        <a class="nav-about" href="{{ route('about') }}">About</a>
     </div>
 </header>
 
