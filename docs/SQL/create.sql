@@ -336,16 +336,15 @@ UPDATE Auction SET tsvectors = to_tsvector('english', search);
 CREATE FUNCTION auction_search_update() RETURNS TRIGGER AS $$
 BEGIN
  IF TG_OP = 'INSERT' THEN
-        NEW.search = CONCAT(A.description, ' ', A.color, ' ', M.name, '', B.name)
-        FROM Auction A
-        INNER JOIN Model M ON M.id = A.id_Model
+        NEW.search = CONCAT(NEW.description, ' ', NEW.color, ' ', M.name, '', B.name)
+        FROM Model M
         INNER JOIN Brand B ON M.id_Brand = B.id
-        where A.id = NEW.id;
-        NEW.tsvectors = to_tsvector('english', NEW.search);
+        where NEW.id_model = M.id;
+        NEW.tsvectors := to_tsvector('english', NEW.search);
  END IF;
  IF TG_OP = 'UPDATE' THEN
          IF (NEW.description <> OLD.description OR NEW.color <> OLD.color) THEN
-            NEW.search = CONCAT(A.description, ' ', A.color, ' ', M.name, '', B.name)
+            NEW.search = CONCAT(NEW.description, ' ', NEW.color, ' ', M.name, '', B.name)
             FROM Auction A
             INNER JOIN Model M ON M.id = A.id_Model
             INNER JOIN Brand B ON M.id_Brand = B.id
