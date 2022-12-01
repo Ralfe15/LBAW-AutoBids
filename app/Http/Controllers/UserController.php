@@ -74,4 +74,40 @@ class UserController extends Controller
         }
         return view('pages.home');
     }
+
+    public function edit(Request $request)
+    {
+        if(Auth::check()){
+            $user_id = Auth::id();
+            $user = User::find($user_id);
+
+
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->address = $request->address;
+
+
+            if($request->password) {
+                $password = bcrypt($request->password);
+                $user->password = $password;
+            }
+
+            $user->save();
+
+            return redirect("/user/$user_id");
+        }
+
+        return redirect('/login');
+    }
+
+    public function showEditForm()
+    {
+        if (Auth::check()) {
+            $user = User::find(Auth::id());
+
+            return view('pages.userEdit', ['user' => $user]);
+        }
+
+        return redirect('/login');
+    }
 }

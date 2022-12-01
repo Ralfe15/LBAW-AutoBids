@@ -14,7 +14,7 @@
               @endif --}}
         </div>
     </div>
-    
+
     <div class="user-details">
         <div class="details-name">
             <p><b>Name: </b> {{$user->name}}</p>
@@ -32,6 +32,13 @@
             <p><b>Member since: </b> {{$user->account_creation}}</p>
         </div>
     </div>
+    @if(Auth::id() == $user->id)
+        <div class="button-wrapper">
+            <a class="btn btn-secondary btn-lg" href="{{route('user_edit')}}">
+                Edit Profile
+            </a>
+        </div>
+    @endif
 
 
 </div>
