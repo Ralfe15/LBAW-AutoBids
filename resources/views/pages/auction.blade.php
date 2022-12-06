@@ -148,7 +148,12 @@
             </table>
         </div>
     </div>
-
+    <div class="comments-box">
+        <div class="comment-title">
+            <p>Comments</p>
+        </div>
+        @include('partials/auctionComments', array('id' => $auction->id))
+    </div>
 @stop
 
 

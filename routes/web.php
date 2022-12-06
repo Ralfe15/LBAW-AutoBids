@@ -20,6 +20,9 @@ Route::get('/home', 'HomeController@show')->name('home');
 Route::get('/faq', 'HomeController@showFAQ')->name('faq');
 Route::get('/about', 'HomeController@showAbout')->name('about');
 
+//Comments
+Route::get('auction/{id}/comments/', 'CommentController@auctionComments')->name('auction-comments');
+
 //Auctions
 Route::get('my-auctions', 'AuctionController@list')->name('my_auctions');
 Route::get('auctions', 'AuctionController@all')->name('auctions');
@@ -70,3 +73,4 @@ Route::post('image/upload', 'ImageController@upload')->name('upload-image');
 
 //Search
 Route::post('auctions/search', 'SearchController@searchAuction')->name('search-auction');
+

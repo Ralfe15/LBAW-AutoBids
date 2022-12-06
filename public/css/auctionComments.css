@@ -1,0 +1,31 @@
+.comments-wrapper {
+    border: solid;
+    border-color: lightgrey;
+    width: 50%;
+    margin: auto;
+    padding: 1em;
+}
+
+.comment-title {
+    text-align: center;
+    font-family: Roboto;
+    font-size: 2.5em;
+    color: #606060;
+    padding-top: 3.125em;
+    padding-bottom: 1.5em;
+}
+
+.comment {
+    border: solid;
+    border-color: lightgrey;
+    width: 90%;
+    margin: auto;
+    padding: 1em;
+}
+.comment-child {
+    border: solid;
+    border-color: lightgrey;
+    width: 90%;
+    margin: auto;
+    padding: 1em;
+}
