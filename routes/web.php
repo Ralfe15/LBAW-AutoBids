@@ -21,7 +21,9 @@ Route::get('/faq', 'HomeController@showFAQ')->name('faq');
 Route::get('/about', 'HomeController@showAbout')->name('about');
 
 //Comments
-Route::get('auction/{id}/comments/', 'CommentController@auctionComments')->name('auction-comments');
+Route::get('auction/{id}/comments/{parent?}', 'CommentController@showCommentForm')->name('create_comment');
+Route::post('auction/comments/', 'CommentController@createComment')->name('create-comment');
+
 
 //Auctions
 Route::get('my-auctions', 'AuctionController@list')->name('my_auctions');

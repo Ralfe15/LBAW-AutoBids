@@ -21,4 +21,9 @@
         </div>
     </div>
     @endforeach
+    <div class="button-wrapper">
+        <a class="btn btn-secondary btn-lg" href="{{route('create_comment', ['id' => $comment->id_auction, 'parent' => $comment->id])}}">
+            Reply
+        </a>
+    </div>
 </div>
