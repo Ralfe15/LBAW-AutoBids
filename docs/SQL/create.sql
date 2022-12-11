@@ -173,15 +173,14 @@ CREATE TABLE Notification (
 
 
 CREATE TABLE Comment (
-                         id serial NOT NULL,
-                         post_date timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                         content text NOT NULL,
-                         likes integer NOT NULL DEFAULT 0,
-                         id_Auction integer,
-                         id_Member integer,
-                         id_Member1 integer,
-                         id_Comment integer,
-                         CONSTRAINT Comment_pk PRIMARY KEY (id)
+	id serial NOT NULL,
+	post_date timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	content text NOT NULL,
+	likes integer NOT NULL DEFAULT 0,
+	id_Auction integer,
+	id_Member integer,
+	id_Comment integer,
+	CONSTRAINT Comment_pk PRIMARY KEY (id)
 );
 
 ALTER TABLE Bid DROP CONSTRAINT IF EXISTS Member_fk CASCADE;
@@ -284,13 +283,6 @@ ALTER TABLE Comment ADD CONSTRAINT Member_fk FOREIGN KEY (id_Member)
     REFERENCES Member (id) MATCH FULL
     ON DELETE SET NULL ON UPDATE CASCADE;
 
-ALTER TABLE Comment DROP CONSTRAINT IF EXISTS Comment_uq CASCADE;
-ALTER TABLE Comment ADD CONSTRAINT Comment_uq UNIQUE (id_Member);
-
-ALTER TABLE Comment DROP CONSTRAINT IF EXISTS Member_fk1 CASCADE;
-ALTER TABLE Comment ADD CONSTRAINT Member_fk1 FOREIGN KEY (id_Member1)
-    REFERENCES Member (id) MATCH FULL
-    ON DELETE SET NULL ON UPDATE CASCADE;
 
 ALTER TABLE Comment DROP CONSTRAINT IF EXISTS Comment_fk CASCADE;
 ALTER TABLE Comment ADD CONSTRAINT Comment_fk FOREIGN KEY (id_Comment)

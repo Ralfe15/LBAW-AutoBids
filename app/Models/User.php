@@ -45,4 +45,8 @@ class User extends Authenticatable
     public function banktransfer() {
         return $this->hasMany('App\Models\BankTransfer', 'id_member');
     }
+
+    public function  comments() {
+        return $this->hasMany('App\Models\Comments', 'id_member');
+    }
 }

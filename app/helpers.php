@@ -95,7 +95,11 @@ if (!function_exists('processNotification')) {
                     credits_format($notification->data['winner_bid'] / 100) . " made by " . $notification->data['winner_name'] .
                     " at " . date("Y-m-d H:i:s", $notification->created_at->timestamp) . "was repaid.";
             case 'App\\Notifications\\NewBidAuctionNotification':
-                return "An auction you have previously bid has a new bid with value of U$" . credits_format($notification->data['new_val'] / 100);
+                return "An auction you have previously bid has a new bid with value of U$" . credits_format($notification->data['new_val']/100);
+            case 'App\\Notifications\\NewCommentNotification':
+                return "New Comment on Auction: " . $notification->data['auction_name'];
+            case 'App\\Notifications\\NewReplyNotification':
+                return "New Reply on Auction: " . $notification->data['auction_name'];
             default:
                 return $notification;
         }

@@ -67,6 +67,9 @@ class Auction extends Model
     {
         return $this->hasMany('App\Models\Image', 'id_auction', 'id');
     }
+    public function comments() {
+        return $this->hasMany('App\Models\Comment', 'id_auction', 'id');
+    }
 
     public function reports()
     {
