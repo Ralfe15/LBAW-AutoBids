@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Auction;
+use App\Models\AuctionReport;
 use App\Models\Bid;
 use App\Models\Brand;
 use App\Models\Card;
@@ -10,13 +11,17 @@ use App\Models\CarModel;
 use App\Models\Category;
 use App\Models\Image;
 use App\Models\User;
+use App\Notifications\AbortedAuctionNotificationBids;
+use App\Notifications\AbortedAuctionNotificationNoBids;
 use App\Notifications\ApprovedAuctionNotification;
+use App\Notifications\DeniedAuctionNotification;
 use App\Notifications\EndAuctionNotificationBids;
 use App\Notifications\EndAuctionNotificationNoBids;
 use Carbon\Carbon;
 use Carbon\CarbonInterval;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class AuctionController extends Controller
@@ -81,11 +86,10 @@ class AuctionController extends Controller
             if (!Carbon::parse($auction->end_date)->diff(Carbon::now())->invert) {
                 //notify the auction winner and the owner about the result
                 $winner = $auction->winner();
-                if(!is_null($winner)){
+                if (!is_null($winner)) {
                     $notification = new EndAuctionNotificationBids($auction, $winner);
                     $winner->user->notify($notification);
-                }
-                else{
+                } else {
                     // Case an auction ends without any bid
                     $notification = new EndAuctionNotificationNoBids($auction);
                 }
@@ -152,21 +156,19 @@ class AuctionController extends Controller
         $auction->save();
 
         //Images
-        if ($request->images){
-            foreach($request->images as $key=> $image)
-            {
+        if ($request->images) {
+            foreach ($request->images as $key => $image) {
                 $newImage = new Image();
-                $imageName = $auction->id.'-'.$key.'.'.$image->extension();
+                $imageName = $auction->id . '-' . $key . '.' . $image->extension();
                 $imagePath = "img/auctions/$auction->id/";
                 $image->move(public_path($imagePath), $imageName);
-                $imageFullPath = $imagePath.$imageName;
+                $imageFullPath = $imagePath . $imageName;
 
                 $newImage->path = $imageFullPath;
                 $newImage->id_auction = $auction->id;
                 $newImage->save();
             }
         }
-
 
 
         //change redirect to auction details
@@ -196,6 +198,40 @@ class AuctionController extends Controller
             $auction->user->notify(new ApprovedAuctionNotification($auction));
             return redirect('/admin');
 
+        }
+    }
+
+    public function deny($id)
+    {
+        if (Auth::check() && Auth::user()->is_admin) {
+            $auction = Auction::find($id);
+            $auction->user->notify(new DeniedAuctionNotification($auction));
+            $auction->delete();
+            return redirect('/admin');
+        }
+    }
+
+    public function abort(Request $request, $id)
+    {
+        if (Auth::check() && Auth::user()->is_admin) {
+            $auction = Auction::find($id);
+            if (is_null($auction->winner())) {
+                $notification = new AbortedAuctionNotificationNoBids($auction);
+                $auction->user->notify($notification);
+            } else {
+                $notification = new AbortedAuctionNotificationBids($auction, $auction->winner());
+                $auction->winner()->user->increment('credits', $auction->winner()->value);
+                $auction->winner()->user->notify($notification);
+                $auction->user->notify($notification);
+                DB::table('reportauction')->where('id_member', $request->input('id_member'))
+                    ->where('id_auction', $request->input('id_auction'))
+                    ->update(['solved' => true]);
+            }
+            $auction->aborted = true;
+            $auction->active = false;
+            $auction->approved = false;
+            $auction->save();
+            return redirect('/admin');
         }
     }
 }

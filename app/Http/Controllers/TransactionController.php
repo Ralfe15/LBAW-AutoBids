@@ -37,22 +37,21 @@ class TransactionController extends Controller
     {
 
         $rules = array(
-            'type' => Rule::in(['Deposit','Withdraw']),
-            'transaction' => Rule::in(['Paypal','BankTransfer'])
+            'type' => Rule::in(['Deposit', 'Withdraw']),
+            'transaction' => Rule::in(['Paypal', 'BankTransfer'])
         );
-        if ($data['type'] == 'Deposit'){
-            $rules+=['value'=> 'required|integer'];
-        }
-        elseif ($data['type'] == 'Withdraw') {
-            $current_credits = Auth::user()->credits/100;
+        if ($data['type'] == 'Deposit') {
+            $rules += ['value' => 'required|integer'];
+        } elseif ($data['type'] == 'Withdraw') {
+            $current_credits = Auth::user()->credits / 100;
 
-            $rules+=['value'=> "required|integer|lte:$current_credits"];
+            $rules += ['value' => "required|integer|lte:$current_credits"];
             info($current_credits);
         }
 
 
-        if($data['transaction']  == 'Paypal'){
-            $rules+=['email'=> 'required|email'];
+        if ($data['transaction'] == 'Paypal') {
+            $rules += ['email' => 'required|email'];
         }
 
         return Validator::make($data, $rules);
@@ -73,11 +72,10 @@ class TransactionController extends Controller
 
         $transaction = null;
 
-        if($request->input('transaction') == 'Paypal') {
+        if ($request->input('transaction') == 'Paypal') {
             $transaction = new Paypal();
             $transaction->email = $request->input('email');
-        }
-        elseif($request->input('transaction') == 'BankTransfer'){
+        } elseif ($request->input('transaction') == 'BankTransfer') {
             $transaction = new BankTransfer();
         }
 
@@ -89,11 +87,10 @@ class TransactionController extends Controller
 
         $transaction->transaction = $request->input('transaction');
 
-        if($transaction->transaction == 'Paypal') {
-            if($transaction->type == 'Deposit') {
+        if ($transaction->transaction == 'Paypal') {
+            if ($transaction->type == 'Deposit') {
                 Auth::user()->increment('credits', $transaction->value);
-            }
-            elseif($transaction->type == 'Withdraw') {
+            } elseif ($transaction->type == 'Withdraw') {
                 Auth::user()->decrement('credits', $transaction->value);
             }
         }
@@ -109,10 +106,9 @@ class TransactionController extends Controller
             $transaction = BankTransfer::find($id);
 
 
-            if($transaction->type == 'Deposit') {
+            if ($transaction->type == 'Deposit') {
                 $transaction->user->increment('credits', $transaction->value);
-            }
-            elseif($transaction->type == 'Withdraw') {
+            } elseif ($transaction->type == 'Withdraw') {
                 $transaction->user->decrement('credits', $transaction->value);
             }
             $transaction->approved = true;
@@ -120,6 +116,16 @@ class TransactionController extends Controller
             return redirect('/admin');
         }
     }
+
+    public function deny($id)
+    {
+        if (Auth::check() && Auth::user()->is_admin) {
+            $transaction = BankTransfer::find($id);
+            $transaction->delete();
+            return redirect('/admin');
+        }
+    }
+
 
     public function showTransactionForm()
     {

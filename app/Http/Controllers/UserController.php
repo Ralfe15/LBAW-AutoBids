@@ -19,36 +19,38 @@ class UserController extends Controller
     /**
      * Shows the user profile for a given id.
      *
-     * @param  int  $id
+     * @param int $id
      * @return Response
      */
     public function show($id)
     {
-      $user = User::find($id);
-      return view('pages.user', ['user' => $user]);
+        $user = User::find($id);
+        return view('pages.user', ['user' => $user]);
     }
 
     public function list()
     {
-      $users = User::all();
-      return view('pages.users', ['users' => $users]);
+        $users = User::all();
+        return view('pages.users', ['users' => $users]);
     }
 
-    public function notifications($id){
-        if(Auth::check() && Auth::id() == $id){
+    public function notifications($id)
+    {
+        if (Auth::check() && Auth::id() == $id) {
             $user = User::find($id);
             return view('pages.notifications', ['user' => $user]);
         }
         return view('pages.home');
     }
 
-    public function readNotification($id){
+    public function readNotification($id)
+    {
         $userUnreadNotification = Auth::user()
             ->unreadNotifications
             ->where('id', $id)
             ->first();
 
-        if($userUnreadNotification) {
+        if ($userUnreadNotification) {
             $userUnreadNotification->markAsRead();
         }
         return back();
@@ -57,19 +59,15 @@ class UserController extends Controller
     public function adminDashboard()
     {
         if (Auth::check() && Auth::user()->is_admin) {
-            $requests = Auction::where('approved', false)->orderBy('creation_date', 'asc')->get();
-            $reports = AuctionReport::where('solved',false)->orderBy('date', 'asc')->get();
-            $banktransfers_approval = BankTransfer::where('approved', false)->orderBy('id')->get();
-            $paypal = Paypal::orderBy('id')->get();
-            $banktransfers = BankTransfer::orderBy('id')->get();
-            $transactions = $banktransfers->merge($paypal);
+            $requests = Auction::where('approved', false)->orderBy('creation_date', 'asc')->paginate(5, ['*'], 'requests');
+            $reports = AuctionReport::where('solved', false)->orderBy('date', 'asc')->paginate(5, ['*'], 'reports');
+            $banktransfers_approval = BankTransfer::where('approved', false)->orderBy('id')->paginate(5, ['*'], 'transactions');
 
 
             return view('pages.admin', [
-                'requests'=>$requests,
-                'reports'=>$reports,
-                'transactions'=>$transactions,
-                'banktransfers_approval' =>$banktransfers_approval
+                'requests' => $requests,
+                'reports' => $reports,
+                'banktransfers_approval' => $banktransfers_approval
             ]);
         }
         return view('pages.home');
@@ -77,7 +75,7 @@ class UserController extends Controller
 
     public function edit(Request $request)
     {
-        if(Auth::check()){
+        if (Auth::check()) {
             $user_id = Auth::id();
             $user = User::find($user_id);
 
@@ -87,7 +85,7 @@ class UserController extends Controller
             $user->address = $request->address;
 
 
-            if($request->password) {
+            if ($request->password) {
                 $password = bcrypt($request->password);
                 $user->password = $password;
             }
