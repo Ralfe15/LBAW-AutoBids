@@ -11,7 +11,7 @@
 |
 */
 // Root
-Route::get('/', function() {
+Route::get('/', function () {
     return redirect('/home');
 });
 
@@ -32,6 +32,9 @@ Route::get('auction/{id}', 'AuctionController@show')->name('detail');
 Route::get('auctions/create', 'AuctionController@showAuctionForm')->name('create_auction');
 Route::post('auctions/create', 'AuctionController@create')->name('create-auction');
 Route::post('auction/approve/{id}', 'AuctionController@approve')->name('approve');
+Route::post('auction/deny/{id}', 'AuctionController@deny')->name('deny');
+Route::post('auction/abort/{id}', 'AuctionController@abort')->name('abort');
+
 
 //Reports
 Route::post('auction/solve', 'AuctionReportController@markAsSolved')->name('solved');
@@ -67,6 +70,7 @@ Route::get('/default', 'DefaultController@show')->name('default');
 Route::get('transaction', 'TransactionController@showTransactionForm')->name('create_transaction');
 Route::post('transaction/create', 'TransactionController@create')->name('create-transaction');
 Route::post('transaction/approve/{id}', 'TransactionController@approve')->name('approve-transaction');
+Route::post('transaction/deny/{id}', 'TransactionController@deny')->name('deny-transaction');
 
 //Images
 Route::get('image', 'ImageController@form')->name('upload_image');

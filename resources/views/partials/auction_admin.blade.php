@@ -9,7 +9,13 @@
     <td>
         <form method="POST" action="{{route('approve', ['id'=>$auction->id])}}">
             {{csrf_field()}}
-        <button class="btn btn-secondary" type="submit" role="button">Approve request</button>
+            <button class="btn btn-success" type="submit" role="button">Approve</button>
+        </form>
+    </td>
+    <td>
+        <form method="POST" action="{{route('deny', ['id'=>$auction->id])}}">
+            {{csrf_field()}}
+            <button class="btn btn-danger" type="submit" role="button">Deny</button>
         </form>
     </td>
 </tr>
