@@ -1,0 +1,28 @@
+* {
+    font-family: 'Open Sans' !important;
+}
+
+
+.dropdown:hover #auction-dropdown{
+    display: block;
+    margin-top: 0;
+}
+
+.navbar-search
+{
+    position: absolute;
+    width: 500px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-30%);
+    text-align: center;
+}
+
+.nav-link {
+    margin-left: 25px;
+}
+
+
+
+
+
+
