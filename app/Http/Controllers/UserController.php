@@ -38,7 +38,20 @@ class UserController extends Controller
     {
         if (Auth::check() && Auth::id() == $id) {
             $user = User::find($id);
-            return view('pages.notifications', ['user' => $user]);
+            $unread_notifications = $user->unreadNotifications()->paginate(5);
+            $read_notifications = $user->readNotifications()->paginate(5);
+            return view('pages.notifications', ['user' => $user, 'unreadNotifications' => $unread_notifications,
+                'readNotifications' => $read_notifications]);
+        }
+        return view('pages.home');
+    }
+
+    public function requests($id)
+    {
+        if (Auth::check() && Auth::id() == $id) {
+            $user = User::find($id);
+            $requests = $user->auctions()->where('approved', false)->orderBy('creation_date', 'asc')->paginate(5, ['*'], 'requests');
+            return view('pages.user_auction_requests', ['requests' => $requests]);
         }
         return view('pages.home');
     }

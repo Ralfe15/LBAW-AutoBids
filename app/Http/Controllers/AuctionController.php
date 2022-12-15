@@ -66,10 +66,10 @@ class AuctionController extends Controller
     public function all(Request $request)
     {
         if (!$request->has('search')) {
-            $auctions = Auction::where('active', true)->get();
+            $auctions = Auction::where('active', true)->paginate(5);
         } else {
             $auctions = Auction::whereRelation('model', 'name', 'ilike', '%' . $request->input('search') . '%')
-                ->distinct()->get();
+                ->distinct()->paginate(5);
         }
         return view('pages.auctions', ['auctions' => $auctions]);
 
@@ -233,5 +233,15 @@ class AuctionController extends Controller
             $auction->save();
             return redirect('/admin');
         }
+    }
+
+    public function cancel($id)
+    {
+        $auction = Auction::find($id);
+        if (Auth::check() && (Auth::id() == $auction->id_member)) {
+            $auction->delete();
+            return redirect('/' . Auth::id() . '/requests');
+        }
+        return redirect('/home');
     }
 }
