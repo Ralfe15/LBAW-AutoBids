@@ -1,5 +1,5 @@
 <div class="card">
-{{--    button redirecting to /auctions/{id}--}}
+
     <a href="{{route('detail', ['id'=> $auction->id]) }}"
        @if(!$auction->active || !$auction->approved)
            style="pointer-events: none; cursor: default;"
@@ -24,7 +24,11 @@
 
         </div>
     </a>
-{{--   TODO favourite btn logic--}}
+    <div>
+        <a style="font-size: 15px"class="favorite-btn" id ="{{"toggle".$auction->id}}> onclick="{{"toggleFavorite('$auction->id', 'true')"}}">Add to favorites : <i id="{{"heart-icon".$auction->id}}" class="fa fa-heart-o"></i></a>
+    </div>
+
+    {{--   TODO favourite btn logic--}}
 {{--    <?php  if(isset($_SESSION['id'])){--}}
 {{--    if($isfav == 'false'){ ?>--}}
 {{--    <a class="favorite-btn" id =<?="toggle".$restaurant['idRestaurant']?> onclick="toggleFavorite('<?= $restaurant['idRestaurant'] ?>', '<?= $isfav ?>')">Add to favorites : <i id="heart-icon<?=$restaurant['idRestaurant']?>"class="fa fa-heart-o" aria-hidden="true"></i></a>--}}

@@ -121,4 +121,12 @@ class UserController extends Controller
 
         return redirect('/login');
     }
+
+    public function followAuction(Request $request){
+        return true;
+    }
+
+    public function unfollowAuction(Request $request){
+        return true;
+    }
 }
