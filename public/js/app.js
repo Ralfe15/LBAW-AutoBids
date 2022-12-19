@@ -1,41 +1,48 @@
-function toggleFavorite(id, isfav){
+function toggleFavorite(id, isfav) {
     var rawBody = {
         "id": id,
     }
+    let token = document.querySelector("#token")
     console.log(isfav)
-    if(isfav == 'false'){
-        // fetch('../actions/action_add_favorite.php', {
+    if (isfav == 'false') {
+        fetch('/actions/follow', {
             method: "POST",
-            headers: { "Content-type": "application/json" },
+            headers: {
+                "Content-type": "application/json",
+                'X-CSRF-Token': token.getAttribute("content")
+            },
             body: JSON.stringify(rawBody),
         }).then(response => response.json()
         ).then((response) => {
             if (response.success) {
-                const button = document.querySelector("#toggle"+id)
-                const icon = document.querySelector("#heart-icon"+id)
+                const button = document.querySelector("#toggle" + id)
+                const icon = document.querySelector("#heart-icon" + id)
                 icon.className = "fa fa-heart"
                 button.textContent = "Remove from favorites: "
                 button.append(icon)
-                button.setAttribute("onclick", "toggleFavorite("+id+", 'true')")
+                button.setAttribute("onclick", "toggleFavorite(" + id + ", 'true')")
             } else {
                 throw new Error(response.message);
             }
         });
     }
-    if(isfav == 'true'){
-        // fetch('../actions/action_remove_favorite.php', {
+    if (isfav == 'true') {
+        fetch('/actions/unfollow', {
             method: "POST",
-            headers: { "Content-type": "application/json" },
+            headers: {
+                "Content-type": "application/json",
+                'X-CSRF-Token': token.getAttribute("content")
+            },
             body: JSON.stringify(rawBody),
         }).then(response => response.json()
         ).then((response) => {
             if (response.success) {
-                const button = document.querySelector("#toggle"+id)
-                const icon = document.querySelector("#heart-icon"+id)
+                const button = document.querySelector("#toggle" + id)
+                const icon = document.querySelector("#heart-icon" + id)
                 icon.className = "fa fa-heart-o"
                 button.textContent = "Add to favorites: "
                 button.append(icon)
-                button.setAttribute("onclick", "toggleFavorite("+id+", 'false')")
+                button.setAttribute("onclick", "toggleFavorite(" + id + ", 'false')")
             } else {
                 throw new Error(response.message);
             }

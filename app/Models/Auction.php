@@ -67,7 +67,9 @@ class Auction extends Model
     {
         return $this->hasMany('App\Models\Image', 'id_auction', 'id');
     }
-    public function comments() {
+
+    public function comments()
+    {
         return $this->hasMany('App\Models\Comment', 'id_auction', 'id');
     }
 
@@ -79,6 +81,14 @@ class Auction extends Model
     public function follows()
     {
         return $this->hasMany('App\Models\FollowAuction', 'id_auction');
+    }
+
+    public function isFavourite(User $user)
+    {
+        if ($this->follows()->where('id_member', $user->id)->count() != 0) {
+            return 'true';
+        }
+        return 'false';
     }
 
     protected static function booted()
