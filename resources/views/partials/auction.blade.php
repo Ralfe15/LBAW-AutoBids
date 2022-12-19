@@ -1,5 +1,6 @@
+<meta name="_token" id="token" content="{{ csrf_token() }}">
 <div class="card">
-{{--    button redirecting to /auctions/{id}--}}
+
     <a href="{{route('detail', ['id'=> $auction->id]) }}"
        @if(!$auction->active || !$auction->approved)
            style="pointer-events: none; cursor: default;"
@@ -21,16 +22,30 @@
                 <p style="color: red" class="text-red">Expired</p>
             @endif
 
-
         </div>
     </a>
-{{--   TODO favourite btn logic--}}
-{{--    <?php  if(isset($_SESSION['id'])){--}}
-{{--    if($isfav == 'false'){ ?>--}}
-{{--    <a class="favorite-btn" id =<?="toggle".$restaurant['idRestaurant']?> onclick="toggleFavorite('<?= $restaurant['idRestaurant'] ?>', '<?= $isfav ?>')">Add to favorites : <i id="heart-icon<?=$restaurant['idRestaurant']?>"class="fa fa-heart-o" aria-hidden="true"></i></a>--}}
-{{--    <?php }?>--}}
-{{--        <?php if($isfav == 'true'){ ?>--}}
-{{--    <a class="favorite-btn" id =<?="toggle".$restaurant['idRestaurant']?> onclick="toggleFavorite('<?= $restaurant['idRestaurant'] ?>', '<?= $isfav ?>')">Remove from favorites : <i id="heart-icon<?=$restaurant['idRestaurant']?>"class="fa fa-heart" aria-hidden="true"></i></a>--}}
-{{--    <?php }}?>--}}
-{{--    </a>--}}
+    @if(Auth::check())
+        @if($auction->isFavourite(Auth::user()) == 'true')
+            <div>
+                <a style="font-size: 15px"
+                   class="favorite-btn"
+                   id="{{"toggle".$auction->id}}"
+                   onclick="toggleFavorite({{$auction->id}}, '{{$auction->isFavourite(Auth::user())}}')">
+                    Remove from favorites :
+                    <i id="{{"heart-icon".$auction->id}}" class="fa fa-heart"></i>
+                </a>
+            </div>
+        @else
+            <div>
+                <a style="font-size: 15px"
+                   class="favorite-btn"
+                   id="{{"toggle".$auction->id}}"
+                   onclick="toggleFavorite({{$auction->id}}, '{{$auction->isFavourite(Auth::user())}}')">
+                    Add to favorites :
+                    <i id="{{"heart-icon".$auction->id}}" class="fa fa-heart-o"></i>
+                </a>
+            </div>
+        @endif
+    @endif
+
 </div>

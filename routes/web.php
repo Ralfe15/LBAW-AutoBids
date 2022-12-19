@@ -57,6 +57,10 @@ Route::get('user/{id}', 'UserController@show')->name('user_profile');
 Route::get('users', 'UserController@list')->name('user_list');
 Route::get('{id}/requests', 'UserController@requests')->name('requests');
 
+// Following
+Route::post('actions/follow', 'UserController@followAuction')->name('follow');
+Route::post('actions/unfollow', 'UserController@unfollowAuction')->name('unfollow');
+
 
 //Admin
 Route::get('admin', 'UserController@adminDashboard')->name('admin_dashboard');

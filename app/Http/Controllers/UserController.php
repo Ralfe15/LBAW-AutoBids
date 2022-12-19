@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Auction;
 use App\Models\AuctionReport;
 use App\Models\BankTransfer;
+use App\Models\FollowAuction;
 use App\Models\Paypal;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Action;
@@ -120,5 +121,28 @@ class UserController extends Controller
         }
 
         return redirect('/login');
+    }
+
+    public function followAuction(Request $request)
+    {
+        if (Auth::check()) {
+            $follow = new FollowAuction;
+            $follow->id_member = Auth::id();
+            $follow->id_auction = $request->input('id');
+            $follow->save();
+            return json_encode(['message' => "OK", 'success' => true]);
+        }
+        return json_encode(['message' => "Session not set", 'success' => false]);
+    }
+
+    public function unfollowAuction(Request $request)
+    {
+        if (Auth::check()) {
+            $follow = FollowAuction::where('id_auction', $request->input('id'))
+                ->where('id_member', Auth::id());
+            $follow->delete();
+            return json_encode(['message' => "OK", 'success' => true]);
+        }
+        return json_encode(['message' => "Session not set", 'success' => false]);
     }
 }
