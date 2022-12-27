@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Auction extends Model
@@ -89,6 +90,17 @@ class Auction extends Model
             return 'true';
         }
         return 'false';
+    }
+
+    public function timeRemaining(){
+        $time_remaining = Carbon::parse($this->end_date)->longAbsoluteDiffForHumans(Carbon::now(), 2);
+        return $time_remaining;
+    }
+
+    public function timeRemainingDetailPage(){
+        $time_remaining = Carbon::now()->diffAsCarbonInterval(Carbon::parse($this->end_date));
+        return $time_remaining->d . " days " . $time_remaining->h . " hours " .
+            $time_remaining->minutes . " minutes " . $time_remaining->s . " seconds";
     }
 
     protected static function booted()

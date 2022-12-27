@@ -115,7 +115,10 @@ class AuctionController extends Controller
             'id_Model' => 'required|integer',
             'starting_bid' => 'required|integer',
             'description' => 'required|string',
-            'duration' => 'required|integer',
+            'd' => 'required|integer',
+            'h' => 'required|integer',
+            'm' => 'required|integer',
+            's' => 'required|integer',
             'year' => 'required|integer|digits:4',
             'mileage' => 'required|integer',
             'displacement' => 'required|integer',
@@ -145,7 +148,8 @@ class AuctionController extends Controller
         $auction->id_model = $request->input('id_Model');
         $auction->starting_bid = $request->input('starting_bid') * 100;
         $auction->description = $request->input('description');
-        $auction->duration = $request->input('duration');
+        $auction->duration = dateToSeconds($request->input('d'), $request->input('h'),
+            $request->input('m'), $request->input('s'));
         $auction->year = $request->input('year');
         $auction->mileage = $request->input('mileage');
         $auction->displacement = $request->input('displacement');
@@ -193,7 +197,7 @@ class AuctionController extends Controller
             $auction->approved = true;
             $auction->active = true;
             $auction->start_date = now();
-            //end date is handled as a pgsql trigger
+            $auction->end_date = now()->addSeconds($auction->duration);
             $auction->save();
             $auction->user->notify(new ApprovedAuctionNotification($auction));
             return redirect('/admin');

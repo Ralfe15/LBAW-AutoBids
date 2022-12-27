@@ -64,6 +64,22 @@ if (!function_exists('secsToStr')) {
     }
 }
 
+if (!function_exists('processTimeHTML')) {
+    function processTimeHTML($timestring, $id){
+        if(str_contains($timestring, "seconds") || str_contains($timestring, "second")){
+            return $id . "-count";
+        }
+        return $id . "-nocount";
+    }
+}
+
+if (!function_exists('dateToSeconds')) {
+    function dateToSeconds($d, $h, $m, $s)
+    {
+        return (intval($d) * 86400) + (intval($h) * 3600) + (intval($m) * 60) + intval($s);
+    }
+}
+
 if (!function_exists('processNotification')) {
     function processNotification($notification)
     {
