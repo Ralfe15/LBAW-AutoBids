@@ -64,5 +64,8 @@ class Auction extends Model
     public function remaining() {
         return Carbon::parse($this->end_date)->longAbsoluteDiffForHumans(Carbon::now(), 2);
     }
+    public function started() {
+        return Carbon::parse($this->start_date)->toDateTimeString();
+    }
 
 }

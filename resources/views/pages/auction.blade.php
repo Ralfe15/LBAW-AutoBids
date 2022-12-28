@@ -55,31 +55,33 @@
     <div class="auction-status-box">
         <div class="auction-status">
             <div class="status-currentbid">
-                <p><b>Current Bid: </b>U${{credits_format($auction->currentWinnerValue()/100)}}</p>
+                <p><b>Current Bid: </b>€{{credits_format($auction->currentWinnerValue()/100)}}</p>
             </div>
             <div class="status-startingbid">
-                <p><b>Starting Bid: </b>U${{credits_format($auction->starting_bid/100)}}</p>
+                <p><b>Starting Bid: </b>€{{credits_format($auction->starting_bid/100)}}</p>
             </div>
             <div class="status-numberbids">
                 <p> <b>Number of bids: </b>{{$auction->bids()->count()}} bids</p>
             </div>
             <div class="status-started">
-                <p><b>Started at: </b> {{$auction->start_date}}</p>
+                <p><b>Started at: </b> {{$auction->started()}}</p>
             </div>
             <div class="status-timeleft">
                 <p><b>Time Left: </b> {{$time_remaining}}</p>
             </div>
             <div class="status-bid">
                 @if(Auth::check() && $can_bid && (Auth::user()->credits/100) >= $current_bid)
-                    <form action="{{route('bid', ['id'=>$auction->id])}}" class="search" method="POST">
+                    <form action="{{route('bid', ['id'=>$auction->id])}}" class="form-label" method="POST">
                         @method('PUT')
                         {{csrf_field()}}
-                        <label>Enter the value to bid! Minimum bid: U${{bid_step($current_bid)}}</label>
-                        <input type="number" min='{{bid_step($current_bid)}}' name="bid" id="bid" step="0.01">
-                        <input type="hidden" value="{{bid_step($current_bid)}}" name="minimum">
-                        <input type="hidden" value="{{$current_bid}}" name="prev_bid">
-                        <input type="hidden" value="{{$prev_id}}" name="prev_id">
-                        <button type="submit">Bid now!</button>
+                        <div class="input-group mb-3">
+
+                            <input aria-describedby="button-bid" type="number" placeholder="Minimum bid: U${{bid_step($current_bid)}}" class="form-control" min='{{bid_step($current_bid)}}' name="bid" id="bid" step="0.01">
+                            <input type="hidden" value="{{bid_step($current_bid)}}" name="minimum">
+                            <input type="hidden" value="{{$current_bid}}" name="prev_bid">
+                            <input type="hidden" value="{{$prev_id}}" name="prev_id">
+                            <button class="btn btn-danger" type="submit" id="button-bid">Bid now!</button>
+                        </div>
                     </form>
                     @include('partials/error_list_validator')
                 @endif
@@ -123,10 +125,10 @@
             </div>
         </div>
     </div>
-    <div class="auction-description-box">
-        <div class="auction-description">
-            <div class="description-brand">
-                <p><b>Bidding hisory: </b></p>
+    <div class="bidding-history-box">
+        <div class="bidding-history">
+            <div class="bidding-title">
+                <p><b>Bidding History: </b></p>
             </div>
             <table class="table">
                 <thead>
