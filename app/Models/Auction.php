@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Auction extends Model
@@ -59,6 +60,9 @@ class Auction extends Model
     }
     public function comments() {
         return $this->hasMany('App\Models\Comment', 'id_auction', 'id');
+    }
+    public function remaining() {
+        return Carbon::parse($this->end_date)->longAbsoluteDiffForHumans(Carbon::now(), 2);
     }
 
 }

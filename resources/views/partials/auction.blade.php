@@ -20,6 +20,7 @@
             @elseif(!$auction->active)
                 <p style="color: red" class="text-red">Expired</p>
             @endif
+            <p>{{ $auction->remaining() }}</p>
 
 
         </div>

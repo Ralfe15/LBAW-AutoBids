@@ -5,7 +5,7 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{{route('home')}}"><img src="{{ asset('/img/autobids_logo.png') }}"></a>
+            <a class="navbar-brand" href="{{route('home')}}"><img src="{{ asset('/img/autobids_logo.png') }}" alt="AutoBids Logo"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -40,13 +40,22 @@
                     </form>
                 </div>
                 <ul class="navbar-nav ms-auto" id="account-dropdown">
+                    @if(Auth::check())
+                    <li class="nav-item icon-notification">
+                        <a class="nav-link" href="{{route('notifications', ['id'=>Auth::id()])}}">
+                            <i class="bi bi-bell"></i>
+                            @if(Auth::user()->unreadNotifications->count() > 0)
+                                <span class="badge bg-danger rounded-pill">{{ Auth::user()->unreadNotifications->count() }}</span>
+                            @endif
+                        </a>
+                    </li>
+                    @endif
                     <li class="nav-item dropdown" >
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="bi bi-person-circle"></i>&ensp;Account</a>
                         <div class="dropdown-menu dropdown-menu-end">
                             @if(Auth::check())
                                 <a class="dropdown-item" href="{{route('create_transaction')}}"><i class="bi bi-currency-exchange"></i>&emsp;Balance: U${{credits_format(Auth::user()->credits/100)}}</a>
                                 <a class="dropdown-item" href="/user/{{ Auth::user()->id }}"><i class="bi bi-person-circle"></i>&emsp;Profile</a>
-                                <a class="dropdown-item" href="{{route('notifications', ['id'=>Auth::id()])}}"><i class="bi bi-exclamation-circle"></i>&emsp;Notifications <span class="badge bg-danger rounded-pill">{{ Auth::user()->unreadNotifications->count() }}</span></a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="/logout"><i class="bi bi-box-arrow-right"></i>&emsp;Logout</a>
                                 @if(Auth::user()->is_admin)

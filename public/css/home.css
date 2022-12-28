@@ -1,3 +1,18 @@
+/*.top-carousel {*/
+/*    background-color: white !important;*/
+/*}*/
+
+.top-carousel .carousel-item  {
+    height: 400px;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+
 .content-wrapper {
     padding: 100px;
 }
@@ -19,4 +34,93 @@
 .popular-text {
     text-align: center;
     padding-bottom: 50px;
+}
+
+
+.card-grid
+{
+    /*margin-top: 20px;*/
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3em;
+    width: 100%;
+    justify-content:space-evenly;
+    /*margin-bottom: 5em;*/
+}
+
+.card > a:nth-child(1){
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 15%;
+    min-width: 200px;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card a:link {
+    text-decoration: none;
+}
+
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.card-caption {
+    padding: 10px 16px;
+}
+.card-caption > *{
+    margin: 0 0 0.5em 0;
+}
+
+.card img{
+    margin: 0.7em auto auto auto;
+    border-radius: 50%;
+
+    width: 90%;
+}
+
+@media (max-width: 767px) {
+    .multi-carousel-inner .multi-carousel-item > div {
+        display: none;
+    }
+    .multi-carousel-inner .multi-carousel-item > div:first-child {
+        display: block;
+    }
+}
+
+.multi-carousel-inner .carousel-item.active,
+.multi-carousel-inner .carousel-item-next,
+.multi-carousel-inner .carousel-item-prev {
+    display: flex;
+    transition: 500ms ease-in-out;
+}
+
+/* medium and up screens */
+@media (min-width: 768px) {
+
+    .multi-carousel-inner .carousel-item-end.active,
+    .multi-carousel-inner .carousel-item-next {
+        transform: translateX(25%);
+        transition: 500ms ease-in-out;
+    }
+
+    .multi-carousel-inner .carousel-item-start.active,
+    .multi-carousel-inner .carousel-item-prev {
+        transform: translateX(-25%);
+        transition: 500ms ease-in-out;
+    }
+}
+
+.multi-carousel-inner .carousel-item-end,
+.multi-carousel-inner .carousel-item-start {
+    transform: translateX(0);
+     transition: 500ms ease-in-out;
 }
