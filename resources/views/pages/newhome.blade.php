@@ -67,7 +67,11 @@
                                                 <div class="card">
                                                     <a href="/auction/{{$auction->id}}">
                                                     <div class="card-img">
-                                                        <img src="{{ asset('img/auctions/car_placeholder_square200.png') }}" class="img-fluid">
+                                                        @if($auction->images->isEmpty())
+                                                            <img src="{{ asset('img/auctions/car_placeholder_square200.png') }}" class="img-fluid">
+                                                        @else
+                                                            <img src="{{ asset($auction->images->first()->path) }}" class="img-fluid">
+                                                        @endif
                                                     </div>
                                                     <div class="card-img-overlay">{{$loop->iteration}}</div>
                                                     <div class="card-caption">
@@ -89,10 +93,10 @@
                                         </div>
                                         @endforeach
                                 </div>
-                                <a class="carousel-control-prev bg-transparent w-aut" href="#latestCarousel" role="button" data-bs-slide="prev">
+                                <a class="multi-carousel-control-prev carousel-control-prev bg-transparent w-aut" href="#latestCarousel" role="button" data-bs-slide="prev">
                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 </a>
-                                <a class="carousel-control-next bg-transparent w-aut" href="#latestCarousel" role="button" data-bs-slide="next">
+                                <a class="multi-carousel-control-next carousel-control-next bg-transparent w-aut" href="#latestCarousel" role="button" data-bs-slide="next">
                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                 </a>
                     </div>
@@ -118,7 +122,11 @@
                                                 <div class="card">
                                                     <a href="/auction/{{$auction->id}}">
                                                         <div class="card-img">
-                                                            <img src="{{ asset('img/auctions/car_placeholder_square200.png') }}" class="img-fluid">
+                                                            @if($auction->images->isEmpty())
+                                                                <img src="{{ asset('img/auctions/car_placeholder_square200.png') }}" class="img-fluid">
+                                                                @else
+                                                                    <img src="{{ asset($auction->images->first()->path) }}" class="img-fluid">
+                                                                    @endif
                                                         </div>
                                                         <div class="card-img-overlay">{{$loop->iteration}}</div>
                                                         <div class="card-caption">
@@ -140,10 +148,10 @@
                                         </div>
                                         @endforeach
                                 </div>
-                                <a class="carousel-control-prev bg-transparent w-aut" href="#finishingCarousel" role="button" data-bs-slide="prev">
+                                <a class="multi-carousel-control-prev carousel-control-prev bg-transparent w-aut" href="#finishingCarousel" role="button" data-bs-slide="prev">
                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 </a>
-                                <a class="carousel-control-next bg-transparent w-aut" href="#finishingCarousel" role="button" data-bs-slide="next">
+                                <a class="multi-carousel-control-next carousel-control-next bg-transparent w-aut" href="#finishingCarousel" role="button" data-bs-slide="next">
                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                 </a>
                     </div>
@@ -169,7 +177,11 @@
                                                 <div class="card">
                                                     <a href="/auction/{{$auction->id}}">
                                                         <div class="card-img">
-                                                            <img src="{{ asset('img/auctions/car_placeholder_square200.png') }}" class="img-fluid">
+                                                            @if($auction->images->isEmpty())
+                                                                <img src="{{ asset('img/auctions/car_placeholder_square200.png') }}" class="img-fluid">
+                                                            @else
+                                                                <img src="{{ asset($auction->images->first()->path) }}" class="img-fluid">
+                                                            @endif
                                                         </div>
                                                         <div class="card-img-overlay">{{$loop->iteration}}</div>
                                                         <div class="card-caption">
@@ -191,10 +203,10 @@
                                         </div>
                                         @endforeach
                                 </div>
-                                <a class="carousel-control-prev bg-transparent w-aut" href="#popularCarousel" role="button" data-bs-slide="prev">
+                                <a class="multi-carousel-control-prev carousel-control-prev bg-transparent w-aut" href="#popularCarousel" role="button" data-bs-slide="prev">
                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 </a>
-                                <a class="carousel-control-next bg-transparent w-aut" href="#popularCarousel" role="button" data-bs-slide="next">
+                                <a class="multi-carousel-control-next carousel-control-next bg-transparent w-aut" href="#popularCarousel" role="button" data-bs-slide="next">
                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                 </a>
                     </div>

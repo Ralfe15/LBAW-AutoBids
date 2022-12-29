@@ -3,6 +3,7 @@
     <head>
         <link rel="stylesheet" href="/css/auctionDetails.css">
     </head>
+    <div class="auction-details-wrapper">
 
     <div class='auction-title'>
         <p>{{$auction->model->brand->name}} {{$auction->model->name}} </p>
@@ -53,6 +54,8 @@
     </div>
 
     <div class="auction-status-box">
+        <div class="description-title">
+            <h3>Auction Details</h3> </div>
         <div class="auction-status">
             <div class="status-currentbid">
                 <p><b>Current Bid: </b>€{{credits_format($auction->currentWinnerValue()/100)}}</p>
@@ -92,9 +95,12 @@
     </div>
 
     <div class="auction-description-box">
+        <div class="description-title">
+            <h3>Car Details</h3> </div>
         <div class="auction-description">
             <div class="description-brand">
-                <p><b>Brand: </b> {{$auction->model->brand->name}}</p>
+                <p>
+                    <b>Brand: </b> {{$auction->model->brand->name}}</p>
             </div>
             <div class="description-model">
                 <p><b>Model: </b> {{$auction->model->name}}</p>
@@ -126,6 +132,8 @@
         </div>
     </div>
     <div class="bidding-history-box">
+        <div class="description-title">
+            <h3>Bidding History</h3> </div>
         <div class="bidding-history">
             <div class="bidding-title">
                 <p><b>Bidding History: </b></p>
@@ -151,10 +159,11 @@
         </div>
     </div>
     <div class="comments-box">
-        <div class="comment-title">
-            <p>Comments</p>
+        <div class="description-title">
+            <h3>Comments</h3>
         </div>
         @include('partials/auctionComments', array('id' => $auction->id))
+    </div>
     </div>
 @stop
 

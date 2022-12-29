@@ -29,6 +29,18 @@
 .comment-user{
     padding-bottom: 10px;
 }
+.comment-user a {
+    color: #000;
+    font-weight: bold;
+    font-size: 1.25em;
+    text-decoration: none;
+}
+
+.comment-date{
+    text-align: right;
+    padding-top: 10px;
+    padding-right: 7%;
+}
 
 .comment-user a:link{
     text-decoration: none;
@@ -59,4 +71,8 @@
 
 .button-wrapper{
     padding: 20px;
+
+}
+.btn{
+    font-size: 1em !important;
 }

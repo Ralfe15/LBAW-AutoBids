@@ -7,7 +7,7 @@
             {{ $comment->content }}
         </div>
         <div class="comment-date">
-            {{ $comment->post_date }}
+            {{ $comment->date() }}
         </div>
         @foreach($comment->children()->get() as $child)
             <div class="comment-child-box">
@@ -19,13 +19,13 @@
                         {{ $child->content }}
                     </div>
                     <div class="comment-date">
-                        {{ $child->post_date }}
+                        {{ $child->date() }}
                     </div>
                 </div>
             </div>
         @endforeach
         <div class="button-wrapper">
-            <a class="btn btn-secondary btn-lg" href="{{route('create_comment', ['id' => $comment->id_auction, 'parent' => $comment->id])}}">
+            <a class="btn btn-outline-danger btn-lg" href="{{route('create_comment', ['id' => $comment->id_auction, 'parent' => $comment->id])}}">
                 Reply
             </a>
         </div>
