@@ -54,35 +54,49 @@ function toggleFavorite(id, isfav) {
     }
 }
 
-setInterval(function(){
+setInterval(function () {
     const elements1 = document.querySelectorAll(`[id$="-count"]`);
-    for (var i = 0; i < elements1.length; i++){
-        var content = elements1[i].textContent.split(" ");
-        if ((content[0] === "0" && content[2] === "0") || content[0] === "Auction"){
-            elements1[i].textContent = "Auction ended!"
-        }
-        else{
-            let newtime = (parseInt(content[0]) * 60) + parseInt(content[2]) - 1
-            let minutes = Math.floor(newtime/60)
-            elements1[i].textContent = minutes + " minutes " + (newtime-(minutes*60)) + " seconds"
+    if (elements1 != null) {
+        for (var i = 0; i < elements1.length; i++) {
+            var content = elements1[i].textContent.split(" ");
+            if (content.length === 2) {
+                if ((content[0] === "0") || content[0] === "Auction") {
+                    elements1[i].textContent = "Auction ended!"}
+                else{
+                let newtime = parseInt(content[0]) - 1
+                elements1[i].textContent = newtime + " seconds"
+                }
+
+            } else {
+                if ((content[0] === "0" && content[2] === "0") || content[0] === "Auction") {
+                    elements1[i].textContent = "Auction ended!"
+                } else {
+                    let newtime = (parseInt(content[0]) * 60) + parseInt(content[2]) - 1
+                    let minutes = Math.floor(newtime / 60)
+                    elements1[i].textContent = minutes + " minutes " + (newtime - (minutes * 60)) + " seconds"
+                }
+            }
+
         }
     }
     const element2 = document.getElementById('countdown')
+    if (element2 != null) {
         var content = element2.textContent.split(" ");
         var d = parseInt(content[3])
-            var h = parseInt(content[5])
-            var m = parseInt(content[7])
-            var s = parseInt(content[9])
-            var seconds_total = (d) * 86400 + (h) * 3600 + (m) * 60 + (s) - 1
-            var d = Math.floor(seconds_total / (3600*24));
-            var h = Math.floor(seconds_total % (3600*24) / 3600);
-            var m = Math.floor(seconds_total % 3600 / 60);
-            var s = Math.floor(seconds_total % 60);
-            if(d===0 && h===0 && m===0 && s===0){
-                window.location.href = '/home';
-            }
+        var h = parseInt(content[5])
+        var m = parseInt(content[7])
+        var s = parseInt(content[9])
+        var seconds_total = (d) * 86400 + (h) * 3600 + (m) * 60 + (s) - 1
+        var d = Math.floor(seconds_total / (3600 * 24));
+        var h = Math.floor(seconds_total % (3600 * 24) / 3600);
+        var m = Math.floor(seconds_total % 3600 / 60);
+        var s = Math.floor(seconds_total % 60);
+        if (d === 0 && h === 0 && m === 0 && s === 0) {
+            window.location.href = '/home';
+        }
 
-        element2.innerHTML = "<b>Time left:  </b>" + d + " days " + h + " hours " + m + " minutes " + s + " seconds"
+        element2.innerHTML = "<b>Time Left:  </b>" + d + " days " + h + " hours " + m + " minutes " + s + " seconds"
+    }
 
 }, 1000);
 

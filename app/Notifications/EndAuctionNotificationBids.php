@@ -47,6 +47,8 @@ class EndAuctionNotificationBids extends Notification
     {
         return [
             'winner_name' => $this->winner->user->name,
+            'winner_id' => $this->winner->user->id,
+            'auction_id' => $this->auction->id,
             'auction_name' => $this->auction->model->brand->name. " - " .
                 $this->auction->model->name . " - "  . $this->auction->year,
             'auction_owner' => $this->auction->user->name,

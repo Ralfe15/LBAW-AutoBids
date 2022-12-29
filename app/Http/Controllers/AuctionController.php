@@ -248,4 +248,24 @@ class AuctionController extends Controller
         }
         return redirect('/home');
     }
+
+    public function rateAuction($id, Request $request){
+        $auction = Auction::find($id);
+        $rating = intval($request->input('rating'));
+        $prevrating = $auction->user->rating;
+        $number_auctions = sizeof($auction->user->auctions->where('active', false));
+        $auction->user->rating = ($prevrating + $rating)/$number_auctions;
+        $auction->user->save();
+
+
+        $userUnreadNotification = Auth::user()
+            ->unreadNotifications
+            ->where('id', $request->input('notification_id'))
+            ->first();
+
+        if ($userUnreadNotification) {
+            $userUnreadNotification->markAsRead();
+        }
+        return back();
+    }
 }

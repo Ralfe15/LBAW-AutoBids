@@ -35,6 +35,7 @@ Route::post('auction/approve/{id}', 'AuctionController@approve')->name('approve'
 Route::post('auction/deny/{id}', 'AuctionController@deny')->name('deny');
 Route::post('auction/abort/{id}', 'AuctionController@abort')->name('abort');
 Route::post('auction/cancel/{id}', 'AuctionController@cancel')->name('cancel');
+Route::post('auction/rate/{id}', 'AuctionController@rateAuction')->name('rate');
 
 
 //Reports
