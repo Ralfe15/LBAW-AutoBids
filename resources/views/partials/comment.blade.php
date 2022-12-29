@@ -13,7 +13,7 @@
             <div class="comment-child-box">
                 <div class="comment-child">
                     <div class="comment-user">
-                        {{ $child->user->name}}
+                        <a href="/user/{{$child->user->id}}"> {{ $child->user->name}}
                     </div>
                     <div class="comment-text">
                         {{ $child->content }}

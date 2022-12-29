@@ -5,7 +5,7 @@
     margin: auto;
     padding: 1em;
     border-radius: 10px;
-    box-shadow: 0 0 15px 5px rgba(0,0,0,0.2);
+    box-shadow: 0 0 15px 5px rgba(244,91,0,0.2);
 }
 
 .comment-title {
@@ -28,9 +28,10 @@
 
 .comment-user{
     padding-bottom: 10px;
+
 }
 .comment-user a {
-    color: #000;
+    color: #f45b00;
     font-weight: bold;
     font-size: 1.25em;
     text-decoration: none;
@@ -54,6 +55,7 @@
     border-radius: 10px;
     box-shadow: 0 0 15px 5px rgba(0,0,0,0.2);
 }
+
 
 .comment-box {
     padding: 25px;

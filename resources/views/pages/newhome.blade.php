@@ -47,6 +47,16 @@
 </div>
 
 
+<div class="navigation-section">
+    <a href="#latestCarousel" class="latest-link">Latest Auctions</a>
+    <a href="#finishingCarousel" class="finishing-link">Finishing Auctions</a>
+    <a href="#popularCarousel" class="popular-link">Popular Auctions</a>
+</div>
+
+<div class="separator">
+    <hr class="line">
+</div>
+
 
 <div class="content-wrapper">
     <div class="latest-actions-wrapper">
@@ -73,7 +83,7 @@
                                                             <img src="{{ asset($auction->images->first()->path) }}" class="img-fluid">
                                                         @endif
                                                     </div>
-                                                    <div class="card-img-overlay">{{$loop->iteration}}</div>
+{{--                                                    <div class="card-img-overlay">{{$loop->iteration}}</div>--}}
                                                     <div class="card-caption">
                                                         <h5><b>{{$auction->model->brand->name}}</b></h5>
                                                         <h6>{{$auction->model->name }}</h6>
@@ -128,7 +138,7 @@
                                                                     <img src="{{ asset($auction->images->first()->path) }}" class="img-fluid">
                                                                     @endif
                                                         </div>
-                                                        <div class="card-img-overlay">{{$loop->iteration}}</div>
+{{--                                                        <div class="card-img-overlay">{{$loop->iteration}}</div>--}}
                                                         <div class="card-caption">
                                                             <h5><b>{{$auction->model->brand->name}}</b></h5>
                                                             <h6>{{$auction->model->name }}</h6>
@@ -183,7 +193,7 @@
                                                                 <img src="{{ asset($auction->images->first()->path) }}" class="img-fluid">
                                                             @endif
                                                         </div>
-                                                        <div class="card-img-overlay">{{$loop->iteration}}</div>
+{{--                                                        <div class="card-img-overlay">{{$loop->iteration}}</div>--}}
                                                         <div class="card-caption">
                                                             <h5><b>{{$auction->model->brand->name}}</b></h5>
                                                             <h6>{{$auction->model->name }}</h6>
@@ -213,6 +223,8 @@
                 </div>
     </div>
 </div>
+
+        <a onclick=topFunction() class="btn btn-danger" id="top-button"><i class="bi bi-caret-up"></i></a>
 <script>
     let items = document.querySelectorAll('#latestCarousel #latest-carousel')
 
@@ -263,5 +275,26 @@
             next = next.nextElementSibling
         }
     })
+</script>
+<script>
+    // Get the button
+    let mybutton = document.getElementById("top-button");
+
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            mybutton.style.display = "block";
+        } else {
+            mybutton.style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
 </script>
 @stop
