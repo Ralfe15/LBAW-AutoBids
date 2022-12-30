@@ -4,6 +4,7 @@
         <link rel="stylesheet" href="{{asset('css/user.css')}}">
     </head>
     <div class="content-wrapper">
+        <h1>Admin Dashboard</h1>
         <h1>Auction creation requests</h1>
         <table class="table table-bordered table-striped">
             <thead>
@@ -20,6 +21,7 @@
             @each('partials/auction_admin', $requests, 'auction')
             </tbody>
         </table>
+        {{$requests->links("pagination::bootstrap-5")}}
         <h1>Auction reports</h1>
         <table class="table table-bordered table-striped">
             <thead>
@@ -27,13 +29,15 @@
                 <th scope="col">Reported by</th>
                 <th scope="col">Auction name</th>
                 <th scope="col">Date</th>
+                <th scope="col">Description</th>
+
             </tr>
             </thead>
             <tbody>
             @each('partials/reports_admin', $reports, 'report')
             </tbody>
         </table>
-
+        {{$reports->links("pagination::bootstrap-5")}}
         <h1>Transaction requests</h1>
         <table class="table table-bordered table-striped">
             <thead>
@@ -49,6 +53,8 @@
             @each('partials/transactions', $banktransfers_approval, 'transaction')
             </tbody>
         </table>
+        {{$banktransfers_approval->links("pagination::bootstrap-5")}}
+
     </div>
 @stop
 

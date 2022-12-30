@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Auction;
+use App\Models\AuctionReport;
 use App\Models\Bid;
 use App\Models\Brand;
 use App\Models\Card;
@@ -10,13 +11,17 @@ use App\Models\CarModel;
 use App\Models\Category;
 use App\Models\Image;
 use App\Models\User;
+use App\Notifications\AbortedAuctionNotificationBids;
+use App\Notifications\AbortedAuctionNotificationNoBids;
 use App\Notifications\ApprovedAuctionNotification;
+use App\Notifications\DeniedAuctionNotification;
 use App\Notifications\EndAuctionNotificationBids;
 use App\Notifications\EndAuctionNotificationNoBids;
 use Carbon\Carbon;
 use Carbon\CarbonInterval;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class AuctionController extends Controller
@@ -61,10 +66,10 @@ class AuctionController extends Controller
     public function all(Request $request)
     {
         if (!$request->has('search')) {
-            $auctions = Auction::where('active', true)->get();
+            $auctions = Auction::where('active', true)->paginate(5);
         } else {
             $auctions = Auction::whereRelation('model', 'name', 'ilike', '%' . $request->input('search') . '%')
-                ->distinct()->get();
+                ->distinct()->paginate(5);
         }
         return view('pages.auctions', ['auctions' => $auctions]);
 
@@ -81,11 +86,10 @@ class AuctionController extends Controller
             if (!Carbon::parse($auction->end_date)->diff(Carbon::now())->invert) {
                 //notify the auction winner and the owner about the result
                 $winner = $auction->winner();
-                if(!is_null($winner)){
+                if (!is_null($winner)) {
                     $notification = new EndAuctionNotificationBids($auction, $winner);
                     $winner->user->notify($notification);
-                }
-                else{
+                } else {
                     // Case an auction ends without any bid
                     $notification = new EndAuctionNotificationNoBids($auction);
                 }
@@ -111,7 +115,10 @@ class AuctionController extends Controller
             'id_Model' => 'required|integer',
             'starting_bid' => 'required|integer',
             'description' => 'required|string',
-            'duration' => 'required|integer',
+            'd' => 'required|integer',
+            'h' => 'required|integer',
+            'm' => 'required|integer',
+            's' => 'required|integer',
             'year' => 'required|integer|digits:4',
             'mileage' => 'required|integer',
             'displacement' => 'required|integer',
@@ -141,7 +148,8 @@ class AuctionController extends Controller
         $auction->id_model = $request->input('id_Model');
         $auction->starting_bid = $request->input('starting_bid') * 100;
         $auction->description = $request->input('description');
-        $auction->duration = $request->input('duration');
+        $auction->duration = dateToSeconds($request->input('d'), $request->input('h'),
+            $request->input('m'), $request->input('s'));
         $auction->year = $request->input('year');
         $auction->mileage = $request->input('mileage');
         $auction->displacement = $request->input('displacement');
@@ -152,21 +160,19 @@ class AuctionController extends Controller
         $auction->save();
 
         //Images
-        if ($request->images){
-            foreach($request->images as $key=> $image)
-            {
+        if ($request->images) {
+            foreach ($request->images as $key => $image) {
                 $newImage = new Image();
-                $imageName = $auction->id.'-'.$key.'.'.$image->extension();
+                $imageName = $auction->id . '-' . $key . '.' . $image->extension();
                 $imagePath = "img/auctions/$auction->id/";
                 $image->move(public_path($imagePath), $imageName);
-                $imageFullPath = $imagePath.$imageName;
+                $imageFullPath = $imagePath . $imageName;
 
                 $newImage->path = $imageFullPath;
                 $newImage->id_auction = $auction->id;
                 $newImage->save();
             }
         }
-
 
 
         //change redirect to auction details
@@ -191,11 +197,75 @@ class AuctionController extends Controller
             $auction->approved = true;
             $auction->active = true;
             $auction->start_date = now();
-            //end date is handled as a pgsql trigger
+            $auction->end_date = now()->addSeconds($auction->duration);
             $auction->save();
             $auction->user->notify(new ApprovedAuctionNotification($auction));
             return redirect('/admin');
 
         }
+    }
+
+    public function deny($id)
+    {
+        if (Auth::check() && Auth::user()->is_admin) {
+            $auction = Auction::find($id);
+            $auction->user->notify(new DeniedAuctionNotification($auction));
+            $auction->delete();
+            return redirect('/admin');
+        }
+    }
+
+    public function abort(Request $request, $id)
+    {
+        if (Auth::check() && Auth::user()->is_admin) {
+            $auction = Auction::find($id);
+            if (is_null($auction->winner())) {
+                $notification = new AbortedAuctionNotificationNoBids($auction);
+                $auction->user->notify($notification);
+            } else {
+                $notification = new AbortedAuctionNotificationBids($auction, $auction->winner());
+                $auction->winner()->user->increment('credits', $auction->winner()->value);
+                $auction->winner()->user->notify($notification);
+                $auction->user->notify($notification);
+                DB::table('reportauction')->where('id_member', $request->input('id_member'))
+                    ->where('id_auction', $request->input('id_auction'))
+                    ->update(['solved' => true]);
+            }
+            $auction->aborted = true;
+            $auction->active = false;
+            $auction->approved = false;
+            $auction->save();
+            return redirect('/admin');
+        }
+    }
+
+    public function cancel($id)
+    {
+        $auction = Auction::find($id);
+        if (Auth::check() && (Auth::id() == $auction->id_member)) {
+            $auction->delete();
+            return redirect('/' . Auth::id() . '/requests');
+        }
+        return redirect('/home');
+    }
+
+    public function rateAuction($id, Request $request){
+        $auction = Auction::find($id);
+        $rating = intval($request->input('rating'));
+        $prevrating = $auction->user->rating;
+        $number_auctions = sizeof($auction->user->auctions->where('active', false));
+        $auction->user->rating = ($prevrating + $rating)/$number_auctions;
+        $auction->user->save();
+
+
+        $userUnreadNotification = Auth::user()
+            ->unreadNotifications
+            ->where('id', $request->input('notification_id'))
+            ->first();
+
+        if ($userUnreadNotification) {
+            $userUnreadNotification->markAsRead();
+        }
+        return back();
     }
 }

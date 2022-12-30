@@ -126,6 +126,17 @@ label{
     text-align: center;
 }
 
+.duration-input {
+    width: 3rem;
+}
+
+.duration-label {
+    width: 3rem;
+    margin-right: .5rem;
+    margin-left: .5rem;
+}
+
+
 .line {
     width: 20%;
     margin: 0 auto 25px auto;

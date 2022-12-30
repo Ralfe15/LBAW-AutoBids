@@ -70,7 +70,7 @@
                 <p><b>Started at: </b> {{$auction->started()}}</p>
             </div>
             <div class="status-timeleft">
-                <p><b>Time Left: </b> {{$time_remaining}}</p>
+                <p id="countdown"><b>Time Left: </b> {{$auction->timeRemainingDetailPage()}}</p>
             </div>
             <div class="status-bid">
                 @if(Auth::check() && $can_bid && (Auth::user()->credits/100) >= $current_bid)

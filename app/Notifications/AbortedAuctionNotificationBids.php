@@ -10,11 +10,13 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class EndAuctionNotificationBids extends Notification
+class AbortedAuctionNotificationBids extends Notification
 {
     use Queueable;
+
     public Bid $winner;
     public Auction $auction;
+
     /**
      * Create a new notification instance.
      *
@@ -29,7 +31,7 @@ class EndAuctionNotificationBids extends Notification
     /**
      * Get the notification's delivery channels.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
      * @return array
      */
     public function via($notifiable)
@@ -40,17 +42,15 @@ class EndAuctionNotificationBids extends Notification
     /**
      * Get the array representation of the notification.
      *
-     * @param  mixed  $notifiable
+     * @param mixed $notifiable
      * @return array
      */
     public function toArray($notifiable)
     {
         return [
             'winner_name' => $this->winner->user->name,
-            'winner_id' => $this->winner->user->id,
-            'auction_id' => $this->auction->id,
-            'auction_name' => $this->auction->model->brand->name. " - " .
-                $this->auction->model->name . " - "  . $this->auction->year,
+            'auction_name' => $this->auction->model->brand->name . " - " .
+                $this->auction->model->name . " - " . $this->auction->year,
             'auction_owner' => $this->auction->user->name,
             'winner_bid' => $this->auction->bids->max('value'),
         ];

@@ -1289,7 +1289,7 @@ insert into Paypal (value, type, id_Member, email) values (39909, 'Withdraw', '3
 CREATE FUNCTION ck_cancel_auction() RETURNS TRIGGER AS
 $BODY$
 BEGIN
-  IF ((SELECT count(*) FROM Bid where id_Auction = OLD.id) > 0)
+  IF ((SELECT count(*) FROM lbaw2285.Bid where id_Auction = OLD.id) > 0)
     THEN
         RAISE EXCEPTION 'You can only delete Auctions with no bids';
     END IF;
@@ -1306,8 +1306,8 @@ CREATE TRIGGER tr_create_notification_auction
 CREATE FUNCTION ck_own_higest_bid() RETURNS TRIGGER AS
 $BODY$
 BEGIN
-  IF ((SELECT id_Member FROM Bid WHERE value = (
-   SELECT MAX (value) FROM Bid where id_Auction = NEW.id_Auction
+  IF ((SELECT id_Member FROM lbaw2285.Bid WHERE value = (
+   SELECT MAX (value) FROM lbaw2285.Bid where id_Auction = NEW.id_Auction
 )) = NEW.id_Member)
     THEN
         RAISE EXCEPTION 'You cant bid if you are the highest bidder';
@@ -1325,7 +1325,7 @@ CREATE TRIGGER tr_own_highest_bid
 CREATE FUNCTION ck_15_min_auction() RETURNS TRIGGER AS
 $BODY$
 BEGIN
-  IF (select (end_date-start_date) > interval '30 minutes'from Auction where id = NEW.id)
+  IF (select (end_date-start_date) > interval '30 minutes'from lbaw2285.Auction where id = NEW.id)
     THEN
         NEW.end_date = NEW.end_date + interval '15 minutes';
     END IF;
@@ -1359,7 +1359,7 @@ CREATE TRIGGER tr_ck_negative_credits
 CREATE FUNCTION ck_owner_cant_bid() RETURNS TRIGGER AS
 $BODY$
 BEGIN
-  IF ((select id_Member from Auction where id = NEW.id_Auction) = NEW.id_Member)
+  IF ((select id_Member from lbaw2285.Auction where id = NEW.id_Auction) = NEW.id_Member)
     THEN
         RAISE EXCEPTION 'You cant bid if you are auction owner';
     END IF;
@@ -1376,7 +1376,7 @@ CREATE TRIGGER tr_owner_cant_bid
 CREATE FUNCTION ck_bid_is_higher() RETURNS TRIGGER AS
 $BODY$
 BEGIN
-  IF ((SELECT MAX (value) FROM Bid where id_Auction = NEW.id_Auction
+  IF ((SELECT MAX (value) FROM lbaw2285.Bid where id_Auction = NEW.id_Auction
 ) >= NEW.value)
     THEN
         RAISE EXCEPTION 'You have to bid higher than previous highest';
@@ -1390,27 +1390,6 @@ CREATE TRIGGER tr_bid_is_higher
   BEFORE INSERT ON Bid
   FOR EACH ROW
     EXECUTE PROCEDURE ck_bid_is_higher();
-
-CREATE FUNCTION change_end_date() RETURNS TRIGGER AS
-$BODY$
-BEGIN
-    IF EXISTS (SELECT * FROM Auction WHERE NEW.id = Auction.id) THEN
-	    IF NEW.approved = TRUE THEN
-            NEW.start_date = CURRENT_TIMESTAMP;
-            NEW.end_date = (NEW.start_date) + (NEW.duration * interval '1 day');
-        END IF;
-    END IF;
-	RETURN NEW;
-END
-$BODY$
-LANGUAGE plpgsql;
-
-CREATE TRIGGER tr_change_end_date
-    BEFORE UPDATE ON Auction
-        FOR EACH ROW
-		      EXECUTE PROCEDURE change_end_date();
-
-
 
 -- INDEXES FOR CLUSTERING
 CREATE INDEX brandIdx ON Brand USING btree (id);

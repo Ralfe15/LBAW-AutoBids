@@ -1,5 +1,7 @@
-DROP SCHEMA IF EXISTS lbaw2285 CASCADE;
+DROP SCHEMA IF EXISTS lbaw2285 CASCADE ;
 CREATE SCHEMA lbaw2285;
+
+set search_path = lbaw2285;
 
 DROP TABLE IF EXISTS Member CASCADE;
 DROP TYPE IF EXISTS TransactionType CASCADE;
@@ -113,6 +115,7 @@ CREATE TABLE Auction (
                          id_Member integer,
                          id_Model integer,
                          id_Category integer,
+                         aborted boolean NOT NULL DEFAULT FALSE,
                          CONSTRAINT Auction_pk PRIMARY KEY (id),
                          CONSTRAINT PositiveStartingBid CHECK (starting_bid >=0),
                          CONSTRAINT PositiveViews CHECK (views >=0),
@@ -228,6 +231,7 @@ CREATE TABLE ReportAuction (
                                id_Auction integer NOT NULL,
                                date timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
                                description text NOT NULL,
+                               solved boolean NOT NULL DEFAULT FALSE,
                                CONSTRAINT ReportAuction_pk PRIMARY KEY (id_Member,id_Auction)
 );
 
@@ -307,39 +311,36 @@ CREATE INDEX auctionEndIdx ON Auction (end_date);
 CREATE INDEX auctionViewsIdx ON Auction USING btree (views);
 
 -- Add column to Auction to store content of model, description and brand.
-ALTER TABLE Auction ADD COLUMN search TEXT;
+-- ALTER TABLE Auction ADD COLUMN search TEXT;
 
-UPDATE Auction SET search =
-                       CONCAT(A.description, ' ', A.color, ' ', M.name, '', B.name)
-    FROM Auction A
-INNER JOIN Model M ON M.id = A.id_Model
-    INNER JOIN Brand B ON M.id_Brand = B.id
-where Auction.id = A.id;
+-- UPDATE Auction SET search =
+-- CONCAT(A.description, ' ', A.color, ' ', M.name, '', B.name)
+-- FROM Auction A
+-- INNER JOIN Model M ON M.id = A.id_Model
+-- INNER JOIN Brand B ON M.id_Brand = B.id
+-- where Auction.id = A.id;
 
 -- Add column to Auction to store computed ts_vectors.
 ALTER TABLE Auction
     ADD COLUMN tsvectors TSVECTOR;
-UPDATE Auction SET tsvectors = to_tsvector('english', search);
+-- UPDATE Auction SET tsvectors = to_tsvector('english', search);
 
 -- Create a function to automatically update ts_vectors.
 CREATE FUNCTION auction_search_update() RETURNS TRIGGER AS $$
 BEGIN
  IF TG_OP = 'INSERT' THEN
-        NEW.search = CONCAT(A.description, ' ', A.color, ' ', M.name, '', B.name)
-        FROM Auction A
-        INNER JOIN Model M ON M.id = A.id_Model
+        NEW.tsvectors := to_tsvector('english', CONCAT(NEW.description, ' ', NEW.color, ' ', M.name, ' ', B.name))
+        FROM lbaw2285.Model M
         INNER JOIN Brand B ON M.id_Brand = B.id
-        where A.id = NEW.id;
-        NEW.tsvectors = to_tsvector('english', NEW.search);
+        where NEW.id_model = M.id;
 END IF;
  IF TG_OP = 'UPDATE' THEN
          IF (NEW.description <> OLD.description OR NEW.color <> OLD.color) THEN
-            NEW.search = CONCAT(A.description, ' ', A.color, ' ', M.name, '', B.name)
-            FROM Auction A
+            NEW.tsvectors := to_tsvector('english', CONCAT(NEW.description, ' ', NEW.color, ' ', M.name, ' ', B.name))
+            FROM lbaw2285.Auction A
             INNER JOIN Model M ON M.id = A.id_Model
             INNER JOIN Brand B ON M.id_Brand = B.id
-            where Auction.id = NEW.id;
-            NEW.tsvectors = to_tsvector('english', NEW.search);
+            where A.id = NEW.id;
 END IF;
 END IF;
 RETURN NEW;
@@ -357,4 +358,3 @@ CREATE INDEX auctionIdxSearch ON Auction USING GIN (tsvectors);
 
 -- CREATE EXTENSION pg_trgm;
 -- CREATE INDEX memberIdxNameEmail ON Member using GIN ((name || ' ' || email) gin_trgm_ops);
-

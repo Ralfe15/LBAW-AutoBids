@@ -29,6 +29,7 @@
                     <li><a class="dropdown-item" href="#">Favourites</a></li>
                     <li><a class="dropdown-item" href="/auctions/create">Create Auction</a></li>
                     <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                    <li><a class="dropdown-item" href="{{route('requests', ['id'=>Auth::id()])}}">Your requests</a></li>
                     @if(Auth::user()->is_admin)
                         <li><a class="dropdown-item" href="{{route('admin_dashboard')}}">Admin dashboard</a></li>
                     @endif
