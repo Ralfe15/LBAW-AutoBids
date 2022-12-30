@@ -109,7 +109,7 @@ label{
 }
 
 .image-form {
-    padding-bottom: 25px;
+    padding-bottom: 50px;
 }
 
 .startingbid-form {
@@ -118,6 +118,19 @@ label{
 
 .duration-form {
     padding-bottom: 50px;
+}
+
+.duration-form input{
+    background-color: #FFFFFF;
+    border: 2px solid lightgray;
+    border-radius: 5px;
+
+}
+
+.duration-form input:focus{
+    background-color: #FFFFFF;
+    border: 2px solid lightgray !important;
+    border-radius: 5px;
 }
 
 .submit-button {

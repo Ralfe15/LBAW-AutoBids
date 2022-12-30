@@ -18,7 +18,7 @@
 
 
         <div class="form">
-            <form method="POST" action="{{ route('create-auction') }}" id="form_createauction"
+            <form method="POST" action="{{ route('create-auction') }}" id="createauction-form"
                   enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="details-wrapper">
@@ -116,7 +116,7 @@
                            placeholder="Ex: 272727">
                 </div>
                 <label for="durationForm" class="form-label">Duration</label>
-                <div class="startingbid-form d-flex">
+                <div class="duration-form d-flex">
                     <input class='duration-input' id='d' name='d' type='number' min='0' max='7'>
                     <label class='duration-label' for='d'>d</label>
                     <input class='duration-input' id='h' name='h' type='number' min='0' max='23'>
@@ -127,7 +127,7 @@
                     <label class='duration-label' for='s'>s</label>
                 </div>
                 <div class="submit-button">
-                    <button type="submit" class="btn btn-secondary">
+                    <button type="submit" class="btn btn-outline-danger">
                         Create Auction
                     </button>
                 </div>

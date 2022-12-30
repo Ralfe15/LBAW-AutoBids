@@ -115,3 +115,9 @@ a{
     padding-top: 25px;
     padding-bottom: 25px;
 }
+
+#bid{
+    border: 2px solid lightgray;
+    color:#000000;
+}
+
