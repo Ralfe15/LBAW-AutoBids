@@ -1,5 +1,8 @@
 @extends('layouts.default')
 @section('content')
+    <head>
+        <link href="{{ asset('css/notifications.css') }}" rel="stylesheet">
+    </head>
     <div class="content-wrapper m-4">
     <h1 class="m-4">Unread notifications</h1>
         <ul class="list-group">

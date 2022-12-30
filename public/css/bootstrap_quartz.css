@@ -2068,7 +2068,7 @@ progress {
   margin: -0.75rem -1.5rem;
   -webkit-margin-end: 1.5rem;
   margin-inline-end: 1.5rem;
-  color: #fff;
+  color: #f45b00; /*CHANGED*/
   background-color: transparent;
   pointer-events: none;
   border-color: inherit;
@@ -2088,10 +2088,12 @@ progress {
   }
 }
 .form-control:hover:not(:disabled):not([readonly])::-webkit-file-upload-button {
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: rgba(244,91,0,1.0); /*CHANGED*/
+    color: white; /*CHANGED*/
 }
 .form-control:hover:not(:disabled):not([readonly])::file-selector-button {
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: rgba(244,91,0,1.0); /*CHANGED*/
+    color: white; /*CHANGED*/
 }
 
 .form-control-plaintext {
@@ -2191,13 +2193,13 @@ textarea.form-control-lg {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #fff;
+  color: #000000; /*CHANGED*/
   background-color: transparent;
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e"); /*CHANGED*/
   background-repeat: no-repeat;
   background-position: right 1.5rem center;
   background-size: 16px 12px;
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.4);
   border-radius: 0.5rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   -webkit-appearance: none;

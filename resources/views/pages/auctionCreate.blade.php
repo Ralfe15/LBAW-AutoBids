@@ -7,17 +7,14 @@
     <link href="{{ asset('css/createAuction.css') }}" rel="stylesheet">
 </head>
 <div class="title-wrapper">
-    <h1>Create Auctions</h1>
+    <h1>Create Auction</h1>
 </div>
 @foreach ($errors->all() as $message)
 <h1>{{$message}}</h1>
 @endforeach
 <div class="form-wrapper">
-
-
-
     <div class="form">
-        <form method="POST" action="{{ route('create-auction') }}" id="form_createauction" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('create-auction') }}" id="createauction-form" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="details-wrapper">
                 <h3>Vehicle Details</h3>
@@ -112,7 +109,7 @@
                 <input type="number" class="form-control" name="duration" id="duration-form" placeholder="Ex: 27">
             </div>
             <div class="submit-button">
-                <button type="submit" class="btn btn-secondary">
+                <button type="submit" class="btn btn-outline-danger">
                     Create Auction
                 </button>
             </div>

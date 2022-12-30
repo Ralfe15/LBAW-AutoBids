@@ -1,14 +1,41 @@
 .title-wrapper {
-    padding-top: 100px;
-    padding-bottom: 25px;
+    padding-top: 200px;
+    padding-bottom: 50px;
     text-align: center;
+    color: #000000;
 }
 
 
-.form {
-    padding-top: 50px;
-    width: 15%;
+#createtransaction-form {
+    padding: 1em;
+    width: 20%;
     margin: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 15px 5px rgba(244,91,0,0.3);
+}
+#createtransaction-form .form-control {
+    border: 2px solid lightgray;
+}
+
+#createtransaction-form .form-control:focus {
+    border: 2px solid #f45b00;
+}
+
+
+
+#createtransaction-form .form-select {
+    border: 2px solid lightgray;
+    color:#000000;
+}
+
+#createtransaction-form input{
+    color: #000000;
+}
+#createtransaction-form input:-webkit-autofill,
+#createtransaction-form input:-webkit-autofill:hover,
+#createtransaction-form input:-webkit-autofill:focus,
+#createtransaction-form input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px #f45b00 inset !important;
 }
 
 
@@ -17,6 +44,11 @@ label{
     text-align: left;
     font-weight: bold;
     width: fit-content;
+    color: #000000;
+}
+
+#createtransaction-form .form-control::placeholder {
+    color: #606060;
 }
 
 .form-transaction {
@@ -38,8 +70,9 @@ label{
 
 
 .submit-button {
-    padding-top: 50px;
-    padding-bottom: 150px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    text-align: center;
 }
 
 .line {
@@ -48,5 +81,9 @@ label{
     border-bottom-style: solid;
     border-color: lightgrey;
     border-width: 2px;
+}
+
+.form-wrapper {
+    padding-bottom: 150px;
 }
 

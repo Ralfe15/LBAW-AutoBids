@@ -6,8 +6,8 @@
     <div class="signup-title">
         <h1 style="text-align: center;">Edit Profile</h1>
     </div>
-    <div class="form">
-        <form method="POST" action="{{ route('user-edit') }}" id="form_login">
+    <div class="form form-wrapper">
+        <form method="POST" action="{{ route('user-edit') }}" id="register-form">
             {{ csrf_field() }}
             <div class="form-name">
                 <label for="nameForm" class="form-label">Name</label>
@@ -31,7 +31,7 @@
             </div>
 
             <div class="button-wrapper">
-                <button class="btn btn-secondary" type="submit">
+                <button class="btn btn-outline-danger" type="submit">
                     Submit
                 </button>
             </div>
