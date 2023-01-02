@@ -14,7 +14,7 @@
                        id="{{"toggle".$auction->id}}"
                        onclick="toggleFavorite({{$auction->id}}, '{{$auction->isFavourite(Auth::user())}}')">
                         Remove from favorites :
-                        <i id="{{"heart-icon".$auction->id}}" class="fa fa-heart"></i>
+                        <i id="{{"heart-icon".$auction->id}}" style="color: red" class="bi bi-heart-fill"></i>
                     </a>
                 </div>
             @else
@@ -24,7 +24,7 @@
                        id="{{"toggle".$auction->id}}"
                        onclick="toggleFavorite({{$auction->id}}, '{{$auction->isFavourite(Auth::user())}}')">
                         Add to favorites :
-                        <i id="{{"heart-icon".$auction->id}}" class="fa fa-heart-o"></i>
+                        <i id="{{"heart-icon".$auction->id}}" style="color: black" class="bi bi-heart"></i>
                     </a>
                 </div>
             @endif

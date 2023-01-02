@@ -17,7 +17,8 @@ function toggleFavorite(id, isfav) {
                 const button = document.querySelectorAll("#toggle" + id)
                 const icon = document.querySelectorAll("#heart-icon" + id)
                 for (var i = 0; i < button.length; i++) {
-                    icon[i].className = "fa fa-heart"
+                    icon[i].className = "bi bi-heart-fill"
+                    icon[i].style.color = "red"
                     button[i].textContent = "Remove from favorites: "
                     button[i].append(icon[i])
                     button[i].setAttribute("onclick", "toggleFavorite(" + id + ", 'true')")
@@ -42,7 +43,8 @@ function toggleFavorite(id, isfav) {
                 const button = document.querySelectorAll("#toggle" + id)
                 const icon = document.querySelectorAll("#heart-icon" + id)
                 for (var i = 0; i < button.length; i++) {
-                    icon[i].className = "fa fa-heart-o"
+                    icon[i].className = "bi bi-heart"
+                    icon[i].style.color = "black"
                     button[i].textContent = "Add to favorites: "
                     button[i].append(icon[i])
                     button[i].setAttribute("onclick", "toggleFavorite(" + id + ", 'false')")
