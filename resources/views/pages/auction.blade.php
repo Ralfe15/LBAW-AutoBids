@@ -7,6 +7,28 @@
 
     <div class='auction-title'>
         <p>{{$auction->model->brand->name}} {{$auction->model->name}} </p>
+        @if(Auth::check())
+            @if($auction->isFavourite(Auth::user()) == 'true')
+                <div>
+                    <a style="font-size: 15px; color: black; text-decoration: none"
+                       id="{{"toggle".$auction->id}}"
+                       onclick="toggleFavorite({{$auction->id}}, '{{$auction->isFavourite(Auth::user())}}')">
+                        Remove from favorites :
+                        <i id="{{"heart-icon".$auction->id}}" class="fa fa-heart"></i>
+                    </a>
+                </div>
+            @else
+                <div>
+                    <a style="font-size: 15px; color: black; text-decoration: none"
+                       class="favorite-btn"
+                       id="{{"toggle".$auction->id}}"
+                       onclick="toggleFavorite({{$auction->id}}, '{{$auction->isFavourite(Auth::user())}}')">
+                        Add to favorites :
+                        <i id="{{"heart-icon".$auction->id}}" class="fa fa-heart-o"></i>
+                    </a>
+                </div>
+            @endif
+        @endif
     </div>
 
     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
