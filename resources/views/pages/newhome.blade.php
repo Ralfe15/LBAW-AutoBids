@@ -4,9 +4,18 @@
     <link href="{{ asset('css/home.css') }}" rel="stylesheet">
     {{--    <link href="{{ asset('css/auction.css') }}" rel="stylesheet">--}}
 </head>
+<script>
+    let url = "https://api.unsplash.com/search/photos/?query=car&client_id=6evLkKSsWtnP-aTy00ftqLmhMMEEXMzVx4pShcPkWk0"
+    fetch(url)
+        .then(function(response) {
+            return response.json();
+        }).then(function(jsonData){
+            document.querySelector("#img1").src = jsonData.results[0].urls.full
+            document.querySelector("#img2").src = jsonData.results[1].urls.full
+            document.querySelector("#img3").src = jsonData.results[2].urls.full
+    })
 
-
-
+</script>
 <div id="carouselCaptions" class="carousel slide top-carousel" data-bs-ride="false">
     <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -15,21 +24,21 @@
     </div>
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="https://placeimg.com/1920/600/any" class="d-block w-100" alt="...">
+            <img src="" style="object-fit: cover;" id="img1" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
                 <h5>Buy your vehicles!</h5>
                 <p>Buy high-quality second-hand vehicles.</p>
             </div>
         </div>
         <div class="carousel-item">
-            <img src="https://placeimg.com/1920/750/any" class="d-block w-100" alt="...">
+            <img src="" style="object-fit: cover;" id="img2" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
                 <h5>Sell your vehicles!</h5>
                 <p>Sell high-quality second-hand vehicles.</p>
             </div>
         </div>
         <div class="carousel-item">
-            <img src="https://placeimg.com/1920/400/any" class="d-block w-100" alt="...">
+            <img src="" style="object-fit: cover;" id="img3" class="d-block w-100" alt="...">
             <div class="carousel-caption d-none d-md-block">
                 <h5>About AutoBids</h5>
                 <p>Want to know more about us?</p>
