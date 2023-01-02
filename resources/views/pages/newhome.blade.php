@@ -2,7 +2,8 @@
 @section('content')
 <head>
     <link href="{{ asset('css/home.css') }}" rel="stylesheet">
-{{--    <link href="{{ asset('css/auction.css') }}" rel="stylesheet">--}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    {{--    <link href="{{ asset('css/auction.css') }}" rel="stylesheet">--}}
 </head>
 
 
@@ -98,6 +99,28 @@
                                                         <p>{{ $auction->remaining() }}</p>
                                                     </div>
                                                     </a>
+                                                    @if(Auth::check())
+                                                        @if($auction->isFavourite(Auth::user()) == 'true')
+                                                            <div>
+                                                                <a style="font-size: 15px; color: black; text-decoration: none"
+                                                                   id="{{"toggle".$auction->id}}"
+                                                                   onclick="toggleFavorite({{$auction->id}}, '{{$auction->isFavourite(Auth::user())}}')">
+                                                                    Remove from favorites :
+                                                                    <i id="{{"heart-icon".$auction->id}}" class="fa fa-heart"></i>
+                                                                </a>
+                                                            </div>
+                                                        @else
+                                                            <div>
+                                                                <a style="font-size: 15px; color: black; text-decoration: none"
+                                                                   class="favorite-btn"
+                                                                   id="{{"toggle".$auction->id}}"
+                                                                   onclick="toggleFavorite({{$auction->id}}, '{{$auction->isFavourite(Auth::user())}}')">
+                                                                    Add to favorites :
+                                                                    <i id="{{"heart-icon".$auction->id}}" class="fa fa-heart-o"></i>
+                                                                </a>
+                                                            </div>
+                                                        @endif
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
