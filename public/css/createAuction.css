@@ -119,6 +119,9 @@ label{
 .duration-form {
     padding-bottom: 50px;
 }
+#description-form{
+    color: black !important;
+}
 
 .duration-form input{
     background-color: #FFFFFF;
@@ -162,3 +165,4 @@ label{
 .form-wrapper {
     padding-bottom: 150px;
 }
+

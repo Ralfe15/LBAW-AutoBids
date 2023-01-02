@@ -36,6 +36,7 @@ class AuctionController extends Controller
         $time_remaining = Carbon::parse($auction->end_date)->longAbsoluteDiffForHumans(Carbon::now(), 6);
         $current_bid_val = $auction->bids->max('value');
         $can_bid = true;
+        $is_winning = false;
         if (is_null($current_bid_val)) {
             $current_bid = ($auction->starting_bid) / 100; //starting price
             $current_bid_user_id = -1; //check for this flag in the notification
@@ -47,13 +48,17 @@ class AuctionController extends Controller
             if (($current_bid[0]->id_member == Auth::id()) || ($auction->id_member == Auth::id())) {
                 $can_bid = false;
             }
+            if($current_bid[0]->id_member == Auth::id()){
+                $is_winning = true;
+            }
             $current_bid_user_id = $current_bid[0]->id_member;
             $current_bid = $current_bid_val / 100;
         }
+
         $prev_bids = $auction->bids()->orderBy('date', 'desc')->get();
 
         return view('pages.auction', ['auction' => $auction, 'time_remaining' => $time_remaining,
-            'current_bid' => $current_bid, 'can_bid' => $can_bid, 'prev_id' => $current_bid_user_id, 'prev_bids' => $prev_bids]);
+            'current_bid' => $current_bid, 'can_bid' => $can_bid, 'prev_id' => $current_bid_user_id, 'prev_bids' => $prev_bids, 'is_winning' => $is_winning]);
     }
 
     public function list()

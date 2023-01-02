@@ -65,6 +65,9 @@ Route::post('actions/unfollow', 'UserController@unfollowAuction')->name('unfollo
 
 //Admin
 Route::get('admin', 'UserController@adminDashboard')->name('admin_dashboard');
+Route::get('admin-requests', 'UserController@adminDashboardReqs')->name('admin_requests');
+Route::get('admin-reports', 'UserController@adminDashboardReps')->name('admin_reports');
+Route::get('admin-transactions', 'UserController@adminDashboardTrans')->name('admin_transactions');
 
 //Notifications
 Route::get('user/{id}/notifications', 'UserController@notifications')->name('notifications');
