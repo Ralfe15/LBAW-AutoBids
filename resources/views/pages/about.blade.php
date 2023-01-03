@@ -6,7 +6,7 @@
 
     <div class="content-wrapper">
         <div class="about-title">
-            <h1>About</h1>
+            <h3>About AutoBids</h3>
         </div>
         <div class="about-wrapper">
             <p>AutoBids is an online website that allows users to buy and sell vehicles through an auction system, ensuring the quality and authenticity of the vehicles.</p>

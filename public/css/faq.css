@@ -1,14 +1,33 @@
 .content-wrapper {
     width: 50%;
-    margin: auto
+    margin: auto;
+    padding-top: 50px
 }
 .faq-title {
     text-align: center;
-    padding-top: 100px;
+    padding-top: 150px;
     padding-bottom: 100px;
+    color: black;
 }
-.faq-wrapper {
-    border: solid;
-    border-color: lightgrey;
-    padding: 25px;
+
+
+.faq-box {
+    color: black;
+    border-radius: 10px;
+    box-shadow: 0 0 15px 5px rgba(244,91,0,0.3);
+    padding: 1em;
+    margin-bottom: 50px;
 }
+
+.faq-answer a{
+    color: #f45b00;
+}
+.faq-answer a:hover{
+    color: grey;
+}
+
+.table {
+    text-align: center;
+}
+
+
