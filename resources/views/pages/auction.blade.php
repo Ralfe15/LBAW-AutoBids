@@ -137,7 +137,7 @@
                     @if(Auth::check() && $is_winning)
                         <p style="color: red">You are currently winning this auction.</p>
                     @endif
-                    @if((Auth::user()->credits/100) < $current_bid)
+                    @if((Auth::user()->credits/100) < $current_bid && $can_bid)
                         <p style="color: red">You do not have enough money to bid.</p>
                     @endif
                 </div>
