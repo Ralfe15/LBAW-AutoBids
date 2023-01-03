@@ -93,11 +93,17 @@ class Auction extends Model
     }
 
     public function timeRemaining(){
+        if(!Carbon::parse($this->end_date)->diff(Carbon::now())->invert){
+            return "Auction ended";
+        }
         $time_remaining = Carbon::parse($this->end_date)->longAbsoluteDiffForHumans(Carbon::now(), 2);
         return $time_remaining;
     }
 
     public function timeRemainingDetailPage(){
+        if(!Carbon::parse($this->end_date)->diff(Carbon::now())->invert){
+            return "Auction ended";
+        }
         $time_remaining = Carbon::now()->diffAsCarbonInterval(Carbon::parse($this->end_date));
         return $time_remaining->d . " days " . $time_remaining->h . " hours " .
             $time_remaining->minutes . " minutes " . $time_remaining->s . " seconds";
