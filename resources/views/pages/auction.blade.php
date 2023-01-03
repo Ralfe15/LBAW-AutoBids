@@ -125,7 +125,7 @@
                             <div class="input-group mb-3">
 
                                 <input aria-describedby="button-bid" type="number"
-                                       placeholder="Minimum bid: U${{bid_step($current_bid)}}" class="form-control"
+                                       placeholder="Minimum bid: €{{bid_step($current_bid)}}" class="form-control"
                                        min='{{bid_step($current_bid)}}' name="bid" id="bid" step="0.01">
                                 <input type="hidden" value="{{bid_step($current_bid)}}" name="minimum">
                                 <input type="hidden" value="{{$current_bid}}" name="prev_bid">
@@ -206,7 +206,7 @@
                         <tr>
                             <th scope="row">{{$loop->iteration}}</th>
                             <td>{{$prev_bid->user->name}}</td>
-                            <td>U${{credits_format($prev_bid->value/100)}}</td>
+                            <td>€{{credits_format($prev_bid->value/100)}}</td>
                             <td>{{date("F j, Y, g:i a", strtotime($prev_bid->date))}}</td>
                         </tr>
                     @endforeach

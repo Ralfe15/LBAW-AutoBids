@@ -22,7 +22,7 @@
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownAccountButton">
                 @if(Auth::check())
-                    <li><a class="dropdown-item" href="{{route('create_transaction')}}">Balance: U${{credits_format(Auth::user()->credits/100)}}</a></li>
+                    <li><a class="dropdown-item" href="{{route('create_transaction')}}">Balance: €{{credits_format(Auth::user()->credits/100)}}</a></li>
                     <li><a class="dropdown-item" href="/user/{{ Auth::user()->id }}">Profile</a></li>
                     <li><a class="dropdown-item" href="{{route('notifications', ['id'=>Auth::id()])}}">Notifications ({{ Auth::user()->unreadNotifications->count() }})</a></li>
                     <li><a class="dropdown-item" href="/my-auctions">My Auctions</a></li>

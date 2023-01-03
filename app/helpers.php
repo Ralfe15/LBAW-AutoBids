@@ -71,16 +71,16 @@ if (!function_exists('processNotification')) {
                     date("Y-m-d H:i:s", $notification->created_at->timestamp) . ".";
             case 'App\\Notifications\\EndAuctionNotificationBids':
                 return "The auction named " .
-                    $notification->data['auction_name'] . " ended with a highest bid of U$" .
+                    $notification->data['auction_name'] . " ended with a highest bid of €" .
                     credits_format($notification->data['winner_bid'] / 100) . " made by " . $notification->data['winner_name'] .
                     " at " . date("Y-m-d H:i:s", $notification->created_at->timestamp) . ".";
             case 'App\\Notifications\\AbortedAuctionNotificationBids':
                 return "The auction named " .
-                    $notification->data['auction_name'] . " was ABORTED. The highest bid of U$" .
+                    $notification->data['auction_name'] . " was ABORTED. The highest bid of €" .
                     credits_format($notification->data['winner_bid'] / 100) . " made by " . $notification->data['winner_name'] .
                     " at " . date("Y-m-d H:i:s", $notification->created_at->timestamp) . "was repaid.";
             case 'App\\Notifications\\NewBidAuctionNotification':
-                return "An auction you have previously bid has a new bid with value of U$" . credits_format($notification->data['new_val'] / 100);
+                return "An auction you have previously bid has a new bid with value of €" . credits_format($notification->data['new_val'] / 100);
             case 'App\\Notifications\\NewCommentNotification':
                 return "New Comment on Auction: " . $notification->data['auction_name'];
             case 'App\\Notifications\\NewReplyNotification':
@@ -109,16 +109,16 @@ if (!function_exists('processNotificationEmail')) {
                     $notification['auction_name'] . " was ABORTED with no bids.";
             case 'App\\Notifications\\EndAuctionNotificationBids':
                 return "The auction named " .
-                    $notification['auction_name'] . " ended with a highest bid of U$" .
+                    $notification['auction_name'] . " ended with a highest bid of €" .
                     credits_format($notification['winner_bid'] / 100) . " made by " . $notification['winner_name'] .
                     ".";
             case 'App\\Notifications\\AbortedAuctionNotificationBids':
                 return "The auction named " .
-                    $notification['auction_name'] . " was ABORTED. The highest bid of U$" .
+                    $notification['auction_name'] . " was ABORTED. The highest bid of €" .
                     credits_format($notification['winner_bid'] / 100) . " made by " . $notification['winner_name'] .
                     "was repaid.";
             case 'App\\Notifications\\NewBidAuctionNotification':
-                return "An auction you have previously bid has a new bid with value of U$" . credits_format($notification['new_val'] / 100);
+                return "An auction you have previously bid has a new bid with value of €" . credits_format($notification['new_val'] / 100);
             case 'App\\Notifications\\NewCommentNotification':
                 return "New Comment on Auction: " . $notification['auction_name'];
             case 'App\\Notifications\\NewReplyNotification':

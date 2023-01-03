@@ -61,7 +61,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-end">
                             @if(Auth::check())
-                                <a class="dropdown-item" href="{{route('create_transaction')}}"><i class="bi bi-currency-exchange"></i>&emsp;Balance: U${{credits_format(Auth::user()->credits/100)}}</a>
+                                <a class="dropdown-item" href="{{route('create_transaction')}}"><i class="bi bi-currency-exchange"></i>&emsp;Balance: €{{credits_format(Auth::user()->credits/100)}}</a>
                                 <a class="dropdown-item" href="/user/{{ Auth::user()->id }}"><i class="bi bi-person-circle"></i>&emsp;Profile</a>
                                 <a class="dropdown-item" href="{{route('requests', ['id'=>Auth::id()])}}"><i class="bi bi-card-list"></i>&emsp;Auction Requests</a>
                                 <div class="dropdown-divider"></div>
