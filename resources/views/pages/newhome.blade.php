@@ -9,15 +9,15 @@
         .then(function(response) {
             return response.json();
         }).then(function(jsonData){
-            var img1 = document.querySelectorAll("#img1"); for(var i = 0; i<img1.length; i++) {img1[i].src = jsonData.results[0].urls.full;}
-            var img2 = document.querySelectorAll("#img2"); for(var i = 0; i<img2.length; i++) {img2[i].src = jsonData.results[1].urls.full;}
-            var img3 = document.querySelectorAll("#img3"); for(var i = 0; i<img3.length; i++) {img3[i].src = jsonData.results[2].urls.full;}
-            var img4 = document.querySelectorAll("#img4"); for(var i = 0; i<img4.length; i++) {img4[i].src = jsonData.results[3].urls.full;}
-            var img5 = document.querySelectorAll("#img5"); for(var i = 0; i<img5.length; i++) {img5[i].src = jsonData.results[4].urls.full;}
-            var img6 = document.querySelectorAll("#img6"); for(var i = 0; i<img6.length; i++) {img6[i].src = jsonData.results[5].urls.full;}
-            var img7 = document.querySelectorAll("#img7"); for(var i = 0; i<img7.length; i++) {img7[i].src = jsonData.results[6].urls.full;}
-            var img8 = document.querySelectorAll("#img8"); for(var i = 0; i<img8.length; i++) {img8[i].src = jsonData.results[7].urls.full;}
-            var img9 = document.querySelectorAll("#img9"); for(var i = 0; i<img9.length; i++) {img9[i].src = jsonData.results[8].urls.full;}
+            var img1 = document.querySelectorAll("#img1"); for(var i = 0; i<img1.length; i++) {img1[i].src = jsonData.results[0].urls.regular;}
+            var img2 = document.querySelectorAll("#img2"); for(var i = 0; i<img2.length; i++) {img2[i].src = jsonData.results[1].urls.regular;}
+            var img3 = document.querySelectorAll("#img3"); for(var i = 0; i<img3.length; i++) {img3[i].src = jsonData.results[2].urls.regular;}
+            var img4 = document.querySelectorAll("#img4"); for(var i = 0; i<img4.length; i++) {img4[i].src = jsonData.results[3].urls.regular;}
+            var img5 = document.querySelectorAll("#img5"); for(var i = 0; i<img5.length; i++) {img5[i].src = jsonData.results[4].urls.regular;}
+            var img6 = document.querySelectorAll("#img6"); for(var i = 0; i<img6.length; i++) {img6[i].src = jsonData.results[5].urls.regular;}
+            var img7 = document.querySelectorAll("#img7"); for(var i = 0; i<img7.length; i++) {img7[i].src = jsonData.results[6].urls.regular;}
+            var img8 = document.querySelectorAll("#img8"); for(var i = 0; i<img8.length; i++) {img8[i].src = jsonData.results[7].urls.regular;}
+            var img9 = document.querySelectorAll("#img9"); for(var i = 0; i<img9.length; i++) {img9[i].src = jsonData.results[8].urls.regular;}
 
 
     })

@@ -6,7 +6,7 @@
             .then(function(response) {
                 return response.json();
             }).then(function(jsonData){
-            var img1 = document.querySelector("#img1");img1.src = jsonData.results[Math.floor(Math.random() * 10)].urls.full;
+            var img1 = document.querySelector("#img1");img1.src = jsonData.results[Math.floor(Math.random() * 10)].urls.regular;
         })
 
     </script>
@@ -29,15 +29,18 @@
                 </div>
             @else
                 <div>
-                    <a style="font-size: 15px; color: black; text-decoration: none"
+                    <a style="font-size: 15px; color: black; text-decoration: none; margin-right: 30px"
                        class="favorite-btn"
                        id="{{"toggle".$auction->id}}"
                        onclick="toggleFavorite({{$auction->id}}, '{{$auction->isFavourite(Auth::user())}}')">
                         Add to favorites :
                         <i id="{{"heart-icon".$auction->id}}" style="color: black" class="bi bi-heart"></i>
                     </a>
+                    <a href="{{route('create_report', ['id'=>$auction->id])}}" style="font-size: 15px; color: black; text-decoration: none; margin-left: 30px"
+                        >Report auction</a>
                 </div>
             @endif
+
         @endif
     </div>
 
