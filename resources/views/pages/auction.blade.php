@@ -110,6 +110,9 @@
                     </form>
                     @include('partials/error_list_validator')
                 @endif
+                @if(Auth::check() && $is_winning)
+                    <p style="color: red">You are currently winning this auction.</p>
+                    @endif
             </div>
 
 
