@@ -121,3 +121,42 @@ if (!function_exists('processNotification')) {
         }
     }
 }
+
+if (!function_exists('processNotificationEmail')) {
+    function processNotificationEmail($notification)
+    {
+        switch ($notification['type']) {
+            case 'App\\Notifications\\ApprovedAuctionNotification':
+                return $notification['auction_owner'] . ", your auction named " .
+                    $notification['auction_name'] . " was approved.";
+            case 'App\\Notifications\\DeniedAuctionNotification':
+                return $notification['auction_owner'] . ", your auction named " .
+                    $notification['auction_name'] . " was denied.";
+            case 'App\\Notifications\\EndAuctionNotificationNoBids':
+                return $notification['auction_owner'] . ", your auction named " .
+                    $notification['auction_name'] . " ended with no bids.";
+            case 'App\\Notifications\\AbortedAuctionNotificationNoBids':
+                return $notification['auction_owner'] . ", your auction named " .
+                    $notification['auction_name'] . " was ABORTED with no bids.";
+            case 'App\\Notifications\\EndAuctionNotificationBids':
+                return "The auction named " .
+                    $notification['auction_name'] . " ended with a highest bid of U$" .
+                    credits_format($notification['winner_bid'] / 100) . " made by " . $notification['winner_name'] .
+                    ".";
+            case 'App\\Notifications\\AbortedAuctionNotificationBids':
+                return "The auction named " .
+                    $notification['auction_name'] . " was ABORTED. The highest bid of U$" .
+                    credits_format($notification['winner_bid'] / 100) . " made by " . $notification['winner_name'] .
+                     "was repaid.";
+            case 'App\\Notifications\\NewBidAuctionNotification':
+                return "An auction you have previously bid has a new bid with value of U$" . credits_format($notification['new_val']/100);
+            case 'App\\Notifications\\NewCommentNotification':
+                return "New Comment on Auction: " . $notification['auction_name'];
+            case 'App\\Notifications\\NewReplyNotification':
+                return "New Reply on Auction: " . $notification['auction_name'];
+            default:
+                return $notification;
+        }
+    }
+}
+

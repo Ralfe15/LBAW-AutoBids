@@ -55,4 +55,8 @@ class AbortedAuctionNotificationBids extends Notification
             'winner_bid' => $this->auction->bids->max('value'),
         ];
     }
+
+    public function toMail($notifiable){
+
+    }
 }

@@ -11,6 +11,8 @@
 |
 */
 // Root
+use App\Http\Controllers\TestController;
+
 Route::get('/', function () {
     return redirect('/home');
 });
@@ -92,4 +94,7 @@ Route::post('image/upload', 'ImageController@upload')->name('upload-image');
 
 //Search
 Route::post('auctions/search', 'SearchController@searchAuction')->name('search-auction');
+
+//Email
+Route::get('/send-email', [TestController::class, 'sendEmail']);
 
