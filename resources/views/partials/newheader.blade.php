@@ -34,7 +34,7 @@
                     <form action="{{ route('search-auction') }}" class="navbar-search" method="POST">
                         {{ csrf_field() }}
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Search..." aria-label="Search Bar" aria-describedby="button-addon2">
+                            <input type="text" class="form-control" placeholder="Search..." aria-label="Search Bar" aria-describedby="button-addon2" name="search" id="search">
                             <button class="btn btn-outline-secondary" type="submit" id="button-addon2"><i class="bi bi-search"></i></button>
                         </div>
                     </form>
