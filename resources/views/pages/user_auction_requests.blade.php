@@ -1,10 +1,13 @@
 @extends('layouts.default')
 @section('content')
     <head>
-        <link rel="stylesheet" href="{{asset('css/user.css')}}">
+        <link rel="stylesheet" href="{{asset('css/userRequest.css')}}">
     </head>
     <div class="content-wrapper">
-        <h1>Auction creation requests</h1>
+        <div class="title">
+        <h3>Auction creation requests</h3>
+        </div>
+        <div class="table-box">
         <table class="table table-bordered table-striped">
             <thead>
             <tr>
@@ -21,6 +24,7 @@
             </tbody>
         </table>
         {{$requests->links("pagination::bootstrap-5")}}
+        </div>
     </div>
 @stop
 

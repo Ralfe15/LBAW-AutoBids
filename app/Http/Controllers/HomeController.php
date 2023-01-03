@@ -11,11 +11,11 @@ class HomeController extends Controller
 {
 
     public function show() {
-        $auctions_latest =  Auction::where('active', true)->where('approved', true)->orderBy('start_date', 'desc')->paginate(5);
-        $auctions_finishing =  Auction::where('active', true)->where('approved', true)->orderBy('end_date', 'desc')->paginate(5);
-        $auctions_popular =  Auction::where('active', true)->where('approved', true)->orderBy('number_bids', 'desc')->paginate(5);
+        $auctions_latest =  Auction::where('active', true)->where('approved', true)->orderBy('start_date', 'desc')->paginate(10);
+        $auctions_finishing =  Auction::where('active', true)->where('approved', true)->orderBy('end_date', 'desc')->paginate(10);
+        $auctions_popular =  Auction::where('active', true)->where('approved', true)->orderBy('number_bids', 'desc')->paginate(10);
 
-        return view("pages.default", ['auctions_latest' => $auctions_latest, 'auctions_finishing' => $auctions_finishing, 'auctions_popular' => $auctions_popular]);
+        return view("pages.newhome", ['auctions_latest' => $auctions_latest, 'auctions_finishing' => $auctions_finishing, 'auctions_popular' => $auctions_popular]);
     }
 
     public function showFAQ() {

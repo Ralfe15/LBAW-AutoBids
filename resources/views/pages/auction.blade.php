@@ -3,9 +3,32 @@
     <head>
         <link rel="stylesheet" href="/css/auctionDetails.css">
     </head>
+    <div class="auction-details-wrapper">
 
     <div class='auction-title'>
         <p>{{$auction->model->brand->name}} {{$auction->model->name}} </p>
+        @if(Auth::check())
+            @if($auction->isFavourite(Auth::user()) == 'true')
+                <div>
+                    <a style="font-size: 15px; color: black; text-decoration: none"
+                       id="{{"toggle".$auction->id}}"
+                       onclick="toggleFavorite({{$auction->id}}, '{{$auction->isFavourite(Auth::user())}}')">
+                        Remove from favorites :
+                        <i id="{{"heart-icon".$auction->id}}" style="color: red" class="bi bi-heart-fill"></i>
+                    </a>
+                </div>
+            @else
+                <div>
+                    <a style="font-size: 15px; color: black; text-decoration: none"
+                       class="favorite-btn"
+                       id="{{"toggle".$auction->id}}"
+                       onclick="toggleFavorite({{$auction->id}}, '{{$auction->isFavourite(Auth::user())}}')">
+                        Add to favorites :
+                        <i id="{{"heart-icon".$auction->id}}" style="color: black" class="bi bi-heart"></i>
+                    </a>
+                </div>
+            @endif
+        @endif
     </div>
 
     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
@@ -53,33 +76,37 @@
     </div>
 
     <div class="auction-status-box">
+        <div class="description-title">
+            <h3>Auction Details</h3> </div>
         <div class="auction-status">
             <div class="status-currentbid">
-                <p><b>Current Bid: </b>U${{credits_format($auction->currentWinnerValue()/100)}}</p>
+                <p><b>Current Bid: </b>€{{credits_format($auction->currentWinnerValue()/100)}}</p>
             </div>
             <div class="status-startingbid">
-                <p><b>Starting Bid: </b>U${{credits_format($auction->starting_bid/100)}}</p>
+                <p><b>Starting Bid: </b>€{{credits_format($auction->starting_bid/100)}}</p>
             </div>
             <div class="status-numberbids">
                 <p> <b>Number of bids: </b>{{$auction->bids()->count()}} bids</p>
             </div>
             <div class="status-started">
-                <p><b>Started at: </b> {{$auction->start_date}}</p>
+                <p><b>Started at: </b> {{$auction->started()}}</p>
             </div>
             <div class="status-timeleft">
                 <p id="countdown"><b>Time Left: </b> {{$auction->timeRemainingDetailPage()}}</p>
             </div>
             <div class="status-bid">
                 @if(Auth::check() && $can_bid && (Auth::user()->credits/100) >= $current_bid)
-                    <form action="{{route('bid', ['id'=>$auction->id])}}" class="search" method="POST">
+                    <form action="{{route('bid', ['id'=>$auction->id])}}" class="form-label" method="POST">
                         @method('PUT')
                         {{csrf_field()}}
-                        <label>Enter the value to bid! Minimum bid: U${{bid_step($current_bid)}}</label>
-                        <input type="number" min='{{bid_step($current_bid)}}' name="bid" id="bid" step="0.01">
-                        <input type="hidden" value="{{bid_step($current_bid)}}" name="minimum">
-                        <input type="hidden" value="{{$current_bid}}" name="prev_bid">
-                        <input type="hidden" value="{{$prev_id}}" name="prev_id">
-                        <button type="submit">Bid now!</button>
+                        <div class="input-group mb-3">
+
+                            <input aria-describedby="button-bid" type="number" placeholder="Minimum bid: U${{bid_step($current_bid)}}" class="form-control" min='{{bid_step($current_bid)}}' name="bid" id="bid" step="0.01">
+                            <input type="hidden" value="{{bid_step($current_bid)}}" name="minimum">
+                            <input type="hidden" value="{{$current_bid}}" name="prev_bid">
+                            <input type="hidden" value="{{$prev_id}}" name="prev_id">
+                            <button class="btn btn-danger" type="submit" id="button-bid">Bid now!</button>
+                        </div>
                     </form>
                     @include('partials/error_list_validator')
                 @endif
@@ -90,9 +117,12 @@
     </div>
 
     <div class="auction-description-box">
+        <div class="description-title">
+            <h3>Car Details</h3> </div>
         <div class="auction-description">
             <div class="description-brand">
-                <p><b>Brand: </b> {{$auction->model->brand->name}}</p>
+                <p>
+                    <b>Brand: </b> {{$auction->model->brand->name}}</p>
             </div>
             <div class="description-model">
                 <p><b>Model: </b> {{$auction->model->name}}</p>
@@ -123,10 +153,12 @@
             </div>
         </div>
     </div>
-    <div class="auction-description-box">
-        <div class="auction-description">
-            <div class="description-brand">
-                <p><b>Bidding hisory: </b></p>
+    <div class="bidding-history-box">
+        <div class="description-title">
+            <h3>Bidding History</h3> </div>
+        <div class="bidding-history">
+            <div class="bidding-title">
+                <p><b>Bidding History: </b></p>
             </div>
             <table class="table">
                 <thead>
@@ -149,10 +181,11 @@
         </div>
     </div>
     <div class="comments-box">
-        <div class="comment-title">
-            <p>Comments</p>
+        <div class="description-title">
+            <h3>Comments</h3>
         </div>
         @include('partials/auctionComments', array('id' => $auction->id))
+    </div>
     </div>
 @stop
 

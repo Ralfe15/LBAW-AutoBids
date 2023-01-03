@@ -1,0 +1,29 @@
+.content-wrapper {
+    padding-top: 100px;
+}
+
+.title {
+    color: black;
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.table-box{
+    width: 90%;
+    margin: auto;
+    padding: 1em;
+    border-radius: 10px;
+    box-shadow: 0 0 15px 5px rgba(244,91,0,0.2);
+    margin-bottom: 150px;
+}
+table {
+    width: 99% !important;
+    margin: auto !important;
+    margin-bottom: 25px !important;
+}
+
+.paginator {
+    text-align: right;
+    margin-right: 10px;
+}

@@ -4,8 +4,8 @@
 <div class="comments-wrapper">
     @each('partials/comment', $auction->comments->whereNull('id_comment'), 'comment')
     <div class="button-wrapper">
-        <a class="btn btn-secondary btn-lg" href="{{route('create_comment', ['id' => $auction->id, 'parent' => null])}}">
-            Reply
+        <a class="btn btn-outline-danger btn-lg" href="{{route('create_comment', ['id' => $auction->id, 'parent' => null])}}">
+            Comment
         </a>
     </div>
 </div>

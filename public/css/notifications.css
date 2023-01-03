@@ -27,3 +27,30 @@
 .star-rating label:hover ~ label {
     color:#fc0;
 }
+
+.m-4 {
+    padding-top: 1em;
+    color: #000000;
+}
+
+.btn{
+    color: #f45b00 !important;
+}
+
+.btn:hover {
+    color: #ffffff !important;
+}
+
+.list-group {
+    border-radius: 10px;
+    box-shadow: 0 0 15px 5px rgba(244,91,0,0.2);
+}
+
+.list-group-item {
+    color: #000000 !important;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 5px rgba(0,0,0,0.2);
+    padding: 1em;
+    margin: 1em;
+
+}

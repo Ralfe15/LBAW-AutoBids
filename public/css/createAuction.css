@@ -1,32 +1,62 @@
 .title-wrapper {
-    padding-top: 100px;
-    padding-bottom: 100px;
+    padding-top: 200px;
+    padding-bottom: 50px;
     text-align: center;
+    color: #000000;
 }
 
 .details-wrapper {
     text-align: center;
     padding-top: 20px;
+    color: #000000;
 }
 
 .technical-wrapper {
     text-align: center;
     padding-top: 20px;
+    color: #000000;
 }
 
 .description-wrapper {
     text-align: center;
     padding-top: 20px;
+    color: #000000;
 }
 
 .auction-details-wrapper{
     text-align: center;
     padding-top: 20px;
+    color: #000000;
 }
 
-.form {
-    width: 15%;
+#createauction-form {
+    padding: 1em;
+    width: 30%;
     margin: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 15px 5px rgba(244,91,0,0.3);
+}
+#createauction-form .form-control {
+    border: 2px solid lightgray;
+}
+
+#createauction-form .form-select:focus {
+    border: 2px solid #f45b00;
+}
+
+#createauction-form .form-select {
+    border: 2px solid lightgray;
+    color:#000000;
+}
+
+#createauction-form input{
+    color: #000000;
+}
+#createauction-form input:-webkit-autofill,
+#createauction-form input:-webkit-autofill:hover,
+#createauction-form input:-webkit-autofill:focus,
+#createauction-form input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px #f45b00 inset !important;
 }
 
 
@@ -34,6 +64,12 @@ label{
     display: block; /* add this */
     text-align: left;
     font-weight: bold;
+    width: fit-content;
+    color: #000000;
+}
+
+#createauction-form .form-control::placeholder {
+    color: #606060;
 }
 
 .form-category {
@@ -73,7 +109,7 @@ label{
 }
 
 .image-form {
-    padding-bottom: 25px;
+    padding-bottom: 50px;
 }
 
 .startingbid-form {
@@ -83,10 +119,27 @@ label{
 .duration-form {
     padding-bottom: 50px;
 }
+#description-form{
+    color: black !important;
+}
+
+.duration-form input{
+    background-color: #FFFFFF;
+    border: 2px solid lightgray;
+    border-radius: 5px;
+
+}
+
+.duration-form input:focus{
+    background-color: #FFFFFF;
+    border: 2px solid lightgray !important;
+    border-radius: 5px;
+}
 
 .submit-button {
-    padding-top: 50px;
-    padding-bottom: 150px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    text-align: center;
 }
 
 .duration-input {
@@ -108,10 +161,8 @@ label{
     border-width: 2px;
 }
 
-.line {
-    width: 100%;
-    margin: 0 auto 25px auto;
-    border-bottom-style: solid;
-    border-color: lightgrey;
-    border-width: 2px;
+
+.form-wrapper {
+    padding-bottom: 150px;
 }
+

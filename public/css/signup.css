@@ -1,33 +1,73 @@
 .signup-title {
     text-align: center;
-    padding-top: 100px;
+    padding-top: 200px;
     padding-bottom: 50px;
+    color: #000000;
 }
 
-.form {
+#register-form {
     width: 25%;
     margin: auto;
+    border-style: solid;
+    border-radius: 10px;
+    box-shadow: 0 0 15px 5px rgba(244,91,0,0.3);
 }
 
+#register-form .form-control {
+    border: 2px solid lightgray;
+}
+
+#register-form .form-control:focus {
+    border: 2px solid #f45b00;
+}
+
+#register-form input{
+    color: #000000;
+}
+
+#register-form input:-webkit-autofill,
+#register-form input:-webkit-autofill:hover,
+#register-form input:-webkit-autofill:focus,
+#register-form input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px #f45b00 inset !important;
+}
+
+
 .form-name {
+    padding-top: 25px;
     padding-bottom: 25px;
+    padding-left: 5%;
+    padding-right: 5%;
 }
 .form-email {
     padding-bottom: 25px;
+    padding-left: 5%;
+    padding-right: 5%;
 }
 .form-password {
     padding-bottom: 25px;
+    padding-left: 5%;
+    padding-right: 5%;
 }
-.form-tel {
+.form-address {
     padding-bottom: 25px;
+    padding-left: 5%;
+    padding-right: 5%;
 }
 
 label{
     display: block; /* add this */
     text-align: left;
     font-weight: bold;
+    color: #000000;
 }
 
 .button-wrapper {
     padding-top: 25px;
+    padding-bottom: 25px;
+    text-align: center;
+}
+
+.form-wrapper {
+    padding-bottom: 150px;
 }

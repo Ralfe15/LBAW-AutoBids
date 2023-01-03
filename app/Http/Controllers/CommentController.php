@@ -33,7 +33,7 @@ class CommentController extends Controller
     public function createComment(Request $request)
     {
         if (!Auth::check()) {
-            redirect('/login');
+            return redirect('/login');
         }
 
         $this->validator($request->all())->validate();
@@ -74,6 +74,9 @@ class CommentController extends Controller
     }
 
     public function showCommentForm($id, $parent = null) {
+        if (!Auth::check()) {
+            return redirect('/login');
+        }
         return view('pages.commentCreate', ['auction_id'=>$id, 'parent' => $parent]);
     }
 

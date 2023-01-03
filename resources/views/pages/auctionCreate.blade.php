@@ -18,7 +18,7 @@
 
 
         <div class="form">
-            <form method="POST" action="{{ route('create-auction') }}" id="form_createauction"
+            <form method="POST" action="{{ route('create-auction') }}" id="createauction-form"
                   enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="details-wrapper">
@@ -116,18 +116,18 @@
                            placeholder="Ex: 272727">
                 </div>
                 <label for="durationForm" class="form-label">Duration</label>
-                <div class="startingbid-form d-flex">
-                    <input class='duration-input' id='d' name='d' type='number' min='0' max='7'>
+                <div class="duration-form d-flex">
+                    <input class='duration-input' value ="0" id='d' name='d' type='number' min='0' max='7'>
                     <label class='duration-label' for='d'>d</label>
-                    <input class='duration-input' id='h' name='h' type='number' min='0' max='23'>
+                    <input class='duration-input' value ="0" id='h' name='h' type='number' min='0' max='23'>
                     <label class='duration-label' for='h'>h</label>
-                    <input class='duration-input' id='m' name='m' type='number' min='0' max='59'>
+                    <input class='duration-input' value ="0" id='m' name='m' type='number' min='0' max='59'>
                     <label class='duration-label' for='m'>m</label>
-                    <input class='duration-input' id='s' name='s' type='number' min='0' max='59'>
+                    <input class='duration-input' value ="0" id='s' name='s' type='number' min='0' max='59'>
                     <label class='duration-label' for='s'>s</label>
                 </div>
                 <div class="submit-button">
-                    <button type="submit" class="btn btn-secondary">
+                    <button type="submit" class="btn btn-outline-danger">
                         Create Auction
                     </button>
                 </div>

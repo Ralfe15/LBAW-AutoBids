@@ -28,7 +28,9 @@ Route::post('auction/comments/', 'CommentController@createComment')->name('creat
 
 
 //Auctions
+Route::get('auctions/favourites', 'AuctionController@favourites')->name('favourites');
 Route::get('my-auctions', 'AuctionController@list')->name('my_auctions');
+Route::get('my-auctions-old', 'AuctionController@listOld')->name('my_auctions_old');
 Route::get('auctions', 'AuctionController@all')->name('auctions');
 Route::get('auction/{id}', 'AuctionController@show')->name('detail');
 Route::get('auctions/create', 'AuctionController@showAuctionForm')->name('create_auction');
@@ -60,6 +62,7 @@ Route::get('user/{id}', 'UserController@show')->name('user_profile');
 Route::get('users', 'UserController@list')->name('user_list');
 Route::get('{id}/requests', 'UserController@requests')->name('requests');
 
+
 // Following
 Route::post('actions/follow', 'UserController@followAuction')->name('follow');
 Route::post('actions/unfollow', 'UserController@unfollowAuction')->name('unfollow');
@@ -67,6 +70,9 @@ Route::post('actions/unfollow', 'UserController@unfollowAuction')->name('unfollo
 
 //Admin
 Route::get('admin', 'UserController@adminDashboard')->name('admin_dashboard');
+Route::get('admin-requests', 'UserController@adminDashboardReqs')->name('admin_requests');
+Route::get('admin-reports', 'UserController@adminDashboardReps')->name('admin_reports');
+Route::get('admin-transactions', 'UserController@adminDashboardTrans')->name('admin_transactions');
 
 //Notifications
 Route::get('user/{id}/notifications', 'UserController@notifications')->name('notifications');

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
@@ -20,5 +21,8 @@ class Comment extends Model
     }
     public function children() {
         return $this->hasMany('App\Models\Comment', 'id_comment', 'id');
+    }
+    public function date() {
+        return Carbon::parse($this->post_date)->toDateTimeString();
     }
 }

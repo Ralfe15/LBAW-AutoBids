@@ -7,7 +7,7 @@
     <h1 style="text-align: center;">Login </h1>
 </div>
 
-<div class="form">
+<div class="form" id="login-form">
     <form action="{{ route('login') }}" method="post">
         {{ csrf_field() }}
         <div class="form-email">
@@ -19,7 +19,7 @@
             <input required type="password" class="form-control" name="password" id="password-form" placeholder="Password">
         </div>
         <div class="button-wrapper">
-            <button type="submit" class="btn btn-secondary">Login</button>
+            <button type="submit" class="btn btn-outline-danger">Login</button>
         </div>
 
     </form>
