@@ -16,7 +16,6 @@ class AuctionReportController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'id_member' => 'required|exists:App\Models\User,id',
             'id_auction' => 'required|exists:App\Models\Auction,id',
         ]);
     }
@@ -28,5 +27,28 @@ class AuctionReportController extends Controller
                 ->update(['solved' => true]);
                 return redirect('/admin');
         }
+        return redirect('/home');
     }
+    public function showReportForm($id) {
+        if (!Auth::check()) {
+            return redirect('/login');
+        }
+        return view('pages.reportCreate', ['auction_id'=>$id]);
+    }
+
+    public function createReport(Request $request)
+    {
+        if (!Auth::check()) {
+            return redirect('/login');
+        }
+
+        $this->validator($request->all())->validate();
+
+        $report = new AuctionReport();
+        $report->id_auction = $request->input('id_auction');
+        $report->id_member = Auth::id();
+        $report->description = $request->input('content');
+        $report->save();
+        return redirect("/auction/$report->id_auction");
+        }
 }

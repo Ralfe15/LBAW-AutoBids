@@ -44,6 +44,8 @@ Route::post('auction/rate/{id}', 'AuctionController@rateAuction')->name('rate');
 
 //Reports
 Route::post('auction/solve', 'AuctionReportController@markAsSolved')->name('solved');
+Route::get('auction/{id}/report', 'AuctionReportController@showReportForm')->name('create_report');
+Route::post('auction/createReport', 'AuctionReportController@createReport')->name('create-report');
 
 //Bids
 Route::put('auction/{id}/bid', 'BidController@create')->name('bid');

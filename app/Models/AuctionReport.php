@@ -9,6 +9,9 @@ class AuctionReport extends Model
     protected $table = "reportauction";
     public $timestamps = false;
 
+    protected $primaryKey = ['id_member', 'id_auction'];
+    public $incrementing = false;
+
     protected $fillable = [
         'date', 'description'
     ];
