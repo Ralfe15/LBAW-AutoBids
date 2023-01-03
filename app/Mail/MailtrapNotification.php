@@ -35,8 +35,8 @@ class MailtrapNotification extends Mailable
     public function envelope()
     {
         return new Envelope(
-            from: new Address('jane.doe@example.com', 'Jane Doe'),
-            subject: 'Mailtrap Example',
+            from: new Address('lbaw2285@autobids.com', 'Autobids team'),
+            subject: 'Autobids notification',
         );
     }
 
