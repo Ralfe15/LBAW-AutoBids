@@ -207,8 +207,10 @@
                                                                 <p style="color: red" class="text-red">Not approved</p>
                                                             @elseif(!$auction->active)
                                                                 <p style="color: red" class="text-red">Expired</p>
+                                                            @else
+                                                                <p id="{{processTimeHTML($auction->timeRemaining(), $auction->id)}}"
+                                                                >{{$auction->timeRemaining()}}</p>
                                                             @endif
-                                                            <p>{{ $auction->remaining() }}</p>
                                                         </div>
                                                     </a>
                                                 </div>
@@ -282,8 +284,10 @@
                                                                 <p style="color: red" class="text-red">Not approved</p>
                                                             @elseif(!$auction->active)
                                                                 <p style="color: red" class="text-red">Expired</p>
+                                                            @else
+                                                                <p id="{{processTimeHTML($auction->timeRemaining(), $auction->id)}}"
+                                                                >{{$auction->timeRemaining()}}</p>
                                                             @endif
-                                                            <p>{{ $auction->remaining() }}</p>
                                                         </div>
                                                     </a>
                                                 </div>
