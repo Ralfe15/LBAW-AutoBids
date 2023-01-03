@@ -59,14 +59,14 @@ class CommentController extends Controller
             if($comment->id_member != $auction->id_member){
                 $notification = new NewReplyNotification($auction);
                 $auction->user->notify($notification);
-                (new TestController)->sendEmail($user->email, $notification);
+                (new TestController)->sendEmail($auction->user->email, $notification);
             }
         }
         //is main comment, notify owner
         elseif($comment->id_member != $auction->id_member){
             $notification = new NewCommentNotification($auction);
             $auction->user->notify($notification);
-            (new TestController)->sendEmail($user->email, $notification);
+            (new TestController)->sendEmail($auction->user->email, $notification);
         }
 
 
