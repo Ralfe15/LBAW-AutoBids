@@ -1,0 +1,40 @@
+.comment-create-title {
+    padding-top: 150px;
+    color: #000000;
+}
+
+.form-box {
+    width: 50%;
+    margin: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 15px 5px rgba(244,91,0,0.2);
+    margin-top: 100px;
+    padding-top: 25px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.form-box form {
+    padding: 1em;
+    color: black;
+}
+
+.button-wrapper{
+    padding-top: 50px;
+    text-align: center;
+}
+
+#content-form {
+    color: black !important;
+    border: 2px solid lightgray;
+}
+
+#content-form:focus {
+    border: 2px solid #f45b00;
+
+}
+
+
+
+
+
