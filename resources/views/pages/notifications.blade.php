@@ -25,7 +25,7 @@
                                 <input type="hidden" name="notification_id" value="{{$notification->id}}"/>
                             </div>
                             <div class="text-wrapper">
-                                <button type="submit" class="btn btn-secondary">Rate seller</button>
+                                <button type="submit" class="btn btn-outline-danger">Rate seller</button>
                             </div>
                         </form>
                     @else
