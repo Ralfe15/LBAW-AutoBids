@@ -2,6 +2,7 @@
 @section('content')
     <head>
         <link href="{{ asset('css/about.css') }}" rel="stylesheet">
+        <title>About</title>
     </head>
 
     <div class="content-wrapper">

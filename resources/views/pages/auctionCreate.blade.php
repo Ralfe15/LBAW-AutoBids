@@ -3,6 +3,7 @@
 
     <head>
         <link href="{{ asset('css/createAuction.css') }}" rel="stylesheet">
+        <title>Create Auction</title>
     </head>
     <div class="title-wrapper">
         <h1>Create Auctions</h1>

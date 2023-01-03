@@ -5,6 +5,7 @@
 
     <head>
         <link href="{{ asset('css/transaction.css') }}" rel="stylesheet">
+        <title>Create Transaction</title>
     </head>
     <div class="title-wrapper">
         <h1>Deposit/Withdraw Funds</h1>

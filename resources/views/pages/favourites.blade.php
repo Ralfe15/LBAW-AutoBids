@@ -2,6 +2,7 @@
 @section('content')
     <head>
         <link href="{{ asset('css/auctions.css') }}" rel="stylesheet">
+        <title>Favourite Auctions</title>
         <script>
             var url = "https://api.unsplash.com/search/photos/?query=car&client_id=6evLkKSsWtnP-aTy00ftqLmhMMEEXMzVx4pShcPkWk0"
             fetch(url)

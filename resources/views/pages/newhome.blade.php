@@ -2,6 +2,7 @@
 @section('content')
 <head>
     <link href="{{ asset('css/home.css') }}" rel="stylesheet">
+    <title>Homepage</title>
 </head>
 <script>
     let url = "https://api.unsplash.com/search/photos/?query=car&client_id=6evLkKSsWtnP-aTy00ftqLmhMMEEXMzVx4pShcPkWk0"
@@ -94,9 +95,9 @@
                                                     <a href="/auction/{{$auction->id}}">
                                                     <div class="card-img">
                                                         @if($auction->images->isEmpty())
-                                                            <img src="" id="img{{($loop->index+1)%10}}"class="img-fluid">
+                                                            <img src="" id="img{{($loop->index+1)%10}}" alt="car photo" class="img-fluid">
                                                         @else
-                                                            <img src="{{ asset($auction->images->first()->path) }}" class="img-fluid">
+                                                            <img src="{{ asset($auction->images->first()->path) }}" alt="car photo" class="img-fluid">
                                                         @endif
                                                             @if(Auth::check())
                                                                 @if($auction->isFavourite(Auth::user()) == 'true')
@@ -171,9 +172,9 @@
                                                     <a href="/auction/{{$auction->id}}">
                                                         <div class="card-img">
                                                             @if($auction->images->isEmpty())
-                                                                <img src="" id="img{{($loop->index+1)%10}}"class="img-fluid">
+                                                                <img src="" id="img{{($loop->index+1)%10}}" alt="car photo" class="img-fluid">
                                                                 @else
-                                                                    <img src="{{ asset($auction->images->first()->path) }}" class="img-fluid">
+                                                                    <img src="{{ asset($auction->images->first()->path) }}" alt="car photo" class="img-fluid">
                                                                     @endif
                                                                 @if(Auth::check())
                                                                     @if($auction->isFavourite(Auth::user()) == 'true')
@@ -248,9 +249,9 @@
                                                     <a href="/auction/{{$auction->id}}">
                                                         <div class="card-img">
                                                             @if($auction->images->isEmpty())
-                                                                <img src="" id="img{{($loop->index+1)%10}}"class="img-fluid">
+                                                                <img src="" id="img{{($loop->index+1)%10}}" alt="car photo" class="img-fluid">
                                                             @else
-                                                                <img src="{{ asset($auction->images->first()->path) }}" class="img-fluid">
+                                                                <img src="{{ asset($auction->images->first()->path) }}" alt="car photo" class="img-fluid">
                                                             @endif
                                                                 @if(Auth::check())
                                                                     @if($auction->isFavourite(Auth::user()) == 'true')

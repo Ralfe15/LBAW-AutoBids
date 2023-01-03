@@ -13,6 +13,7 @@
     </script>
     <head>
         <link rel="stylesheet" href="/css/auctionDetails.css">
+        <title>Auction Details</title>
     </head>
     <div class="auction-details-wrapper">
 

@@ -2,6 +2,7 @@
 @section('content')
     <head>
         <link href="{{ asset('css/commentCreate.css') }}" rel="stylesheet">
+        <title>Create Report</title>
     </head>
     <div class="comment-create-title">
         <h3 style="text-align: center;">Create Report</h3>

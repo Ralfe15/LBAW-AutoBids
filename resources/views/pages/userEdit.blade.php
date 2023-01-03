@@ -2,6 +2,7 @@
 @section('content')
     <head>
         <link href="{{ asset('css/signup.css') }}" rel="stylesheet">
+        <title>Edit Profile</title>
     </head>
     <div class="signup-title">
         <h1 style="text-align: center;">Edit Profile</h1>

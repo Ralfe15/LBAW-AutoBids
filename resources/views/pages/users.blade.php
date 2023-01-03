@@ -2,7 +2,8 @@
 @section('content')
 <head>
     <link rel="stylesheet" href="{{asset('css/users.css')}}">
-    
+    <title>User List</title>
+
 </head>
 
 <div class="content-wrapper">
@@ -21,8 +22,8 @@
             @each('partials/user', $users, 'user')
         </tbody>
       </table>
-    
-    
+
+
     </section>
 </div>
 @stop

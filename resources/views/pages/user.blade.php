@@ -2,13 +2,14 @@
 @section('content')
 <head>
     <link rel="stylesheet" href="{{asset('css/user.css')}}">
+    <title>Profile</title>
 </head>
 
 <div class="content-wrapper">
     <div class="user-image-wrapper">
         <div class="user-image">
            {{-- @if($user->image->isEmpty()) --}}
-                <img src="{{ asset('img/users/profile_placeholder.png') }}">
+                <img src="{{ asset('img/users/profile_placeholder.png') }}" alt="profile picture">
             {{--  @else
                 <img src="{{ $user->image->path }}">
               @endif --}}

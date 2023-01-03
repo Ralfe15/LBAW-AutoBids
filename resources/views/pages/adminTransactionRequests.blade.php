@@ -2,6 +2,7 @@
 @section('content')
     <head>
         <link rel="stylesheet" href="{{asset('css/admin.css')}}">
+        <title>Admin Transaction Requests</title>
     </head>
     <div class="content-wrapper">
         <div class="navigation-section">
