@@ -175,6 +175,26 @@
                                                                 @else
                                                                     <img src="{{ asset($auction->images->first()->path) }}" class="img-fluid">
                                                                     @endif
+                                                                @if(Auth::check())
+                                                                    @if($auction->isFavourite(Auth::user()) == 'true')
+                                                                        <div>
+                                                                            <a style="font-size: 25px; color: black; text-decoration: none"
+                                                                               id="{{"toggle".$auction->id}}"
+                                                                               onclick="toggleFavorite({{$auction->id}}, '{{$auction->isFavourite(Auth::user())}}')">
+                                                                                <i id="{{"heart-icon".$auction->id}}" class="bi bi-heart-fill"></i>
+                                                                            </a>
+                                                                        </div>
+                                                                    @else
+                                                                        <div>
+                                                                            <a style="font-size: 25px; color: black; text-decoration: none"
+                                                                               class="favorite-btn"
+                                                                               id="{{"toggle".$auction->id}}"
+                                                                               onclick="toggleFavorite({{$auction->id}}, '{{$auction->isFavourite(Auth::user())}}')">
+                                                                                <i id="{{"heart-icon".$auction->id}}" class="bi bi-heart"></i>
+                                                                            </a>
+                                                                        </div>
+                                                                    @endif
+                                                                @endif
                                                         </div>
 {{--                                                        <div class="card-img-overlay">{{$loop->iteration}}</div>--}}
                                                         <div class="card-caption">
@@ -230,6 +250,26 @@
                                                             @else
                                                                 <img src="{{ asset($auction->images->first()->path) }}" class="img-fluid">
                                                             @endif
+                                                                @if(Auth::check())
+                                                                    @if($auction->isFavourite(Auth::user()) == 'true')
+                                                                        <div>
+                                                                            <a style="font-size: 25px; color: black; text-decoration: none"
+                                                                               id="{{"toggle".$auction->id}}"
+                                                                               onclick="toggleFavorite({{$auction->id}}, '{{$auction->isFavourite(Auth::user())}}')">
+                                                                                <i id="{{"heart-icon".$auction->id}}" class="bi bi-heart-fill"></i>
+                                                                            </a>
+                                                                        </div>
+                                                                    @else
+                                                                        <div>
+                                                                            <a style="font-size: 25px; color: black; text-decoration: none"
+                                                                               class="favorite-btn"
+                                                                               id="{{"toggle".$auction->id}}"
+                                                                               onclick="toggleFavorite({{$auction->id}}, '{{$auction->isFavourite(Auth::user())}}')">
+                                                                                <i id="{{"heart-icon".$auction->id}}" class="bi bi-heart"></i>
+                                                                            </a>
+                                                                        </div>
+                                                                    @endif
+                                                                @endif
                                                         </div>
 {{--                                                        <div class="card-img-overlay">{{$loop->iteration}}</div>--}}
                                                         <div class="card-caption">
