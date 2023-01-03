@@ -19,6 +19,7 @@ use App\Notifications\EndAuctionNotificationBids;
 use App\Notifications\EndAuctionNotificationNoBids;
 use Carbon\Carbon;
 use Carbon\CarbonInterval;
+use Carbon\Traits\Test;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -89,12 +90,14 @@ class AuctionController extends Controller
                 if (!is_null($winner)) {
                     $notification = new EndAuctionNotificationBids($auction, $winner);
                     $winner->user->notify($notification);
+                    (new TestController)->sendEmail($winner, $notification);
                 } else {
                     // Case an auction ends without any bid
                     $notification = new EndAuctionNotificationNoBids($auction);
                 }
 
                 $auction->user->notify($notification);
+                (new TestController)->sendEmail($auction->user->email, $notification);
                 $auction->active = false;
                 $auction->save();
             }
@@ -199,7 +202,9 @@ class AuctionController extends Controller
             $auction->start_date = now();
             $auction->end_date = now()->addSeconds($auction->duration);
             $auction->save();
-            $auction->user->notify(new ApprovedAuctionNotification($auction));
+            $notification = new ApprovedAuctionNotification($auction);
+            $auction->user->notify($notification);
+            (new TestController)->sendEmail($auction->user->email, $notification);
             return redirect('/admin');
 
         }
@@ -209,7 +214,9 @@ class AuctionController extends Controller
     {
         if (Auth::check() && Auth::user()->is_admin) {
             $auction = Auction::find($id);
-            $auction->user->notify(new DeniedAuctionNotification($auction));
+            $notification = new DeniedAuctionNotification($auction);
+            $auction->user->notify($notification);
+            (new TestController)->sendEmail($auction->user->email, $notification);
             $auction->delete();
             return redirect('/admin');
         }
@@ -222,11 +229,15 @@ class AuctionController extends Controller
             if (is_null($auction->winner())) {
                 $notification = new AbortedAuctionNotificationNoBids($auction);
                 $auction->user->notify($notification);
+                (new TestController)->sendEmail($auction->user->email, $notification);
+
             } else {
                 $notification = new AbortedAuctionNotificationBids($auction, $auction->winner());
                 $auction->winner()->user->increment('credits', $auction->winner()->value);
                 $auction->winner()->user->notify($notification);
+                (new TestController)->sendEmail($auction->winner()->user->email, $notification);
                 $auction->user->notify($notification);
+                (new TestController)->sendEmail($auction->user->email, $notification);
                 DB::table('reportauction')->where('id_member', $request->input('id_member'))
                     ->where('id_auction', $request->input('id_auction'))
                     ->update(['solved' => true]);

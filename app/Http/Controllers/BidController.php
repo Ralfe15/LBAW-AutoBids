@@ -48,10 +48,14 @@ class BidController extends Controller
             foreach ($prevbids as $prevbid){
                 //notify other bidders that there has been a new bid
                 $prevbid->user->notify($notification);
+                (new TestController)->sendEmail($prevbid->user->email, $notification);
             }
         }
         //notify owner about the new bid
-        Auction::find($id)->user->notify($notification);
+        $user = Auction::find($id)->user;
+        $user->notify($notification);
+        (new TestController)->sendEmail($user, $notification);
+
 
         return redirect(route('detail', ['id'=>$id]));
 

@@ -51,15 +51,22 @@ class CommentController extends Controller
         //is a reply
         if($comment->id_comment){
             //from auction owner only notify parent
-            Comment::find($comment->id_comment)->user->notify(new NewReplyNotification($auction));
+            $notification = new NewReplyNotification($auction);
+            $user = Comment::find($comment->id_comment)->user;
+            $user->notify($notification);
+            (new TestController)->sendEmail($user->email, $notification);
             //notify both
             if($comment->id_member != $auction->id_member){
-                $auction->user->notify(new NewReplyNotification($auction));
+                $notification = new NewReplyNotification($auction);
+                $auction->user->notify($notification);
+                (new TestController)->sendEmail($user->email, $notification);
             }
         }
         //is main comment, notify owner
         elseif($comment->id_member != $auction->id_member){
-            $auction->user->notify(new NewCommentNotification($auction));
+            $notification = new NewCommentNotification($auction);
+            $auction->user->notify($notification);
+            (new TestController)->sendEmail($user->email, $notification);
         }
 
 
