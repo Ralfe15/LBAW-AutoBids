@@ -21,52 +21,21 @@ if (!function_exists('credits_format')) {
     }
 }
 if (!function_exists('secsToStr')) {
-    function secsToStr($secs)
+    function secsToStr($init)
     {
-        if ($secs >= 86400) {
-            $days = floor($secs / 86400);
-            $secs = $secs % 86400;
-            $r = $days . ' day';
-            if ($days <> 1) {
-                $r .= 's';
-            }
-            if ($secs > 0) {
-                $r .= ', ';
-            }
-        }
-        if ($secs >= 3600) {
-            $hours = floor($secs / 3600);
-            $secs = $secs % 3600;
-            $r .= $hours . ' hour';
-            if ($hours <> 1) {
-                $r .= 's';
-            }
-            if ($secs > 0) {
-                $r .= ', ';
-            }
-        }
-        if ($secs >= 60) {
-            $minutes = floor($secs / 60);
-            $secs = $secs % 60;
-            $r .= $minutes . ' minute';
-            if ($minutes <> 1) {
-                $r .= 's';
-            }
-            if ($secs > 0) {
-                $r .= ', ';
-            }
-        }
-        $r .= $secs . ' second';
-        if ($secs <> 1) {
-            $r .= 's';
-        }
-        return $r;
+        $day = floor($init / 86400);
+        $hours = floor(($init - ($day * 86400)) / 3600);
+        $minutes = floor(($init / 60) % 60);
+        $seconds = $init % 60;
+
+        return $day." day(s), " . $hours . " hour(s), " . $minutes ." minute(s), " .$seconds . " second(s).";
     }
 }
 
 if (!function_exists('processTimeHTML')) {
-    function processTimeHTML($timestring, $id){
-        if(str_contains($timestring, "seconds") || str_contains($timestring, "second")){
+    function processTimeHTML($timestring, $id)
+    {
+        if (str_contains($timestring, "seconds") || str_contains($timestring, "second")) {
             return $id . "-count";
         }
         return $id . "-nocount";
@@ -111,7 +80,7 @@ if (!function_exists('processNotification')) {
                     credits_format($notification->data['winner_bid'] / 100) . " made by " . $notification->data['winner_name'] .
                     " at " . date("Y-m-d H:i:s", $notification->created_at->timestamp) . "was repaid.";
             case 'App\\Notifications\\NewBidAuctionNotification':
-                return "An auction you have previously bid has a new bid with value of U$" . credits_format($notification->data['new_val']/100);
+                return "An auction you have previously bid has a new bid with value of U$" . credits_format($notification->data['new_val'] / 100);
             case 'App\\Notifications\\NewCommentNotification':
                 return "New Comment on Auction: " . $notification->data['auction_name'];
             case 'App\\Notifications\\NewReplyNotification':
@@ -147,9 +116,9 @@ if (!function_exists('processNotificationEmail')) {
                 return "The auction named " .
                     $notification['auction_name'] . " was ABORTED. The highest bid of U$" .
                     credits_format($notification['winner_bid'] / 100) . " made by " . $notification['winner_name'] .
-                     "was repaid.";
+                    "was repaid.";
             case 'App\\Notifications\\NewBidAuctionNotification':
-                return "An auction you have previously bid has a new bid with value of U$" . credits_format($notification['new_val']/100);
+                return "An auction you have previously bid has a new bid with value of U$" . credits_format($notification['new_val'] / 100);
             case 'App\\Notifications\\NewCommentNotification':
                 return "New Comment on Auction: " . $notification['auction_name'];
             case 'App\\Notifications\\NewReplyNotification':

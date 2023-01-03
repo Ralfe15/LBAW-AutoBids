@@ -35,7 +35,7 @@
                 <h6>{{$auction->model->name }}</h6>
                 <p>{{ $auction->year }}</p>
                 <p>{{$auction->mileage}} km</p>
-                <p>${{credits_format($auction->currentWinnerValue()/100)}}</p>
+                <p>€{{credits_format($auction->currentWinnerValue()/100)}}</p>
                 @if(!$auction->approved)
                     <p style="color: red" class="text-red">Not approved</p>
                 @elseif(!$auction->active)

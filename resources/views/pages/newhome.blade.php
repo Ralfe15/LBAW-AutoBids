@@ -9,9 +9,17 @@
         .then(function(response) {
             return response.json();
         }).then(function(jsonData){
-            document.querySelector("#img1").src = jsonData.results[0].urls.full
-            document.querySelector("#img2").src = jsonData.results[1].urls.full
-            document.querySelector("#img3").src = jsonData.results[2].urls.full
+            var img1 = document.querySelectorAll("#img1"); for(var i = 0; i<img1.length; i++) {img1[i].src = jsonData.results[0].urls.full;}
+            var img2 = document.querySelectorAll("#img2"); for(var i = 0; i<img2.length; i++) {img2[i].src = jsonData.results[1].urls.full;}
+            var img3 = document.querySelectorAll("#img3"); for(var i = 0; i<img3.length; i++) {img3[i].src = jsonData.results[2].urls.full;}
+            var img4 = document.querySelectorAll("#img4"); for(var i = 0; i<img4.length; i++) {img4[i].src = jsonData.results[3].urls.full;}
+            var img5 = document.querySelectorAll("#img5"); for(var i = 0; i<img5.length; i++) {img5[i].src = jsonData.results[4].urls.full;}
+            var img6 = document.querySelectorAll("#img6"); for(var i = 0; i<img6.length; i++) {img6[i].src = jsonData.results[5].urls.full;}
+            var img7 = document.querySelectorAll("#img7"); for(var i = 0; i<img7.length; i++) {img7[i].src = jsonData.results[6].urls.full;}
+            var img8 = document.querySelectorAll("#img8"); for(var i = 0; i<img8.length; i++) {img8[i].src = jsonData.results[7].urls.full;}
+            var img9 = document.querySelectorAll("#img9"); for(var i = 0; i<img9.length; i++) {img9[i].src = jsonData.results[8].urls.full;}
+
+
     })
 
 </script>
@@ -86,7 +94,7 @@
                                                     <a href="/auction/{{$auction->id}}">
                                                     <div class="card-img">
                                                         @if($auction->images->isEmpty())
-                                                            <img src="{{ asset('img/auctions/car_placeholder_square200.png') }}" class="img-fluid">
+                                                            <img src="" id="img{{($loop->index+1)%10}}"class="img-fluid">
                                                         @else
                                                             <img src="{{ asset($auction->images->first()->path) }}" class="img-fluid">
                                                         @endif
@@ -117,7 +125,7 @@
                                                         <h6>{{$auction->model->name }}</h6>
                                                         <p>{{ $auction->year }}</p>
                                                         <p>{{$auction->mileage}} km</p>
-                                                        <p>${{credits_format($auction->currentWinnerValue()/100)}}</p>
+                                                        <p>€{{credits_format($auction->currentWinnerValue()/100)}}</p>
                                                         @if(!$auction->approved)
                                                             <p style="color: red" class="text-red">Not approved</p>
                                                         @elseif(!$auction->active)
@@ -163,7 +171,7 @@
                                                     <a href="/auction/{{$auction->id}}">
                                                         <div class="card-img">
                                                             @if($auction->images->isEmpty())
-                                                                <img src="{{ asset('img/auctions/car_placeholder_square200.png') }}" class="img-fluid">
+                                                                <img src="" id="img{{($loop->index+1)%10}}"class="img-fluid">
                                                                 @else
                                                                     <img src="{{ asset($auction->images->first()->path) }}" class="img-fluid">
                                                                     @endif
@@ -174,7 +182,7 @@
                                                             <h6>{{$auction->model->name }}</h6>
                                                             <p>{{ $auction->year }}</p>
                                                             <p>{{$auction->mileage}} km</p>
-                                                            <p>${{credits_format($auction->currentWinnerValue()/100)}}</p>
+                                                            <p>€{{credits_format($auction->currentWinnerValue()/100)}}</p>
                                                             @if(!$auction->approved)
                                                                 <p style="color: red" class="text-red">Not approved</p>
                                                             @elseif(!$auction->active)
@@ -218,7 +226,7 @@
                                                     <a href="/auction/{{$auction->id}}">
                                                         <div class="card-img">
                                                             @if($auction->images->isEmpty())
-                                                                <img src="{{ asset('img/auctions/car_placeholder_square200.png') }}" class="img-fluid">
+                                                                <img src="" id="img{{($loop->index+1)%10}}"class="img-fluid">
                                                             @else
                                                                 <img src="{{ asset($auction->images->first()->path) }}" class="img-fluid">
                                                             @endif
@@ -229,7 +237,7 @@
                                                             <h6>{{$auction->model->name }}</h6>
                                                             <p>{{ $auction->year }}</p>
                                                             <p>{{$auction->mileage}} km</p>
-                                                            <p>${{credits_format($auction->currentWinnerValue()/100)}}</p>
+                                                            <p>€{{credits_format($auction->currentWinnerValue()/100)}}</p>
                                                             @if(!$auction->approved)
                                                                 <p style="color: red" class="text-red">Not approved</p>
                                                             @elseif(!$auction->active)

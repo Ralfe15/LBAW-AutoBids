@@ -23,6 +23,7 @@ use Carbon\Traits\Test;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
 class AuctionController extends Controller
@@ -185,6 +186,9 @@ class AuctionController extends Controller
         $auction->description = $request->input('description');
         $auction->duration = dateToSeconds($request->input('d'), $request->input('h'),
             $request->input('m'), $request->input('s'));
+        if($auction->duration < 600 || $auction->duration > 604800){
+            return Redirect::back()->withInput()->withErrors(['msg' => 'Duration out of bounds. Minimum 10 minutes and maximum 1 week']);
+        }
         $auction->year = $request->input('year');
         $auction->mileage = $request->input('mileage');
         $auction->displacement = $request->input('displacement');
@@ -208,8 +212,6 @@ class AuctionController extends Controller
                 $newImage->save();
             }
         }
-
-
         //change redirect to auction details
         return redirect('/home');
     }

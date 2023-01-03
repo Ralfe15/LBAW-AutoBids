@@ -1,5 +1,15 @@
 @extends('layouts.default')
 @section('content')
+    <script>
+        let url = "https://api.unsplash.com/search/photos/?query=car&client_id=6evLkKSsWtnP-aTy00ftqLmhMMEEXMzVx4pShcPkWk0"
+        fetch(url)
+            .then(function(response) {
+                return response.json();
+            }).then(function(jsonData){
+            var img1 = document.querySelector("#img1");img1.src = jsonData.results[Math.floor(Math.random() * 10)].urls.full;
+        })
+
+    </script>
     <head>
         <link rel="stylesheet" href="/css/auctionDetails.css">
     </head>
@@ -49,7 +59,7 @@
         <div class="carousel-inner">
             @if($auction->images->isEmpty())
             <div class="carousel-item active">
-                <img src="{{ asset('img/auctions/car_placeholder.png') }}" class="d-block w-100" alt="...">
+                <img src="" id="img1" class="d-block w-100" alt="...">
             </div>
             @else
                 @foreach($auction->images as $img)
