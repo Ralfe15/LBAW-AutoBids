@@ -3,7 +3,7 @@
         <a href="/auction/{{$auction->id}}">
             <div class="card-img">
                 @if($auction->images->isEmpty())
-                    <img src="{{ asset('img/auctions/car_placeholder_square200.png') }}" class="img-fluid">
+                    <img src="" id="img1" class="img-fluid">
                 @else
                     <img src="{{ asset($auction->images->first()->path) }}" class="img-fluid">
                 @endif
