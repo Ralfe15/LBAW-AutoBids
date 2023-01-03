@@ -18,8 +18,10 @@ function toggleFavorite(id, isfav) {
                 const icon = document.querySelectorAll("#heart-icon" + id)
                 for (var i = 0; i < button.length; i++) {
                     icon[i].className = "bi bi-heart-fill"
-                    icon[i].style.color = "red"
-                    button[i].textContent = "Remove from favorites: "
+                    if(!document.URL.includes("home")){
+                        icon[i].style.color = "#f45b00"
+                        button[i].textContent = "Remove from favorites: "
+                    }
                     button[i].append(icon[i])
                     button[i].setAttribute("onclick", "toggleFavorite(" + id + ", 'true')")
                 }
@@ -44,8 +46,10 @@ function toggleFavorite(id, isfav) {
                 const icon = document.querySelectorAll("#heart-icon" + id)
                 for (var i = 0; i < button.length; i++) {
                     icon[i].className = "bi bi-heart"
-                    icon[i].style.color = "black"
-                    button[i].textContent = "Add to favorites: "
+                    if(!document.URL.includes("home")){
+                        icon[i].style.color = "#f45b00"
+                        button[i].textContent = "Add to favorites: "
+                    }
                     button[i].append(icon[i])
                     button[i].setAttribute("onclick", "toggleFavorite(" + id + ", 'false')")
                 }

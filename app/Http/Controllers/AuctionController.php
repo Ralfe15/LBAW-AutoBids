@@ -30,7 +30,7 @@ class AuctionController extends Controller
     public function show($id)
     {
         $auction = Auction::find($id);
-        if (!$auction->active) {
+        if (!$auction->active && $auction->id_member != Auth::id()) {
             return redirect('/home');
         }
         $time_remaining = Carbon::parse($auction->end_date)->longAbsoluteDiffForHumans(Carbon::now(), 6);
@@ -64,14 +64,41 @@ class AuctionController extends Controller
     public function list()
     {
         if (!Auth::check()) return redirect('/login');
-        $auctions = Auth::user()->auctions()->orderBy('id')->get();
+        $auctions = Auth::user()->auctions()
+            ->where('active', true)
+            ->orderBy('id')
+            ->paginate(10);;
         return view('pages.my_auctions', ['auctions' => $auctions]);
+    }
+
+    public function listOld()
+    {
+        if (!Auth::check()) return redirect('/login');
+        $auctions = Auth::user()->auctions()
+            ->where('active', false)
+            ->orderBy('id')
+            ->paginate(10);;
+        return view('pages.my_auctions', ['auctions' => $auctions]);
+    }
+
+    public function favourites()
+    {
+        if (!Auth::check()) return redirect('/login');
+        $auctions_id = DB::table('followauction')
+            ->join('auction', 'followauction.id_auction', '=', 'auction.id')
+            ->where('followauction.id_member', '=', Auth::id())
+            ->where('auction.active', '=', true)
+            ->select('auction.id');
+        $auctions = Auction::whereIn('id', $auctions_id)->paginate(10);
+        return view('pages.favourites', ['auctions' => $auctions]);
     }
 
     public function all(Request $request)
     {
         if (!$request->has('search')) {
-            $auctions = Auction::where('active', true)->paginate(5);
+            $auctions = Auction::where('active', true)
+                ->where('approved', true)
+                ->paginate(10);
         } else {
             $auctions = Auction::whereRelation('model', 'name', 'ilike', '%' . $request->input('search') . '%')
                 ->distinct()->paginate(5);

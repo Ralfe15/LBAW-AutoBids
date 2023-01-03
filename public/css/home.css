@@ -94,7 +94,7 @@
 }
 
 .card:hover {
-    box-shadow: 0 0px 10px 5px rgba(0,0,0,0.2);
+    box-shadow: 0 0px 10px 5px rgba(244,90,0,0.2);
 }
 
 .card-caption {
@@ -107,9 +107,11 @@
 
 .card img{
     margin: 0.7em auto auto auto;
-    /*border-radius: 50%;*/
-    box-shadow: #000000;
+    background-color: rgba(0,0,0,0.1);
+    /*box-shadow: 0 0px 8px 1px rgba(0,0,0,0.1);*/
+    /*box-shadow: #000000;*/
     width: 90%;
+    border-radius: 10px;
 }
 
 @media (max-width: 767px) {
@@ -142,6 +144,23 @@
         transform: translateX(-25%);
         transition: 500ms ease-in-out;
     }
+}
+
+.card .bi-heart {
+    color: #f45b00;
+}
+
+.card .bi-heart-fill {
+    color: #f45b00;
+}
+
+
+
+.card .bi {
+    position: absolute;
+    top:10px;
+    right:10px;
+    text-shadow: #000000 0 0 10px;
 }
 
 .multi-carousel-inner .carousel-item-end,

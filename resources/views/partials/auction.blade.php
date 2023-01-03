@@ -1,56 +1,49 @@
-<meta name="_token" id="token" content="{{ csrf_token() }}">
-<div class="card">
+<div class="col-md-3">
+    <div class="card">
+        <a href="/auction/{{$auction->id}}">
+            <div class="card-img">
+                @if($auction->images->isEmpty())
+                    <img src="{{ asset('img/auctions/car_placeholder_square200.png') }}" class="img-fluid">
+                @else
+                    <img src="{{ asset($auction->images->first()->path) }}" class="img-fluid">
+                @endif
+                    @if(Auth::check())
+                        @if($auction->isFavourite(Auth::user()) == 'true')
+                            <div>
+                                <a style="font-size: 25px; color: black; text-decoration: none"
+                                   id="{{"toggle".$auction->id}}"
+                                   onclick="toggleFavorite({{$auction->id}}, '{{$auction->isFavourite(Auth::user())}}')">
+                                    <i id="{{"heart-icon".$auction->id}}" class="bi bi-heart-fill"></i>
+                                </a>
+                            </div>
+                        @else
+                            <div>
+                                <a style="font-size: 25px; color: black; text-decoration: none"
+                                   class="favorite-btn"
+                                   id="{{"toggle".$auction->id}}"
+                                   onclick="toggleFavorite({{$auction->id}}, '{{$auction->isFavourite(Auth::user())}}')">
+                                    <i id="{{"heart-icon".$auction->id}}" class="bi bi-heart"></i>
+                                </a>
+                            </div>
+                        @endif
+                    @endif
 
-    <a href="{{route('detail', ['id'=> $auction->id]) }}"
-       @if(!$auction->active || !$auction->approved)
-           style="pointer-events: none; cursor: default;"
-        @endif
-    >
-        @if($auction->images->isEmpty())
-            <img src='{{ asset('img/auctions/car_placeholder_square200.png') }}'>
-        @else
-            <img src={{ asset($auction->images->first()->path) }}>
-        @endif
-
-        <div class="container">
-            <h4><b>{{$auction->model->brand->name}} {{$auction->model->name }} - {{ $auction->year }}</b></h4>
-            <p>Mileage: {{$auction->mileage}}</p>
-            <p>Current Bid: U${{credits_format($auction->currentWinnerValue()/100)}}</p>
-            @if(!$auction->approved)
-                <p style="color: red" class="text-red">Not approved</p>
-            @elseif(!$auction->active)
-                <p style="color: red" class="text-red">Auction ended</p>
-            @else
-                <p
-                    id="{{processTimeHTML($auction->timeRemaining(), $auction->id)}}"
-                >{{$auction->timeRemaining()}}</p>
-            @endif
-            <p>{{ $auction->remaining() }}</p>
-
-        </div>
-    </a>
-    @if(Auth::check())
-        @if($auction->isFavourite(Auth::user()) == 'true')
-            <div>
-                <a style="font-size: 15px"
-                   class="favorite-btn"
-                   id="{{"toggle".$auction->id}}"
-                   onclick="toggleFavorite({{$auction->id}}, '{{$auction->isFavourite(Auth::user())}}')">
-                    Remove from favorites :
-                    <i id="{{"heart-icon".$auction->id}}" class="bi bi-heart"></i>
-                </a>
             </div>
-        @else
-            <div>
-                <a style="font-size: 15px"
-                   class="favorite-btn"
-                   id="{{"toggle".$auction->id}}"
-                   onclick="toggleFavorite({{$auction->id}}, '{{$auction->isFavourite(Auth::user())}}')">
-                    Add to favorites :
-                    <i id="{{"heart-icon".$auction->id}}" class="bi bi-heart-o"></i>
-                </a>
+            {{--                                                    <div class="card-img-overlay">{{$loop->iteration}}</div>--}}
+            <div class="card-caption">
+                <h5><b>{{$auction->model->brand->name}}</b></h5>
+                <h6>{{$auction->model->name }}</h6>
+                <p>{{ $auction->year }}</p>
+                <p>{{$auction->mileage}} km</p>
+                <p>${{credits_format($auction->currentWinnerValue()/100)}}</p>
+                @if(!$auction->approved)
+                    <p style="color: red" class="text-red">Not approved</p>
+                @elseif(!$auction->active)
+                    <p style="color: red" class="text-red">Expired</p>
+                @endif
+                <p>{{ $auction->remaining() }}</p>
             </div>
-        @endif
-    @endif
+        </a>
 
+    </div>
 </div>

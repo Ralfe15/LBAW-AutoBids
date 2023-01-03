@@ -121,3 +121,11 @@ a{
     color:#000000;
 }
 
+.auction-title .bi-heart {
+    color: #f45b00;
+}
+
+.auction-title .bi-heart-fill {
+    color: #f45b00;
+}
+

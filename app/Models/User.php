@@ -54,4 +54,9 @@ class User extends Authenticatable
     public function since() {
         return Carbon::parse($this->account_creation)->toDateTimeString();
     }
+
+    public function getUsername() {
+        $full_name = explode(" ", $this->name);
+        return $full_name[0] . " " . end($full_name);
+    }
 }

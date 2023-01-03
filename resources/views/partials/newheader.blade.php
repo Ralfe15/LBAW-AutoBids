@@ -16,7 +16,7 @@
                         <div class="dropdown-menu" id="auction-dropdown">
                             <a class="dropdown-item" href="{{route('auctions')}}"><i class="bi bi-car-front"></i>&emsp;Active Auctions</a>
                             <a class="dropdown-item" href="{{route('my_auctions')}}"><i class="bi bi-person-vcard"></i>&emsp;My Auctions</a>
-                            <a class="dropdown-item" href="#"><i class="bi bi-heart"></i>&emsp;Favourites</a>
+                            <a class="dropdown-item" href="{{route('favourites')}}"><i class="bi bi-heart"></i>&emsp;Favourites</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{route('create_auction')}}"><i class="bi bi-patch-plus"></i>&emsp;Create Auction</a>
                         </div>
@@ -51,11 +51,19 @@
                     </li>
                     @endif
                     <li class="nav-item dropdown" >
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="bi bi-person-circle"></i>&ensp;Account</a>
+
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="bi bi-person-circle"></i>&ensp;
+                            @if(Auth::check())
+                                {{ Auth::user()->getUsername() }}
+                            @else
+                                Account
+                            @endif
+                        </a>
                         <div class="dropdown-menu dropdown-menu-end">
                             @if(Auth::check())
                                 <a class="dropdown-item" href="{{route('create_transaction')}}"><i class="bi bi-currency-exchange"></i>&emsp;Balance: U${{credits_format(Auth::user()->credits/100)}}</a>
                                 <a class="dropdown-item" href="/user/{{ Auth::user()->id }}"><i class="bi bi-person-circle"></i>&emsp;Profile</a>
+                                <a class="dropdown-item" href="{{route('requests', ['id'=>Auth::id()])}}"><i class="bi bi-card-list"></i>&emsp;Auction Requests</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="/logout"><i class="bi bi-box-arrow-right"></i>&emsp;Logout</a>
                                 @if(Auth::user()->is_admin)
