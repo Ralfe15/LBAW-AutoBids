@@ -30,12 +30,13 @@ class AuctionController extends Controller
     public function show($id)
     {
         $auction = Auction::find($id);
-        if (!$auction->active) {
+        if (!$auction->active && $auction->id_member != Auth::id()) {
             return redirect('/home');
         }
         $time_remaining = Carbon::parse($auction->end_date)->longAbsoluteDiffForHumans(Carbon::now(), 6);
         $current_bid_val = $auction->bids->max('value');
         $can_bid = true;
+        $is_winning = false;
         if (is_null($current_bid_val)) {
             $current_bid = ($auction->starting_bid) / 100; //starting price
             $current_bid_user_id = -1; //check for this flag in the notification
@@ -47,26 +48,57 @@ class AuctionController extends Controller
             if (($current_bid[0]->id_member == Auth::id()) || ($auction->id_member == Auth::id())) {
                 $can_bid = false;
             }
+            if($current_bid[0]->id_member == Auth::id()){
+                $is_winning = true;
+            }
             $current_bid_user_id = $current_bid[0]->id_member;
             $current_bid = $current_bid_val / 100;
         }
+
         $prev_bids = $auction->bids()->orderBy('date', 'desc')->get();
 
         return view('pages.auction', ['auction' => $auction, 'time_remaining' => $time_remaining,
-            'current_bid' => $current_bid, 'can_bid' => $can_bid, 'prev_id' => $current_bid_user_id, 'prev_bids' => $prev_bids]);
+            'current_bid' => $current_bid, 'can_bid' => $can_bid, 'prev_id' => $current_bid_user_id, 'prev_bids' => $prev_bids, 'is_winning' => $is_winning]);
     }
 
     public function list()
     {
         if (!Auth::check()) return redirect('/login');
-        $auctions = Auth::user()->auctions()->orderBy('id')->get();
+        $auctions = Auth::user()->auctions()
+            ->where('active', true)
+            ->orderBy('id')
+            ->paginate(10);;
         return view('pages.my_auctions', ['auctions' => $auctions]);
+    }
+
+    public function listOld()
+    {
+        if (!Auth::check()) return redirect('/login');
+        $auctions = Auth::user()->auctions()
+            ->where('active', false)
+            ->orderBy('id')
+            ->paginate(10);;
+        return view('pages.my_auctions', ['auctions' => $auctions]);
+    }
+
+    public function favourites()
+    {
+        if (!Auth::check()) return redirect('/login');
+        $auctions_id = DB::table('followauction')
+            ->join('auction', 'followauction.id_auction', '=', 'auction.id')
+            ->where('followauction.id_member', '=', Auth::id())
+            ->where('auction.active', '=', true)
+            ->select('auction.id');
+        $auctions = Auction::whereIn('id', $auctions_id)->paginate(10);
+        return view('pages.favourites', ['auctions' => $auctions]);
     }
 
     public function all(Request $request)
     {
         if (!$request->has('search')) {
-            $auctions = Auction::where('active', true)->paginate(5);
+            $auctions = Auction::where('active', true)
+                ->where('approved', true)
+                ->paginate(10);
         } else {
             $auctions = Auction::whereRelation('model', 'name', 'ilike', '%' . $request->input('search') . '%')
                 ->distinct()->paginate(5);

@@ -2,7 +2,7 @@
 @section('content')
     <link rel="stylesheet" type="text/css" href="{{ asset('css/notifications.css') }}" >
     <div class="content-wrapper m-4">
-    <h1 class="m-4">Unread notifications</h1>
+    <h3 class="m-4">Unread notifications</h3>
         <ul class="list-group">
             @foreach($unreadNotifications as $notification)
                 <li class="list-group-item">
@@ -29,13 +29,13 @@
                             </div>
                         </form>
                     @else
-                        <a class="btn btn-secondary" href="{{route('readnotification', ['id'=>$notification->id])}}">Mark as read</a>
+                        <a class="btn btn-outline-danger" href="{{route('readnotification', ['id'=>$notification->id])}}">Mark as read</a>
                     @endif
                 </li>
             @endforeach
         </ul>
         {{$unreadNotifications->links('pagination::bootstrap-5')}}
-        <h1 class="m-4">Past notifications</h1>
+        <h3 class="m-4">Past notifications</h3>
         <ul class="list-group">
             @foreach($readNotifications as $notification)
                 <li class="list-group-item">

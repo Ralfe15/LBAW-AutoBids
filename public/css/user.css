@@ -1,9 +1,11 @@
 .content-wrapper {
     padding-top: 100px;
     margin:auto;
+    border-radius: 10px;
 }
 
 .user-image-wrapper {
+    padding-top: 100px;
     padding-bottom: 100px;
 }
 
@@ -14,10 +16,20 @@
 }
 
 .user-details {
-    
-    border: solid;
-    border-color: lightgrey;
-    width: 50%;
+    width: 30%;
     margin: auto;
-    padding: 1em;
+    border-radius: 10px;
+    box-shadow: 0 0 15px 5px rgba(244,91,0,0.3);
+    color: #000000;
+    padding: 1%
+}
+
+.button-wrapper {
+    padding-top: 50px;
+    text-align: center;
+}
+
+.user-details b {
+    font-size: larger !important;
+    font-family: "Roboto Black" !important;
 }

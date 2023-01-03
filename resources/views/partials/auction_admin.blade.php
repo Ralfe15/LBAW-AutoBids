@@ -6,13 +6,13 @@
     <td>{{ $auction -> user->name }}</td>
     <td>{{ $auction -> duration }}</td>
 
-    <td>
+    <td style="text-align: center">
         <form method="POST" action="{{route('approve', ['id'=>$auction->id])}}">
             {{csrf_field()}}
             <button class="btn btn-success" type="submit" role="button">Approve</button>
         </form>
     </td>
-    <td>
+    <td style="text-align: center">
         <form method="POST" action="{{route('deny', ['id'=>$auction->id])}}">
             {{csrf_field()}}
             <button class="btn btn-danger" type="submit" role="button">Deny</button>

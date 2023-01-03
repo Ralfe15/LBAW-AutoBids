@@ -29,12 +29,12 @@
             <p><b>Rating: </b> {{$user->rating}}</p>
         </div>
         <div class="details-membersince">
-            <p><b>Member since: </b> {{$user->account_creation}}</p>
+            <p><b>Member since: </b> {{$user->since()}}</p>
         </div>
     </div>
     @if(Auth::id() == $user->id)
         <div class="button-wrapper">
-            <a class="btn btn-secondary btn-lg" href="{{route('user_edit')}}">
+            <a class="btn btn-outline-danger btn-lg" href="{{route('user_edit')}}">
                 Edit Profile
             </a>
         </div>

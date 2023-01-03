@@ -30,7 +30,7 @@
         <section class="results-grid">
             @each('partials/auction', $auctions_finishing, 'auction')
         </section>
-    </div> 
+    </div>
 
     <div class="popular-actions-wrapper">
         <div class="popular-text">
@@ -39,6 +39,6 @@
         <section class="results-grid">
             @each('partials/auction', $auctions_popular, 'auction')
         </section>
-    </div> 
+    </div>
 </div>
 @stop

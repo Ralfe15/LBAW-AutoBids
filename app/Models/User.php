@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -48,5 +49,14 @@ class User extends Authenticatable
 
     public function  comments() {
         return $this->hasMany('App\Models\Comments', 'id_member');
+    }
+
+    public function since() {
+        return Carbon::parse($this->account_creation)->toDateTimeString();
+    }
+
+    public function getUsername() {
+        $full_name = explode(" ", $this->name);
+        return $full_name[0] . " " . end($full_name);
     }
 }

@@ -87,6 +87,42 @@ class UserController extends Controller
         return view('pages.home');
     }
 
+    public function adminDashboardReqs()
+    {
+        if (Auth::check() && Auth::user()->is_admin) {
+            $requests = Auction::where('approved', false)->orderBy('creation_date', 'asc')->paginate(5, ['*'], 'requests');
+
+            return view('pages.adminAuctionRequests', [
+                'requests' => $requests
+            ]);
+        }
+        return view('pages.home');
+    }
+    public function adminDashboardReps()
+    {
+        if (Auth::check() && Auth::user()->is_admin) {
+            $reports = AuctionReport::where('solved', false)->orderBy('date', 'asc')->paginate(5, ['*'], 'reports');
+
+            return view('pages.adminAuctionReports', [
+                'reports' => $reports
+            ]);
+        }
+        return view('pages.home');
+    }
+    public function adminDashboardTrans()
+    {
+        if (Auth::check() && Auth::user()->is_admin) {
+            $banktransfers_approval = BankTransfer::where('approved', false)->orderBy('id')->paginate(5, ['*'], 'transactions');
+
+            return view('pages.adminTransactionRequests', [
+                'banktransfers_approval' => $banktransfers_approval
+            ]);
+        }
+        return view('pages.home');
+    }
+
+
+
     public function edit(Request $request)
     {
         if (Auth::check()) {
@@ -145,4 +181,6 @@ class UserController extends Controller
         }
         return json_encode(['message' => "Session not set", 'success' => false]);
     }
+
+
 }

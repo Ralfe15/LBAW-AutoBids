@@ -1,40 +1,131 @@
+
 .auction-title {
 	text-align: center;
     font-family: Roboto;
     font-size: 2.5em;
-    color: #606060;
+    color: #000000;
     padding-top: 3.125em;
     padding-bottom: 1.5em;
 }
 
 #carouselExampleIndicators {
     width: 50%;
-    border: solid;
-    border-width: thin;
-    border-color: lightgrey;
+    /*border: solid;*/
+    /*border-width: thin;*/
+    /*border-color: lightgrey;*/
+    /*color: #000000;*/
     margin: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 15px 5px rgba(244,91,0,0.2);
+}
+
+.carousel-item {
+    height: 500px;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .auction-status-box{
     padding-top: 3.125em;
+    padding-bottom: 50px;
 }
 
 .auction-status {
-    border: solid;
-    border-color: lightgrey;
+    /*border: solid;*/
+    /*border-color: lightgrey;*/
+    color: #000000;
     width: 50%;
     margin: auto;
     padding: 1em;
+    border-radius: 10px;
+    box-shadow: 0 0 15px 5px rgba(244,91,0,0.2);
 }
 
 .auction-description-box{
     padding-top: 3.125em;
+    color: #000000;
+    padding-bottom: 50px;
 }
 
 .auction-description {
-    border: solid;
-    border-color: lightgrey;
+    /*border: solid;*/
+    /*border-color: lightgrey;*/
+    color: #000000;
     width: 50%;
     margin: auto;
     padding: 1em;
+    border-radius: 10px;
+    box-shadow: 0 0 15px 5px rgba(244,91,0,0.2);
+
 }
+
+.bidding-history-box{
+    color: #000000;
+    padding-top: 3.125em;
+    padding-bottom: 50px;
+}
+
+.bidding-history {
+    color: #000000;
+    /*border: solid;*/
+    /*border-color: lightgrey;*/
+    width: 50%;
+    margin: auto;
+    padding: 1em;
+    border-radius: 10px;
+    box-shadow: 0 0 15px 5px rgba(244,91,0,0.2);
+}
+
+.bidding-title {
+    color: #000000;
+}
+
+.table {
+    color: #000000;
+}
+
+.status-bid form {
+    color: #000000;
+    width: 50%;
+}
+
+.comments-box{
+    color: #000000;
+    padding-top: 3.125em;
+    padding-bottom: 50px;
+
+}
+b {
+    font-size: larger !important;
+    font-family: "Roboto Black" !important;
+}
+
+a{
+    text-decoration: none;
+    color: #000000;
+}
+
+.description-title {
+    color: #000000;
+    text-align: center;
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+#bid{
+    border: 2px solid lightgray;
+    color:#000000;
+}
+
+.auction-title .bi-heart {
+    color: #f45b00;
+}
+
+.auction-title .bi-heart-fill {
+    color: #f45b00;
+}
+

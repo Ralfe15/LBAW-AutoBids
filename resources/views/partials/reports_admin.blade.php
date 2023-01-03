@@ -8,21 +8,21 @@
     <td>{{ $report->description }}</td>
 
 
-    <td>
+    <td style="text-align: center">
         <form method="POST" action="{{route('solved')}}">
             {{csrf_field()}}
             <input type="hidden" value="{{$report->id_member}}" name="id_member">
             <input type="hidden" value="{{$report->id_auction}}" name="id_auction">
 
-            <button class="btn btn-secondary" type="submit" role="button">Mark as solved</button>
+            <button class="btn btn-danger" type="submit" role="button">Mark as solved</button>
         </form>
     </td>
-    <td>
+    <td style="text-align: center">
         <form method="POST" action="{{route('abort', ["id"=>$report->id_auction])}}">
             {{csrf_field()}}
             <input type="hidden" value="{{$report->id_member}}" name="id_member">
             <input type="hidden" value="{{$report->id_auction}}" name="id_auction">
-            <button class="btn btn-secondary" type="submit" role="button">Abort auction</button>
+            <button class="btn btn-outline-danger" type="submit" role="button">Abort auction</button>
         </form>
     </td>
 </tr>

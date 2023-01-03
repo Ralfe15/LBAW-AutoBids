@@ -1,0 +1,89 @@
+.content-wrapper {
+    padding-top: 100px;
+}
+
+.admin-title {
+    color: black;
+    text-align: center;
+    padding-top: 50px;
+}
+
+.title {
+    color: black;
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.navigation-section{
+    padding-top: 50px;
+    text-align: center;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+.requests-link {
+    padding-left: 25px;
+    padding-right: 25px;
+}
+.reports-link {
+    border-left: 2px solid #f45b00;
+    border-right: 2px solid #f45b00;
+    border-radius: 1px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+.transactions-link {
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.line {
+    width: 50%;
+    border-radius: 10px;
+    border-top:solid 2px;
+    border-color: #f45b00;
+    margin: auto;
+}
+
+.separator{
+    margin-top: 10px;
+}
+
+.table-box{
+    width: 90%;
+    margin: auto;
+    padding: 1em;
+    border-radius: 10px;
+    box-shadow: 0 0 15px 5px rgba(244,91,0,0.2);
+    margin-bottom: 150px;
+}
+table {
+    width: 99% !important;
+    margin: auto !important;
+    margin-bottom: 25px !important;
+}
+
+.paginator {
+    text-align: right;
+    margin-right: 10px;
+}
+
+.admin-button {
+    padding-top: 100px;
+    text-align: center;
+    margin: auto;
+}
+
+.admin-button .btn {
+    width: 25%;
+    height: 10%;
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+    margin: auto;
+}
+
