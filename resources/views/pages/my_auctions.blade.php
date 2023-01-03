@@ -9,7 +9,7 @@
                 return response.json();
             }).then(function(jsonData){
 
-            var img1 = document.querySelectorAll("#img1"); for(var i = 0; i<img1.length; i++) {img1[i].src = jsonData.results[Math.floor(Math.random() * 9)].urls.full;}
+            var img1 = document.querySelectorAll("#img1"); for(var i = 0; i<img1.length; i++) {img1[i].src = jsonData.results[Math.floor(Math.random() * 9)].urls.regular;}
         })
 
     </script>
