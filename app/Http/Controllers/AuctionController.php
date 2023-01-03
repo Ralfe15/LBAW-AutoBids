@@ -122,14 +122,14 @@ class AuctionController extends Controller
                 if (!is_null($winner)) {
                     $notification = new EndAuctionNotificationBids($auction, $winner);
                     $winner->user->notify($notification);
-                    (new TestController)->sendEmail($winner, $notification);
+                    //(new TestController)->sendEmail($winner, $notification);
                 } else {
                     // Case an auction ends without any bid
                     $notification = new EndAuctionNotificationNoBids($auction);
                 }
 
                 $auction->user->notify($notification);
-                (new TestController)->sendEmail($auction->user->email, $notification);
+                //(new TestController)->sendEmail($auction->user->email, $notification);
                 $auction->active = false;
                 $auction->save();
             }
